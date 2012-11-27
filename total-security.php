@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: *Total Security
+Plugin Name: Total Security
 Plugin URI: http://fabrix.net/total-security/
 Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
 Author: Fabrix DoRoMo
@@ -23,7 +23,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define('FDX_DIC', plugin_dir_path(__FILE__) . 'admin/brute-force-dictionary.txt');
+define('FDX_DIC', plugin_dir_path(__FILE__) . 'libs/brute-force-dictionary.txt');
 define('FDX_OPTIONS_KEY', 'wf_sn_results');
 define('FDX_WPSS_PLUGIN_URL', plugin_dir_url(__FILE__));
 include 'config.php';
@@ -42,7 +42,16 @@ define('FDX2_PLUGIN_NAME', 'Total Security' ); //plugin name
 define('FDX2_PLUGIN_VERSION', '1.0' ); //plugin version
 define('FDX2_MINIMUM_PHP_VER', '5.0.0'); //minimum version of PHP
 
+/*
+*------------------------------------------------------------*/
+$currentLocale = get_locale();
+			if(!empty($currentLocale)) {
+				$moFile = dirname(__FILE__) . "/languages/total-security-" . $currentLocale . ".mo";
+				if(@file_exists($moFile) && is_readable($moFile)) load_textdomain('fdx-lang', $moFile);
+}
 
+/*
+*------------------------------------------------------------*/
 class fdx_class {
 
   function fdx_init() {
@@ -79,16 +88,14 @@ function fdx_enqueue_scripts() {
     }
  }
 
-
- /* ADICIONA O MENU
+/*
 *------------------------------------------------------------*/
 function fdx_admin_menu(){
 	add_menu_page('Total Security','Total Security', 'manage_options', 'fdx-sn', array(__CLASS__, 'fdx_tests_table'), FDX_PLUGIN_URL . '/images/menu.png' );
     add_submenu_page('fdx-sn', __('Vulnerability Scan', 'fdx-lang'), __('Vulnerability Scan', 'fdx-lang'), 'manage_options', 'fdx-sn', array(__CLASS__, 'fdx_tests_table'));
     add_submenu_page('fdx-sn', __('Scanning all your core WP files', 'fdx-lang'), __('Core Exploit Scanner', 'fdx-lang'), 'manage_options', 'fdx_core', array(__CLASS__, 'core_page'));
     add_submenu_page('fdx-sn', __('System Information', 'fdx-lang'), __('System Information', 'fdx-lang'), 'manage_options', 'fdx_sis', array(__CLASS__, 'system_inf'));
-
- }
+}
 
   // display warning if test were never run
   function run_tests_warning() {
@@ -204,8 +211,8 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
                         'wp-admin/install.php', 'wp-admin/upgrade.php');
     $changed_ok = array('wp-config.php', '.htaccess');
 
-    if (file_exists(dirname(__FILE__) . '/admin/hashes-' . FDX_LAST_WP_VER . '.php')) {
-      require 'admin/hashes-' . FDX_LAST_WP_VER . '.php';
+    if (file_exists(dirname(__FILE__) . '/libs/hashes-' . FDX_LAST_WP_VER . '.php')) {
+      require 'libs/hashes-' . FDX_LAST_WP_VER . '.php';
 
       $results['total'] = sizeof($filehashes);
       foreach ($filehashes as $file => $hash) {
