@@ -51,9 +51,8 @@ a.sm_link {background-image:url(../images/link.png);}
   font-size: 13px;
 }
 
-.sn-status,.sn-details {
-  text-align: center !important
-}
+.sn-status {text-align: center !important; vertical-align: middle !important; }
+.sn-details { vertical-align: middle !important; }
 
 
 #icon-sn-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent;}
@@ -129,7 +128,7 @@ pre {
 .sn-cs-ok h4 {color:#444; margin-bottom: 0;}
 .sn-file {	font-style:italic;	margin-right:20px; color:#888}
 .sn-show-source, .sn-restore-source {
-	margin:0 15px 0 1px;
+	margin:0 0 0 1px;
 	font-size: 11px;
 	text-decoration: none;
 	font-weight: bold
