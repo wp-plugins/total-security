@@ -50,7 +50,7 @@ if (version_compare(PHP_VERSION, FDX2_MINIMUM_PHP_VER, '>=') ) { ?>
 <li><a class="sm_button sm_star" href="http://wordpress.org/extend/plugins/total-security/" target="_blank"><?php _e('Rate the plugin 5 star on WordPress.org', 'fdx-lang') ?>.</a></li>
 <li><a class="sm_button sm_link" href="http://fabrix.net/total-security/" target="_blank"><?php _e('Blog about it and link to the plugin page', 'fdx-lang') ?>.</a></li>
 </ul>
-<div align="center"><span class="st_sharethis_hcount" st_url="http://fabrix.net/total-security/" st_title="<?php echo FDX2_PLUGIN_NAME;?>: <?php _e('the best wordpress plugin to integrate your website with Twitter. ', 'fdx-lang') ?>"></span></div>
+<div align="center"><span class="st_sharethis_hcount" st_url="http://fabrix.net/total-security/" st_title="<?php echo FDX2_PLUGIN_NAME;?>: <?php _e('Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities', 'fdx-lang') ?>"></span></div>
 
 
 </div>
