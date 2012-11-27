@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Total Security
+Plugin Name: *Total Security
 Plugin URI: http://fabrix.net/total-security/
 Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
 Author: Fabrix DoRoMo
@@ -50,6 +50,8 @@ class fdx_class {
       add_action('admin_menu', array(__CLASS__, 'fdx_admin_menu'));
       add_action('wp_ajax_sn_run_tests', array(__CLASS__, 'run_tests'));
 
+      add_action( 'fdx_core_get_file_source', 'fdx_diff_page' );
+
        if ( isset( $_GET['page'] ) && $_GET['page'] == 'fdx-sn' || isset( $_GET['page'] ) && $_GET['page'] == 'fdx_core' || isset( $_GET['page'] ) && $_GET['page'] == 'fdx_sis')  {
          add_action('admin_enqueue_scripts', array(__CLASS__, 'fdx_enqueue_scripts'));
             }
@@ -93,9 +95,9 @@ function fdx_admin_menu(){
     $tests = get_option(FDX_OPTIONS_KEY);
 
     if (!$tests['last_run']) {
-      echo '<div id="message" class="error"><p>Total Security (Vulnerability Scan) <strong>tests were never run.</strong> Click <strong>"One Click Scan"</strong> to run them now and analyze your site for security vulnerabilities.</p></div>';
-    } elseif ((current_time('timestamp') - 30*24*60*60) > $tests['last_run']) {
-      echo '<div id="message" class="error"><p>Total Security (Vulnerability Scan) <strong>tests were not run for more than 30 days.</strong> It\'s advisable to run them once in a while. Click <strong>"One Click Scan"</strong> to run them now and analyze your site for security vulnerabilities.</p></div>';
+      echo '<div id="message" class="error"><p>Total Security '.__('(Vulnerability Scan) <strong>tests were never run.</strong> Click <strong>"'.__('One Click Scan', 'fdx-lang').'"</strong> to run them now and analyze your site for security vulnerabilities.', 'fdx-lang').'</p></div>';
+    } elseif ((current_time('timestamp') - 15*24*60*60) > $tests['last_run']) {
+      echo '<div id="message" class="error"><p>Total Security '.__('(Vulnerability Scan) <strong>tests were not run for more than 30 days.</strong> It\'s advisable to run them once in a while. Click <strong>"'.__('One Click Scan', 'fdx-lang').'"</strong> to run them now and analyze your site for security vulnerabilities.', 'fdx-lang').'</p></div>';
     }
   } // run_tests_warning
 
@@ -148,11 +150,11 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
   // convert status integer to button
   function status($int) {
     if ($int == 0) {
-      $string = '<img src="'.FDX_WPSS_PLUGIN_URL.'images/critical.png" width="32" height="32" border="0" alt="" />';
+      $string = '<img src="'.FDX_WPSS_PLUGIN_URL.'images/critical.png" width="32" height="32" border="0" alt="*" />';
     } elseif ($int == 10) {
-      $string = '<img src="'.FDX_WPSS_PLUGIN_URL.'images/clean.png" width="32" height="32" border="0" alt="" />';
+      $string = '<img src="'.FDX_WPSS_PLUGIN_URL.'images/clean.png" width="32" height="32" border="0" alt="*" />';
     } else {
-      $string = '<img src="'.FDX_WPSS_PLUGIN_URL.'images/wan.png" width="32" height="32" border="0" alt="" />';
+      $string = '<img src="'.FDX_WPSS_PLUGIN_URL.'images/wan.png" width="32" height="32" border="0" alt="*" />';
     }
 
     return $string;
@@ -161,7 +163,7 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
 //###############################################################################################
 
   // ajax for viewing file source
-  function get_file_source() {
+ function get_file_source() {
     $out = array();
 
     if (!current_user_can('administrator') || md5(FDX_CS_SALT . stripslashes(@$_POST['filename'])) != $_POST['hash']) {
@@ -198,9 +200,9 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
 
     $i = 0;
 
-    $missing_ok = array('index.php', 'readme.html', 'license.txt', 'wp-config-sample.php',
+    $missing_ok = array('readme.html', 'license.txt', 'wp-config-sample.php',
                         'wp-admin/install.php', 'wp-admin/upgrade.php');
-    $changed_ok = array('index.php', 'wp-config.php');
+    $changed_ok = array('wp-config.php', '.htaccess');
 
     if (file_exists(dirname(__FILE__) . '/admin/hashes-' . FDX_LAST_WP_VER . '.php')) {
       require 'admin/hashes-' . FDX_LAST_WP_VER . '.php';
@@ -237,8 +239,13 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
 
    // display results
   function core_page() {
+   	if ( isset($_GET['view']) && 'diff' == $_GET['view'] ) {
+     fdx_diff_page();
+   	} else {
   require_once( dirname(__FILE__) . '/admin/core_exploit_scanner.php' );
-  } // core_page
+  }
+
+} // core_page
 
 
      // check if files can be restored
@@ -285,13 +292,11 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
     }
 
     if (self::check_file_write()) {
-      $out['out'] = '<p>By clicking the "restore file" button a copy of the original file will be downloaded from wordpress.org and the
-      modified file will be overwritten. Please note that there is no undo!<br /><br /><br />
-      <input type="button" value="Restore file" data-filename="' . stripslashes(@$_POST['filename']) . '" id="sn-restore-file" class="button-primary" /></p>';
+      $out['out'] = '<p>'.__('By clicking the "restore file" button a copy of the original file will be downloaded from wordpress.org and the modified file will be overwritten. Please note that there is no undo!', 'fdx-lang').'<br /><br /><br />
+      <input type="button" value="'.__('Restore file', 'fdx-lang').'" data-filename="' . stripslashes(@$_POST['filename']) . '" id="sn-restore-file" class="button-primary" /></p>';
     } else {
-      $out['out'] = '<p>Your WordPress core files are not writable from PHP. This is not a bad thing as it increases your security but
-      you will have to restore the file manually by logging on to your FTP account and overwriting the file. You can
-      <a target="_blank" href="http://core.trac.wordpress.org/browser/tags/' . get_bloginfo('version') . '/' . str_replace(ABSPATH, '', stripslashes($_POST['filename'])) . '?format=txt' . '">download the file directly</a> from worpress.org.</p>';
+      $out['out'] = '<p>'.__('Your WordPress core files are not writable from PHP. This is not a bad thing as it increases your security but you will have to restore the file manually by logging on to your FTP account and overwriting the file. You can', 'fdx-lang').'
+       <a target="_blank" href="http://core.trac.wordpress.org/browser/tags/' . get_bloginfo('version') . '/' . str_replace(ABSPATH, '', stripslashes($_POST['filename'])) . '?format=txt' . '">'.__('download the file directly from worpress.org', 'fdx-lang').  '</a>.</p>';
     }
 
     die(json_encode($out));
@@ -306,10 +311,15 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
       $out .= '<li>';
       $out .= '<code>' . ABSPATH . $file . '</code>';
       if ($view) {
-        $out .= ' <a data-hash="' . md5(FDX_CS_SALT . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#source-dialog" class="sn-show-source"><code>view file source</code></a>';
-      }
+        $out .= ' <a data-hash="' . md5(FDX_CS_SALT . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#source-dialog" class="sn-show-source" title="'.__('View file source', 'fdx-lang').'"><img src="'.FDX_WPSS_PLUGIN_URL.'images/ico2.png" width="16" height="16" border="0" alt="'.__('View file source', 'fdx-lang').'" /></a>';
+       }
+      if ($view && $restore ) {
+        $url = add_query_arg( array( 'view' => 'diff', 'file' => $file ), menu_page_url( 'fdx_core', false ) );
+		$url = wp_nonce_url( $url );
+		$out .= ' <a href="#" onclick="PopupCenter(\''.$url.'\', \''.esc_attr($file).'\',700,500,\'yes\');" title="'.__('See what has been modified', 'fdx-lang').'"><img src="'.FDX_WPSS_PLUGIN_URL.'images/ico3.png" width="16" height="16" border="0" alt="'.__('See what has been modified', 'fdx-lang').'" /></a>';
+       }
       if ($restore) {
-        $out .= ' <a data-hash="' . md5(FDX_CS_SALT . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#restore-dialog" class="sn-restore-source"><code>restore file</code></a>';
+        $out .= ' <a data-hash="' . md5(FDX_CS_SALT . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#restore-dialog" class="sn-restore-source" title="'.__('Restore file', 'fdx-lang').'"><img src="'.FDX_WPSS_PLUGIN_URL.'images/ico1.png" width="16" height="16" border="0" alt="'.__('Restore file', 'fdx-lang').'" /></a>';
       }
       $out .= '</li>';
     } // foreach $files
@@ -319,14 +329,21 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
     return $out;
   } // list_files
 
+//###########################################################################################################
+
+
+
+
+
+//##########################################################################################################
   // display warning if test were never run
   function run_tests_warning2() {
     $tests = get_option(FDX_CS_OPTIONS_KEY);
 
     if (!@$tests['last_run']) {
-      echo '<div id="message" class="error"><p>Total Security (Core Exploit Scanner) <strong>tests were never run.</strong> Click <strong>"One Click Scanner"</strong> to run them now and check your core files for exploits.</p></div>';
-    } elseif ((current_time('timestamp') - 30*24*60*60) > $tests['last_run']) {
-      echo '<div id="message" class="error"><p>Total Security (Core Exploit Scanner) <strong>tests were not run for more than 30 days.</strong> It\'s advisable to run them once in a while. Click <strong>"One Click Scanner"</strong> to run them now check your core files for exploits.</p></div>';
+      echo '<div id="message" class="error"><p>Total Security '.__('(Core Exploit Scanner) <strong>tests were never run.</strong> Click <strong>"'.__('One Click Scanner', 'fdx-lang'). '"</strong> to run them now and check your core files for exploits.', 'fdx-lang').'</p></div>';
+    } elseif ((current_time('timestamp') - 15*24*60*60) > $tests['last_run']) {
+      echo '<div id="message" class="error"><p>Total Security '.__('(Core Exploit Scanner) <strong>tests were not run for more than 30 days.</strong> It\'s advisable to run them once in a while. Click <strong>"'.__('One Click Scanner', 'fdx-lang'). '"</strong> to run them now check your core files for exploits.', 'fdx-lang').'</p></div>';
     }
   } // run_tests_warning
 
@@ -337,7 +354,104 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
     delete_option(FDX_OPTIONS_KEY);
     delete_option(FDX_CS_OPTIONS_KEY);
   } // deactivate
+
+
 } // fdx_sn class
+
+
+
+//######################################DIF###################################################
+function fdx_diff_page() {
+	$file = $_GET['file'];
+    echo '<style> #adminmenuwrap,#adminmenuwrap, #adminmenuback, #wpadminbar, #message, #footer { display: none !important }</style>';
+	echo '<h2>'.__('Changes made to file', 'fdx-lang'). ': <code>' . esc_html($file) . '</code></h2>';
+	echo fdx_display_file_diff( $file );
+//	echo '<p><a href="' . menu_page_url('fdx_core',false) . '">Go back.</a></p>';
+}
+
+/**
+ * Generate the diff of a modified core file.
+ */
+function fdx_display_file_diff( $file ) {
+	global $wp_version;
+
+	// core file names have a limited character set
+	$file = preg_replace( '#[^a-zA-Z0-9/_.-]#', '', $file );
+	if ( empty( $file ) || ! is_file( ABSPATH . $file ) )
+		return '<p>Sorry, an error occured. This file might not exist!</p>';
+
+	$key = $wp_version . '-' . $file;
+	$cache = get_option( 'exploitscanner_diff_cache' );
+	if ( ! $cache || ! is_array($cache) || ! isset($cache[$key]) ) {
+		$url = "http://core.svn.wordpress.org/tags/$wp_version/$file";
+		$response = wp_remote_get( $url );
+		if ( is_wp_error( $response ) || 200 != $response['response']['code'] )
+			return '<p>Sorry, an error occured. Please try again later.</p>';
+
+		$clean = $response['body'];
+
+		if ( is_array($cache) ) {
+			if ( count($cache) > 4 ) array_shift( $cache );
+			$cache[$key] = $clean;
+		} else {
+			$cache = array( $key => $clean );
+		}
+		update_option( 'exploitscanner_diff_cache', $cache );
+	} else {
+		$clean = $cache[$key];
+	}
+
+	$modified = file_get_contents( ABSPATH . $file );
+
+	$text_diff = new Text_Diff( explode( "\n", $clean ), explode( "\n", $modified ) );
+	$renderer = new FDX_Text_Diff_Renderer();
+	$diff = $renderer->render( $text_diff );
+
+	$r  = "<table class='diff'>\n<col style='width:5px' /><col />\n";
+	$r .= "<tbody>\n$diff\n</tbody>\n";
+	$r .= "</table>";
+	return $r;
+}
+
+include_once( ABSPATH . WPINC . '/wp-diff.php' );
+if ( class_exists( 'Text_Diff_Renderer' ) ) :
+class FDX_Text_Diff_Renderer extends Text_Diff_Renderer {
+	function FDX_Text_Diff_Renderer() {
+		parent::Text_Diff_Renderer();
+	}
+
+	function _startBlock( $header ) {
+		return "<tr><td></td><td><code>$header</code></td></tr>\n";
+	}
+
+	function _lines( $lines, $prefix, $class ) {
+		$r = '';
+		foreach ( $lines as $line ) {
+			$line = esc_html( $line );
+			$r .= "<tr><td>{$prefix}</td><td class='{$class}'>{$line}</td></tr>\n";
+		}
+		return $r;
+	}
+
+	function _added( $lines ) {
+		return $this->_lines( $lines, '+', 'diff-addedline' );
+	}
+
+	function _deleted( $lines ) {
+		return $this->_lines( $lines, '-', 'diff-deletedline' );
+	}
+
+	function _context( $lines ) {
+		return $this->_lines( $lines, '', 'diff-context' );
+	}
+
+	function _changed( $orig, $final ) {
+		return $this->_deleted( $orig ) . $this->_added( $final );
+	}
+}
+endif;
+
+//####################################FIM DIF#################################################
 
 
 // hook everything up

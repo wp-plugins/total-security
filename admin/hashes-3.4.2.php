@@ -1,6 +1,7 @@
 <?php
 $filehashes = array(
-'wp-config.php' => '', //add e apaga plugin e thema
+'wp-config.php' => '',//add
+'.htaccess' => '',
 'wp-app.php' => 'f9325a411fbbae3350efb5cc29a1b238',
 'wp-content/index.php' => '67442c5615eba73d105c0715c6620850',
 'wp-admin/edit-tag-form.php' => '79727704b3da55f37ec9c0159fd2ca7d',
