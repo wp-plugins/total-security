@@ -26,7 +26,7 @@ Best practices on security combined into one plugin! It does not remove or modif
 * quickly identify problematic files
 * restore modified files with one click
 * great for removing exploits and fixing accidental file edits/deletes
-* view files’ source to take a closer look
+* view files source to take a closer look
 * fix broken WP auto-updates
 * detailed help and description
 
@@ -36,9 +36,9 @@ For Vulnerability Scan: Once you click the `One Click Scan` button all tests wil
 
 For Core Exploit Scanner: Once you click the `One Click Scanner` button all tests will be run,
 
-depending on various parameters of your site this can take from ten seconds to 2-3 minutes. Please don’t reload the page until testing is done.
+depending on various parameters of your site this can take from ten seconds to 2-3 minutes. Please don't reload the page until testing is done.
 
-Each test comes with a detailed explanation which you should use to determine whether it affects your site or not. Most test have simple to follow instructions on how to strengthen your site’s security. 
+Each test comes with a detailed explanation which you should use to determine whether it affects your site or not. Most test have simple to follow instructions on how to strengthen your site's security. 
 
 Color-coded results separate files into categories:
 
