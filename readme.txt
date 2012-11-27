@@ -26,7 +26,7 @@ Best practices on security combined into one plugin! It does not remove or modif
 * quickly identify problematic files
 * restore modified files with one click
 * great for removing exploits and fixing accidental file edits/deletes
-* view files’ source to take a closer look
+* view files source to take a closer look
 * fix broken WP auto-updates
 * detailed help and description
 
