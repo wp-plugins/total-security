@@ -1,3 +1,8 @@
+/* Language */
+.ico_button {padding:4px;display:block;padding-left:25px;background-repeat:no-repeat;background-position:5px 50%;text-decoration:none;border:none;}
+.ico_button_pt_BR, .ico_button_pt-BR, .ico_button_pt   {background-image:url(../images/flag_br.png);}
+
+/* ************************sidebar common******************************* */
 div.hid { visibility: hidden; overflow: hidden; height: 1px; }  /* hack para input hiden */
 .postbox p { padding: 0 5px 0 5px !important  }
 .fdx { font-size: 13px !important; font-weight: normal !important; text-align: left !important}
@@ -10,8 +15,6 @@ code.red {font-family: Verdana, Arial, Helvetica, sans-serif;  background-color:
 span#butpop a  {  text-decoration: none !important }
 h5 { padding: 0!important; margin: 0 !important; font-size: 11px !important }
 
-
-
 a.sm_button {padding:4px;display:block;padding-left:25px;background-repeat:no-repeat;background-position:5px 50%;text-decoration:none;border:none;}
 a.sm_button:hover {border-bottom-width:1px;}
 a.sm_bug {background-image:url(../images/bug.png);}
@@ -22,50 +25,23 @@ a.sm_lang {background-image:url(../images/locate.png);}
 a.sm_star {background-image:url(../images/star.png);}
 a.sm_link {background-image:url(../images/link.png);}
 
+/* ************************extra******************************* */
+  pre {background: none repeat scroll 0 0 #EAEAEA; display: inline-block; padding: 5px;  margin: 2px;}
 
+.fdx-list {list-style-type:  decimal;list-style-position: inside;  margin-left: 5px}
 
-.ico_button {padding:4px;display:block;padding-left:25px;background-repeat:no-repeat;background-position:5px 50%;text-decoration:none;border:none;}
-.ico_button_ok {background-image:url(../images/ok.png);}
-.ico_button_error {background-image:url(../images/error.png);}
+.fdx-error, .fdx-warning, .fdx-success {font-weight: bold;text-align: center;}
+.fdx-error {color: #FF0000;}
+.fdx-warning {color: #efa800;}
+.fdx-success {color: #008000;}
 
-/* ###################################1################################################## */
-#fdx-table td { padding: 5px 0 2px 0  !important  }
+.fdx-status {text-align: center !important; vertical-align: middle !important; }
+.fdx-details { vertical-align: middle !important; }
 
-.sn-error, .sn-warning, .sn-success {
-  font-weight: bold;
-  text-align: center;
-}
+#icon-fdx-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent;}
+.admin-color-classic #icon-fdx-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent !important;}
 
-.sn-error {
-    color: #FF0000;
-}
-.sn-warning {
-  color: #efa800;
-}
-.sn-success {
-  color: #008000;
-}
-
-.sn-notice {
-  margin-left: 4px;
-  font-size: 13px;
-}
-
-.sn-status {text-align: center !important; vertical-align: middle !important; }
-.sn-details { vertical-align: middle !important; }
-
-
-#icon-sn-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent;}
-.admin-color-classic #icon-sn-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent !important;}
-
-
-pre {
-  background: none repeat scroll 0 0 #EAEAEA;
-  display: inline-block;
-  padding: 5px;
-  margin: 2px;
-}
-
+/* usa js */
 .blockMsg {
   border:  none !important;
   padding: 15px !important;
@@ -77,95 +53,32 @@ pre {
    font-size: 12px !important;
 }
 
-.wrap h2 {
-  color: #464646;
-  font-size: 30px;
-  font-weight: bold;
-  letter-spacing: -1px;
-  margin-top: 18px;
-}
 
-.sn-list {
+.fdx-list {
   list-style-position: inside;
   list-style-type: disc;
   margin-left: 10px;
 }
 
-.sn-list ul {
+.fdx-list ul {
   list-style-position: inside;
   list-style-type: circle;
   margin-left: 10px;
 }
 
-.sn_core_ad {
-  /* IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  /* IE 5-7 */
-  filter: alpha(opacity=50);
-  /* Netscape */
-  -moz-opacity: 0.5;
-  /* Safari 1.x */
-  -khtml-opacity: 0.5;
-  /* Good browsers */
-  opacity: 0.5;
-}
+.fdx-cs-ok {	margin:0 0 0 0;	display:block;	clear:both}
+.fdx-cs-ok p {	font-size:12px;	font-weight:normal;	margin-bottom:15px;color: #666}
+.fdx-cs-ok h4 {	font-size:17px;}
 
 
-/* ####################################################################################### */
-.fdx-list {list-style-type:  decimal;list-style-position: inside;  margin-left: 5px}
+.fdx-cs-ok h4 {color:#444; margin-bottom: 0;}
+.fdx-file {	font-style:italic;	margin-right:20px; color:#888}
+.fdx-show-source, .fdx-restore-source {margin:0 0 0 1px;font-size: 11px;text-decoration: none;font-weight: bold}
+.fdx-file-list li {	margin-bottom:10px}
+.fdx-cs-ok {border-bottom:1px dotted #ccc;padding-bottom:20px}
+.fdx-cs-ok {	border-bottom:0}
+.fdx-cs-ok h4 {font-weight: bold;margin-bottom: 5px}
+ .sn_count {font-weight:bold;font-size:32px;letter-spacing:-3px}
 
-
-/* ************************************************************ */
-
-
-.sn-cs-changed-bad,.sn-cs-missing-bad,.sn-cs-changed-ok,.sn-cs-missing-ok,.sn-cs-ok {	margin:0 0 0 0;	display:block;	clear:both}
-.sn-cs-changed-bad p,.sn-cs-missing-bad p,.sn-cs-changed-ok p,.sn-cs-missing-ok p,.sn-cs-ok p {	font-size:12px;	font-weight:normal;	margin-bottom:15px;color: #666}
-.sn-cs-changed-bad h4,.sn-cs-missing-bad h4,.sn-cs-changed-ok h4,.sn-cs-missing-ok h4,.sn-cs-ok h4 {	font-size:17px;}
-.sn-cs-changed-bad h4 {color:red; margin-bottom: 0;}
-.sn-cs-missing-bad h4 {color:#EFA800; margin-bottom: 0;}
-.sn-cs-changed-ok h4 {color:#6FBF00; margin-bottom: 0;}
-.sn-cs-missing-ok h4 {color:#6FBF00; margin-bottom: 0;}
-.sn-cs-ok h4 {color:#444; margin-bottom: 0;}
-.sn-file {	font-style:italic;	margin-right:20px; color:#888}
-.sn-show-source, .sn-restore-source {
-	margin:0 0 0 1px;
-	font-size: 11px;
-	text-decoration: none;
-	font-weight: bold
-}
-.sn-file-list li {	margin-bottom:10px}
-.sn-cs-changed-bad,.sn-cs-missing-bad,.sn-cs-changed-ok,.sn-cs-missing-ok,.sn-cs-ok {
-	border-bottom:1px dotted #ccc;
-	padding-bottom:20px
-}
-.sn-cs-ok {
-	border-bottom:0
-}
-
-
-.sn-cs-ok h4 {
-	font-weight: bold;
-	margin-bottom: 5px
-}
-
-.sn_count {
-	font-weight:bold;
-	font-size:32px;
-	letter-spacing:-3px
-}
-
-.wrap h2 {
-	color: #464646;
-	font-size: 30px;
-	font-weight: bold;
-	letter-spacing: -1px;
-	margin-top: 18px
-}
-
-#source-dialog p, #restore-dialog p {
-  margin: 20px;
-}
-
-.wp-dialog .ui-dialog-title {
-  padding: 3px 18px 5px 3px !important;
-}
+#source-dialog p, #restore-dialog p {margin: 20px;}
+.wp-dialog .ui-dialog-title {padding: 3px 18px 5px 3px !important;}

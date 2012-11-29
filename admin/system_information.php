@@ -71,7 +71,7 @@ function fdx_check_php_version() {
 	}
 }
 ?>
-<div class="wrap"><?php echo get_screen_icon('sn-lock');?>
+<div class="wrap"><?php echo get_screen_icon('fdx-lock');?>
 <h2><?php echo FDX2_PLUGIN_NAME;?>: <?php _e('System Information', 'fdx-lang') ?></h2>
 <div id="poststuff">
 <div id="post-body" class="metabox-holder columns-2">
