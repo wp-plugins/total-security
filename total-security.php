@@ -131,7 +131,7 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
       }
       $response = fdx_tests::$test_name();
 
-      $test_description['test'][$test_name]['title'] = $test['title'];
+//      $test_description['test'][$test_name]['title'] = $test['title'];
       $test_description['test'][$test_name]['status'] = $response['status'];
 
       if (!isset($response['msg'])) {
