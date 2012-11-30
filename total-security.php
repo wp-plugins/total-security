@@ -54,7 +54,7 @@ require_once 'admin/vulnerability_scan_inc.php';
 *------------------------------------------------------------*/
 $currentLocale = get_locale();
 			if(!empty($currentLocale)) {
-				$moFile = dirname(__FILE__) . "/languages/total-security-" . $currentLocale . ".mo";
+				$moFile = dirname(__FILE__) . "/languages/".FDX2_PLUGIN_P1."-" . $currentLocale . ".mo";
 				if(@file_exists($moFile) && is_readable($moFile)) load_textdomain('fdx-lang', $moFile);
 }
 

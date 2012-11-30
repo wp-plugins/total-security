@@ -25,8 +25,14 @@ a.sm_lang {background-image:url(../images/locate.png);}
 a.sm_star {background-image:url(../images/star.png);}
 a.sm_link {background-image:url(../images/link.png);}
 
+#icon-fdx-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent;}
+.admin-color-classic #icon-fdx-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent !important;}
+
 /* ************************extra******************************* */
-  pre {background: none repeat scroll 0 0 #EAEAEA; display: inline-block; padding: 5px;  margin: 2px;}
+ .fdxlist li { list-style: disc; margin-left: 20px }
+ .fdxlist li strong { background: #FFFFEA; padding: 2px}
+
+pre {background: none repeat scroll 0 0 #EAEAEA; display: inline-block; padding: 5px;  margin: 2px;}
 
 .fdx-list {list-style-type:  decimal;list-style-position: inside;  margin-left: 5px}
 
@@ -38,8 +44,6 @@ a.sm_link {background-image:url(../images/link.png);}
 .fdx-status {text-align: center !important; vertical-align: middle !important; }
 .fdx-details { vertical-align: middle !important; }
 
-#icon-fdx-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent;}
-.admin-color-classic #icon-fdx-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent !important;}
 
 /* usa js */
 .blockMsg {
