@@ -11,10 +11,17 @@ function fdx_check_perms($name,$path,$perm) {
     if ($current_perms == '.0.') { echo '-----'; } else { echo $current_perms; };
     echo '</td></tr></tbody>';
 	echo '</table>';
-
-
 }
 
+function fdx_url_method() {
+	if(function_exists('curl_init')) {
+		return 'curl';
+	} else if(ini_get('allow_url_fopen') && function_exists('stream_get_contents')) {
+		return 'fopen';
+	} else {
+		return 'fsockopen';
+	}
+}
 ?>
 <div class="wrap"><?php echo get_screen_icon('fdx-lock');?>
 <h2><?php echo FDX2_PLUGIN_NAME;?>: <?php _e('System Information', 'fdx-lang') ?></h2>
@@ -128,7 +135,7 @@ function fdx_check_perms($name,$path,$perm) {
 	$sql_mode = '<strong>'.__('Off', 'fdx-lang').'</strong>';
 	}}
 	echo $sql_mode;
-	echo '<a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<a href="http://fabrix.net/total-security/msys/#sql_mode" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>Browser Compression Supported: <strong>'.esc_html($_SERVER['HTTP_ACCEPT_ENCODING']).'</strong></li>';
 	?>
      </ul>
@@ -147,11 +154,11 @@ $post_max = ini_get('post_max_size')
   <ul class="fdxlist"><?php
 	echo '<li>PHP Version: <strong>'.PHP_VERSION.'</strong></li>';
 	echo '<li>PHP Memory Usage: <strong>'.round(memory_get_usage() / 1024 / 1024, 2) . ' MB</strong></li>';
-	echo '<li>PHP Memory Limit: <strong>'.$memory_limit.'</strong><a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<li>PHP Memory Limit: <strong>'.$memory_limit.'</strong><a href="http://fabrix.net/total-security/msys/#php_memory_limit" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP Base Memory Limit: <strong>'.WP_MEMORY_LIMIT.'</strong></li>';
 	echo '<li>PHP Actual Configuration Memory Limit: <strong>'.get_cfg_var('memory_limit').'</strong></li>';
-	echo '<li>PHP Max Upload Size: <strong>'.$upload_max.'</strong><a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
-	echo '<li>PHP Max Post Size: <strong>'.$post_max.'</strong><a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<li>PHP Max Upload Size: <strong>'.$upload_max.'</strong><a href="http://fabrix.net/total-security/msys/#php_max_upload_size" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<li>PHP Max Post Size: <strong>'.$post_max.'</strong><a href="http://fabrix.net/total-security/msys/#php_max_post_size" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP Safe Mode: ';
 	if (ini_get('safe_mode') == 1) {
 	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
@@ -160,7 +167,7 @@ $post_max = ini_get('post_max_size')
 	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
 	echo $text;
 	}
-	echo '<a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li><li>PHP Allow URL fopen: ';
+	echo '<a href="http://fabrix.net/total-security/msys/#php_safe_mode" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li><li>PHP Allow URL fopen: ';
 	if (ini_get('allow_url_fopen') == 1) {
 	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
 	echo $text;
@@ -168,7 +175,7 @@ $post_max = ini_get('post_max_size')
 	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
 	echo $text;
 	}
-	echo '<a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li><li>PHP Allow URL Include: ';
+	echo '<a href="http://fabrix.net/total-security/msys/#php_allow_url_fopen" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li><li>PHP Allow URL Include: ';
 	if (ini_get('allow_url_include') == 1) {
 	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
 	echo $text.'</li>';
@@ -224,7 +231,7 @@ $post_max = ini_get('post_max_size')
 	echo '<font color="green"><strong>'.$output_buffering.'</strong></font></li>';
 	}
 	echo '<li>PHP Max Script Execution Time: '; $max_execute = ini_get('max_execution_time');
-	echo '<strong>'.$max_execute.' Seconds</strong><a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<strong>'.$max_execute.' Seconds</strong><a href="http://fabrix.net/total-security/msys/#php_max_script_execute_time" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP Magic Quotes GPC: ';
 	if (ini_get('magic_quotes_gpc') == 1) {
 	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
@@ -248,7 +255,7 @@ $post_max = ini_get('post_max_size')
 	$text = '<strong>'.__('No', 'fdx-lang').'</strong></font>';
 	echo $text;
 	}
-    echo '<a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+    echo '<a href="http://fabrix.net/total-security/msys/#php_xml_support" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP IPTC Support: ';
 	if (is_callable('iptcparse')) {
 	$text = '<strong>'.__('Yes', 'fdx-lang').'</strong></font>';
@@ -257,7 +264,7 @@ $post_max = ini_get('post_max_size')
 	$text = '<strong>'.__('No', 'fdx-lang').'</strong></font>';
 	echo $text;
 	}
-      echo '<a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+      echo '<a href="http://fabrix.net/total-security/msys/#php_iptc_support" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP Exif Support: ';
 	if (is_callable('exif_read_data')) {
 	$text = '<strong>'.__('Yes', 'fdx-lang').' (v' . substr(phpversion('exif'),0,4) . ')</strong></font>';
@@ -266,7 +273,7 @@ $post_max = ini_get('post_max_size')
 	$text = '<strong>'.__('No', 'fdx-lang').'</strong></font>';
 	echo $text;
     }
-     echo '<a href="#" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+     echo '<a href="http://fabrix.net/total-security/msys/#php_exif_support" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 
 	?>
 
@@ -276,6 +283,43 @@ $post_max = ini_get('post_max_size')
 
 </div>
 </div>
+
+
+<div class="postbox">
+<div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('Debug Information', 'fdx-lang'); ?></span></h3>
+<div class="inside">
+<p align="center"><?php _e('Debug information is used to provide help. You should include this information in your posts on support forum. ', 'fdx-lang') ?> </p>
+ <form name="test">
+<p align="center"><a class="button" href="javascript:selectcopy('test.select1')"><?php _e('Select All', 'fdx-lang') ?></a></p>
+ <div align="center">
+<textarea style="width:90%; height:200px;" name="select1">
+OS: <?php echo PHP_OS; ?>
+
+PHP: <?php echo phpversion(); ?>
+
+WP: <?php  global $wp_version; echo $wp_version; ?>
+
+Active Theme: <?php $theme = get_theme(get_current_theme()); echo $theme['Name'].' '.$theme['Version']; ?>
+
+URLOpen Method: <?php echo fdx_url_method(); ?>
+
+---------Plugins---------
+<?php
+foreach (get_plugins() as $key => $plugin) {
+    $isactive = "";
+    if (is_plugin_active($key)) {
+        $isactive = "(active)";
+    }
+    echo $plugin['Name'].' '.$plugin['Version'].' '.$isactive."\n";
+}
+?>
+
+</textarea>
+</div>
+   </form>
+ </div>
+</div>
+
 
 
 </div> <!-- /postbox-container -->

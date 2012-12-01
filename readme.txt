@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Security,scan,scanner,hack,hackers,htaccess,injection,exploit,secure,malware,phishing,SQL Injection,vulnerability,attack,anything suspicious,Total Security, Total      
 Requires at least: 3.4.2
 Tested up to: 3.4.2
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -60,8 +60,8 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 
 == Screenshots ==
-1. Vulnerability Scan 1
-2. Vulnerability Scan
+1. Vulnerability Scan
+2. Vulnerability Scan 2
 3. Core Exploit Scanner
 4. System Information
 
@@ -88,6 +88,8 @@ are version dependant.
 
 
 == Changelog ==
+* 1.1
+    * Bug Fix
 
 * 1.0
     * Initial release
