@@ -104,9 +104,13 @@ One of the best practices a WordPress site owner can do to keep their site secur
 
 = MD5 hashes =
 > #1: a85b9b972b05dbe1687ddc83441189a5
+
 > #2: d41d8cd98f00b204e9800998ecf8427e
+
 > #3: 02c0a96fe2b6143a4e959bf591a04b8a
+
 > #4: 97e783343059cff771c1030f9cfde7b7
+
 > #5: 39f71732a87dcb724c9b90c72f245984
 
 
