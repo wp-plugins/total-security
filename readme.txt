@@ -41,9 +41,9 @@ The [Total Security](http://fabrix.net/total-security/ "Total Security") plugin 
 Scours your file system by suspicious or potentially malicious files, compressed, log, binary, data, and temporary files. And any unknown file in WP core.
  
 * Detects unknown file found in WP core => |any file|
-* Detects suspicious or potentially malicious files => |.exe|.com|.scr|.bat|.msi|.vb|
-* Detects compressed files => |.zip|.rar|.7z|.gz|.tar|.bz2|
-* Detects log, binary, data and temporary files => |.log|.dat|.bin|.tmp|
+* Detects suspicious or potentially malicious files => |`.exe`|`.com`|`.scr`|`.bat`|`.msi`|`.vb`|
+* Detects compressed files => |`.zip`|`.rar`|`.7z`|`.gz`|`.tar`|`.bz2`|
+* Detects log, binary, data and temporary files => |`.log`|`.dat`|`.bin`|`.tmp`|
 
 
 
