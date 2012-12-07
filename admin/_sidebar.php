@@ -24,7 +24,7 @@
 
 <span class="ico_button ico_button_<?php echo WPLANG;?>"><?php _e('Translated by: <a href="http://fabrix.net"><strong>Fabrix DoRoMo</strong></a>', 'fdx-lang') ?></span>
 
-<p><?php _e('If you find any spelling error in this translation or would like to contribute', 'fdx-lang') ?>, <a href="<?php echo FDX2_GLOTPRESS;?>" target="_blank"><?php _e('click here.', 'fdx-lang') ?></a></p>
+<p><?php _e('If you find any spelling error in this translation or would like to contribute', 'fdx-lang') ?>, <a href="<?php echo FDX2_GLOTPRESS;?>" target="_blank"><?php _e('click here', 'fdx-lang') ?>.</a></p>
 
 <?php } ?>
 </div>
@@ -95,7 +95,7 @@
 
 
 <div class="postbox">
-<div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('Do you like this Plugins?', 'fdx-lang') ?></span></h3>
+<div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('Do you like this Plugin?', 'fdx-lang') ?></span></h3>
 <div class="inside">
 <?php _e('Please help to support continued development of this plugin!', 'fdx-lang') ?>
 <div align="center"><a href="<?php echo FDX2_DONATELINK;?>" target="_blank"><img src="<?php echo FDX2_PLUGIN_URL;?>/images/btn_donateCC_LG.gif" width="147" height="47" border="0" alt="" /></a></div>

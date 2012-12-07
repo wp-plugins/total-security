@@ -1,6 +1,17 @@
 <?php
-// maximum number of administrators accounts that are brute-force scan.  0 = disabled
-define('FDX_MAX_USERS_ATTACK', 0);
+/***********************************************************
+0 = disabled */
+define('FDX_PASS_ATTACK', 1);
+/*********************************************************** */
 
+/***********************************************************
+maximum script execution time */
 define('FDX_MAX_EXEC_SEC', 200);
+/*********************************************************** */
+
+/*/***********************************************************
+Number of files per batch: (100 | 150 |  250 | 500 | 1000 )
+(to help reduce memory limit errors the scan processes a series of file batches) */
+define('FDX_MAX_BATCH_SIZE', 500);
+/*********************************************************** */
 ?>

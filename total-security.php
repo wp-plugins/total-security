@@ -4,7 +4,7 @@ Plugin Name: Total Security
 Plugin URI: http://fabrix.net/total-security/
 Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
 Author: Fabrix DoRoMo
-Version: 1.1
+Version: 2.0.342
 Author URI: http://fabrix.net/
 */
 /*
@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /*********************************************************************************/
 define('FDX2_PLUGIN_NAME', 'Total Security' );
-define('FDX2_PLUGIN_VERSION', '1.1' );
+define('FDX2_PLUGIN_VERSION', '2.0.342' );
 define('FDX2_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 define('FDX2_WPPAGE', 'http://wordpress.org/extend/plugins/total-security/');
@@ -37,7 +37,9 @@ define('FDX2_LAST_WP_VER', '3.4.2'); //Last version of wordpress
 
 define('FDX2_PLUGIN_P1', 'total-security' ); //link1, plugin prefix (.mo)
 define('FDX2_PLUGIN_P2', 'total-security-core' ); //link2
-define('FDX2_PLUGIN_P3', 'total-security-sys' ); //link3
+define('FDX2_PLUGIN_P3', 'total-security-uns' ); //link3
+define('FDX2_PLUGIN_P4', 'total-security-sys' ); //link4
+
 
 /* SPECIFIC */
 define('FDX_OPTIONS_KEY', 'fdx_key1_237'); // cookies
@@ -68,16 +70,19 @@ class fdx_class {
       add_action('wp_ajax_sn_run_tests', array(__CLASS__, 'run_tests'));
 
       add_action( 'fdx_core_get_file_source', 'fdx_diff_page' );
-
-       if ( isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P1 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P2 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P3)  {
+       //------------------------------
+       if ( isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P1 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P2 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P3 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P4)  {
          add_action('admin_enqueue_scripts', array(__CLASS__, 'fdx_enqueue_scripts'));
-            }
+        }
         add_action('wp_ajax_sn_core_get_file_source', array(__CLASS__, 'get_file_source'));
         add_action('wp_ajax_sn_core_restore_file', array(__CLASS__, 'restore_file_dialog'));
         add_action('wp_ajax_sn_core_restore_file_do', array(__CLASS__, 'restore_file'));
         add_action('wp_ajax_sn_core_run_scan', array(__CLASS__, 'scan_files'));
         add_action('admin_notices', array(__CLASS__, 'run_tests_warning'));
-       add_action('admin_notices', array(__CLASS__, 'run_tests_warning2'));
+        add_action('admin_notices', array(__CLASS__, 'run_tests_warning2'));
+        //++++++++++++++++++++++++++++++++++
+        add_action( 'wp_ajax_fdx-scanner_file_scan', 'fdx_ajax_file_scan' );
+        add_action( 'wp_ajax_fdx-run_end', 'fdx_run_end' );
     }
   }
 
@@ -101,8 +106,10 @@ function fdx_enqueue_scripts() {
 function fdx_admin_menu(){
 	add_menu_page('Total Security','Total Security', 'manage_options', FDX2_PLUGIN_P1, array(__CLASS__, 'fdx_tests_table'), FDX2_PLUGIN_URL . '/images/menu.png' );
     add_submenu_page(FDX2_PLUGIN_P1, __('Vulnerability Scan', 'fdx-lang'), __('Vulnerability Scan', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P1, array(__CLASS__, 'fdx_tests_table'));
-    add_submenu_page(FDX2_PLUGIN_P1, __('Scanning all your core WP files', 'fdx-lang'), __('Core Exploit Scanner', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P2, array(__CLASS__, 'core_page'));
-    add_submenu_page(FDX2_PLUGIN_P1, __('System Information', 'fdx-lang'), __('System Information', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P3, array(__CLASS__, 'system_inf'));
+    add_submenu_page(FDX2_PLUGIN_P1, __('Core Exploit Scanner', 'fdx-lang'), __('Core Exploit Scanner', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P2, array(__CLASS__, 'core_page'));
+    add_submenu_page(FDX2_PLUGIN_P1, __('Unsafe Files Search', 'fdx-lang'), __('Unsafe Files Search', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P3, array(__CLASS__, 'unsafe_files'));
+    add_submenu_page(FDX2_PLUGIN_P1, __('System Information', 'fdx-lang'), __('System Information', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P4, 'system_inf');
+
 }
 
 /* display warning if test were never run
@@ -118,13 +125,15 @@ function fdx_admin_menu(){
 
 /* PAGES
 *------------------------------------------------------------*/
-function system_inf(){
-require_once( dirname(__FILE__) . '/admin/system_information.php' );
-}
 
 function fdx_tests_table() {
 require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
   }
+
+function unsafe_files() {
+require_once( dirname(__FILE__) . '/admin/unsafe_files.php' );
+}
+
 
 /* run all tests; via AJAX
 *------------------------------------------------------------*/
@@ -197,13 +206,19 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
   function scan_files() {
     $results['missing_ok'] =  $results['missing_bad'] = array();
     $results['changed_ok'] = $results['changed_bad'] = array();
+     $results['missing_conf'] = $results['missing_conf'] = array();
     $results['ok'] = array();
     $results['last_run'] = current_time('timestamp');
     $results['total'] = 0;
     $i = 0;
     $missing_ok = array('readme.html', 'license.txt', 'wp-config-sample.php',
                         'wp-admin/install.php', 'wp-admin/upgrade.php');
+
     $changed_ok = array('wp-config.php', '.htaccess');
+
+    $all_exclude = array('readme.html', 'license.txt', 'wp-config-sample.php',
+                        'wp-admin/install.php', 'wp-admin/upgrade.php', 'wp-config.php', '.htaccess');
+
     if (file_exists(dirname(__FILE__) . '/libs/hashes-' . FDX2_LAST_WP_VER . '.php')) {
       require 'libs/hashes-' . FDX2_LAST_WP_VER . '.php';
       $results['total'] = sizeof($filehashes);
@@ -217,11 +232,14 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
           } else {
             $results['changed_bad'][] = $file;
           }
-        } else {
+         } else {
           if (in_array($file, $missing_ok)) {
             $results['missing_ok'][] = $file;
+          } elseif (in_array($file, $changed_ok)) {
+            $results['missing_conf'][] = $file;
           } else {
             $results['missing_bad'][] = $file;
+
           }
         }
       } // foreach file
@@ -334,9 +352,16 @@ require_once( dirname(__FILE__) . '/admin/vulnerability_scan.php' );
   function fdx_deactivate() {
     delete_option(FDX_OPTIONS_KEY);
     delete_option(FDX_CS_OPTIONS_KEY);
-  }
+    //ver isso
+    delete_transient( 'fdx_results_trans' );
+	delete_transient( 'fdx_files' );
+    //----------
+//	delete_option( 'fdx' );
+	delete_option( 'fdx_results' );
+ }
 
 } // end class
+
 
 /* +++++ Diff Page
 *------------------------------------------------------------*/
@@ -417,6 +442,257 @@ class FDX_Text_Diff_Renderer extends Text_Diff_Renderer {
 	}
 }
 endif;
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                                            Unsafe
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/**
+ * AJAX callback to initiate a file scan.
+ */
+function fdx_ajax_file_scan() {
+    @set_time_limit(FDX_MAX_EXEC_SEC);
+	check_ajax_referer( 'fdx-scanner_scan' );
+
+	if ( ! isset($_POST['start']) )
+		die( json_encode( array( 'status' => 'error', 'data' => __('Error: start not set.', 'fdx-lang') ) ) );
+	else
+		$start = (int) $_POST['start'];
+
+    $max = FDX_MAX_BATCH_SIZE;
+
+	$args = compact( 'start', 'max' );
+
+	$scanner = new File_FDX_Scanner( ABSPATH, $args );
+	$result = $scanner->run();
+	if ( is_wp_error($result) ) {
+		$message = $result->get_error_message();
+		$data = $result->get_error_data();
+		echo json_encode( array( 'status' => 'error', 'message' => $message, 'data' => $data ) );
+	} else if ( $result ) {
+		echo json_encode( array( 'status' => 'complete' ) );
+	} else {
+		echo json_encode( array( 'status' => 'running', 'data' => __('Scanner filesystem', 'fdx-lang'). ': ' . ($start+$max) . '...' ) );
+	}
+
+	exit;
+}
+
+
+
+/**
+ * AJAX run_end
+ */
+function fdx_run_end() {
+	check_ajax_referer( 'fdx-scanner_scan' );
+	$scanner = new RunEnd();
+	$scanner->RunEnd();
+	exit;
+}
+
+
+/**
+ * Exploit Scanner base class. Scanners should extend this.
+ */
+class FDX_C_Scanner {
+	var $results;
+
+	function add_result( $level, $info ) {
+		$this->results[$level][] = $info;
+	}
+
+	function store_results( $done = false ) {
+		$stored = get_transient( 'fdx_results_trans' );
+
+		if ( empty($this->results) ) {
+			if ( $done )
+				update_option( 'fdx_results', $stored );
+			return;
+		}
+
+		if ( $stored && is_array($stored) )
+			$this->results = array_merge_recursive( $stored, $this->results );
+
+		if ( $done ) {
+			update_option( 'fdx_results', $this->results );
+			delete_transient( 'fdx_results_trans' );
+		} else {
+			set_transient( 'fdx_results_trans', $this->results );
+		}
+	}
+}
+/**
+ * File Scanner. Scans all files in given path for suspicious text.
+ */
+class File_FDX_Scanner extends FDX_C_Scanner {
+	var $path;
+	var $start;
+	var $max_batch_size;
+	var $paged = true;
+	var $files = array();
+	var $modified_files = array();
+	var $skip;
+	var $complete = false;
+
+
+	function File_FDX_Scanner( $path, $args ) {
+		$this->__construct( $path, $args );
+	}
+
+	function __construct( $path, $args ) {
+		$this->path = $path;
+
+		if ( ! empty($args['max']) )
+			$this->max_batch_size = $args['max'];
+		else
+			$this->paged = false;
+
+		$this->start = $args['start'];
+		$this->skip = ltrim( str_replace( array( untrailingslashit( ABSPATH ), '\\' ), array( '', '/' ), __FILE__ ), '/' );
+	}
+
+	function run() {
+		$this->get_files( $this->start );
+		$this->store_results();
+		return $this->complete;
+	}
+
+	function get_files( $s ) {
+   		if ( 0 == $s ) {
+			unset( $filehashes );
+			$hashes = dirname(__FILE__) . '/libs/hashes-'. FDX2_LAST_WP_VER .'.php';
+	 		include( $hashes );
+  			$this->recurse_directory( $this->path );
+  			foreach( $this->files as $k => $file ) {
+
+//--------------------------------------------severe=03.core(php)
+				if ( isset( $filehashes[$file] ) ) {
+                    if ( $filehashes[$file] == md5_file( $this->path.'/'.$file ) ) {
+						unset( $this->files[$k] );
+						continue;
+				   	}
+				} else {
+					list( $dir ) = explode( '/', $file );
+					if ( $dir == 'wp-includes' || $dir == 'wp-admin') {
+						$severity = substr( $file, -4 ) == '.php' ? '03' : '03';  //severe=03 warning=02 note=01
+						$this->add_result( $severity, array(
+							'loc' => $file,
+   						) );
+					}
+				}
+//--------------------------------------------severe=02.xxx
+				if ( substr( $file, -4 ) == '.exe' ||
+                     substr( $file, -4 ) == '.bat' ||
+                     substr( $file, -4 ) == '.com' ||
+                     substr( $file, -4 ) == '.scr' ||
+                     substr( $file, -4 ) == '.msi')  {
+					$this->add_result( '02', array(
+						'loc' => $file,
+					) );
+//--------------------------------------------severe=02.xx
+                } else if ( substr( $file, -3 ) == '.vb' ) {
+					$this->add_result( '02', array(
+						'loc' => $file,
+					) );
+//--------------------------------------------warning=01.xxx
+                } else if ( substr( $file, -4 ) == '.rar' ||
+                            substr( $file, -4 ) == '.zip' ||
+                            substr( $file, -4 ) == '.tar' ||
+                            substr( $file, -4 ) == '.bz2' ) {
+					$this->add_result( '01', array(
+						'loc' => $file,
+					) );
+//--------------------------------------------warning=01.xx
+               } else if ( substr( $file, -3 ) == '.7z' ||
+                           substr( $file, -3 ) == '.gz' ) {
+					$this->add_result( '01', array(
+						'loc' => $file,
+					) );
+//--------------------------------------------warning=00.xxx
+               } else if ( substr( $file, -4 ) == '.log' ||
+                           substr( $file, -4 ) == '.dat' ||
+                           substr( $file, -4 ) == '.bin' ||
+                           substr( $file, -4 ) == '.tmp' ) {
+					$this->add_result( '00', array(
+						'loc' => $file,
+					) );
+               }
+			}
+//--------------------------------------------end
+			$this->files = array_values( $this->files );
+			$result = set_transient( 'fdx_files', $this->files, 3600 );
+
+			if ( ! $result ) {
+				$this->paged = false;
+				$data = array( 'files' => esc_html( serialize( $this->files ) ) );
+				if ( ! empty($GLOBALS['EZSQL_ERROR']) )
+					$data['db_error'] = $GLOBALS['EZSQL_ERROR'];
+				$this->complete = new WP_Error( 'failed_transient', '$this->files was not properly saved as a transient', $data );
+			}
+		} else {
+			$this->files = get_transient( 'fdx_files' );
+		}
+
+		if ( ! is_array( $this->files ) ) {
+			$data = array(
+				'start' => $s,
+				'files' => esc_html( serialize( $this->files ) ),
+			);
+
+			if ( ! empty( $GLOBALS['EZSQL_ERROR'] ) )
+				$data['db_error'] = $GLOBALS['EZSQL_ERROR'];
+
+			$this->complete = new WP_Error( 'no_files_array', '$this->files was not an array', $data );
+			$this->files = array();
+			return;
+		}
+
+		// use files list to get a batch if paged
+		if ( $this->paged && (count($this->files) - $s) > $this->max_batch_size ) {
+			$this->files = array_slice( $this->files, $s, $this->max_batch_size );
+		} else {
+			$this->files = array_slice( $this->files, $s );
+			if ( ! is_wp_error( $this->complete ) )
+				$this->complete = true;
+		}
+	}
+
+	function recurse_directory( $dir ) {
+		if ( $handle = @opendir( $dir ) ) {
+			while ( false !== ( $file = readdir( $handle ) ) ) {
+				if ( $file != '.' && $file != '..' ) {
+					$file = $dir . '/' . $file;
+					if ( is_dir( $file ) ) {
+						$this->recurse_directory( $file );
+					} elseif ( is_file( $file ) ) {
+						$this->files[] = str_replace( $this->path.'/', '', $file );
+					}
+				}
+			}
+			closedir( $handle );
+		}
+	}
+
+
+	function replace( $matches ) {
+		return '$#$#' . $matches[0] . '#$#$';
+	}
+
+}
+/**
+ * RunEnd
+ */
+class RunEnd extends FDX_C_Scanner {
+	function RunEnd() {$this->store_results(true);	}
+}
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                                            Unsafe
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+function system_inf(){
+require_once( dirname(__FILE__) . '/admin/system_information.php' );
+}
 
 /* hook everything up
 *------------------------------------------------------------*/

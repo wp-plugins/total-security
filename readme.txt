@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Security,scan,scanner,hack,hackers,htaccess,injection,exploit,secure,malware,phishing,SQL Injection,vulnerability,attack,anything suspicious,Total Security, Total      
 Requires at least: 3.4.2
 Tested up to: 3.4.2
-Stable tag: 1.1
+Stable tag: 2.0.342
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -13,22 +13,40 @@ Checks your WordPress installation and provides detailed reporting on discovered
 == Description ==
 The [Total Security](http://fabrix.net/total-security/ "Total Security") plugin is the must-have tool when it comes security of your WordPress installation. The plugin monitors your website for security weaknesses that hackers might exploit and tells you how to easily fix them.
 
-Best practices on security combined into one plugin! It does not remove or modify anything. That is left to the user to do. 
+> Best practices on security combined into one plugin! It does not remove or modify anything. That is left to the user to do. 
 
-= Features: =
+
+= Vulnerability Scan =
 
 * Check your site for security vulnerabilities and holes.
 * numerous installation parameters tests
 * Apache and PHP related tests
 * file permissions
 * WP options tests
+* detailed help and description
+
+
+= Core Exploit Scanner =
+
 * scan WP core files with one click
 * quickly identify problematic files
-* restore modified files with one click
 * great for removing exploits and fixing accidental file edits/deletes
 * view files source to take a closer look
 * fix broken WP auto-updates
-* detailed help and description
+* restore modified files with one click
+
+
+= Unsafe Files Search =
+
+Scours your file system by suspicious or potentially malicious files, compressed, log, binary, data, and temporary files. And any unknown file in WP core.
+ 
+* Detects unknown file found in WP core => |any file|
+* Detects suspicious or potentially malicious files => |.exe|.com|.scr|.bat|.msi|.vb|
+* Detects compressed files => |.zip|.rar|.7z|.gz|.tar|.bz2|
+* Detects log, binary, data and temporary files => |.log|.dat|.bin|.tmp|
+
+
+
 
 = Usage =
 
@@ -61,8 +79,8 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 == Screenshots ==
 1. Vulnerability Scan
-2. Vulnerability Scan 2
-3. Core Exploit Scanner
+2. Core Exploit Scanner
+3. Unsafe Files Search
 4. System Information
 
 == Installation ==
@@ -78,16 +96,22 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 [Changing File Permissions](http://codex.wordpress.org/Changing_File_Permissions)
 
 = Why do I need to hide my version of WordPress?  =
-Many attackers and automated tools will try and determine software versions
-before launching exploit code. Removing your WordPress blog version may
-discourage some attackers and certainly will mitigate virus and malware programs
-that rely on software versions.
+Many attackers and automated tools will try and determine software versions before launching exploit code. Removing your WordPress blog version may discourage some attackers and certainly will mitigate virus and malware programs that rely on software versions.
 
-NOTE: Hiding your version of WordPress may break any plugins you have which
-are version dependant.
+> Hiding your version of WordPress may break any plugins you have which are version dependant.
+
+= Why does Total Security require WordPress the latest version? =
+One of the best practices a WordPress site owner can do to keep their site secure is to keep your software up to date. Because of this fact I do not test this plugin in anything but the latest stable version of WordPress and will only guarantee it works in the latest version.
+
 
 
 == Changelog ==
+* 2.0.342
+    * New version notation (x.y.zzz) |new feature|improvements or bug fixes|last WP core|
+    * Add new feature: Unsafe Files Search
+    * Performance improvements.
+
+
 * 1.1
     * Bug Fix
 
