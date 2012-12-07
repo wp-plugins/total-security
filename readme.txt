@@ -13,9 +13,6 @@ Checks your WordPress installation and provides detailed reporting on discovered
 == Description ==
 The [Total Security](http://fabrix.net/total-security/ "Total Security") plugin is the must-have tool when it comes security of your WordPress installation. The plugin monitors your website for security weaknesses that hackers might exploit and tells you how to easily fix them.
 
-> Best practices on security combined into one plugin! It does not remove or modify anything. That is left to the user to do. 
-
-
 = Vulnerability Scan =
 
 * Check your site for security vulnerabilities and holes.
@@ -45,7 +42,7 @@ Scours your file system by suspicious or potentially malicious files, compressed
 * Detects compressed files => |`.zip`|`.rar`|`.7z`|`.gz`|`.tar`|`.bz2`|
 * Detects log, binary, data and temporary files => |`.log`|`.dat`|`.bin`|`.tmp`|
 
-
+> Best practices on security combined into one plugin! It does not remove or modify anything. That is left to the user to do. 
 
 
 = Usage =
@@ -103,15 +100,11 @@ NOTE:Hiding your version of WordPress may break any plugins you have which are v
 One of the best practices a WordPress site owner can do to keep their site secure is to keep your software up to date. Because of this fact I do not test this plugin in anything but the latest stable version of WordPress and will only guarantee it works in the latest version.
 
 = MD5 hashes =
-> #1: a85b9b972b05dbe1687ddc83441189a5
-
-> #2: d41d8cd98f00b204e9800998ecf8427e
-
-> #3: 02c0a96fe2b6143a4e959bf591a04b8a
-
-> #4: 97e783343059cff771c1030f9cfde7b7
-
-> #5: 39f71732a87dcb724c9b90c72f245984
+* a85b9b972b05dbe1687ddc83441189a5
+* d41d8cd98f00b204e9800998ecf8427e
+* 02c0a96fe2b6143a4e959bf591a04b8a
+* 97e783343059cff771c1030f9cfde7b7
+* 39f71732a87dcb724c9b90c72f245984
 
 
 == Changelog ==
