@@ -25,14 +25,6 @@ function fdx_url_method() {
 	}
 }
 
-function getConfig() {
-if ( file_exists( trailingslashit( ABSPATH ) . 'wp-config.php' ) ) {
-return trailingslashit( ABSPATH ) . 'wp-config.php';
-} else {
-return trailingslashit( dirname( ABSPATH ) ) . 'wp-config.php';
-}
-}
-
 ### Function: Format Bytes Into KB/MB
 
 	function fdx_format_size($rawSize) {
@@ -95,33 +87,8 @@ return trailingslashit( dirname( ABSPATH ) ) . 'wp-config.php';
 	echo '<li>Document Root Path: <strong>'.esc_html($_SERVER['DOCUMENT_ROOT']).'</strong></li>';
 	echo '<li>WP ABSPATH: <strong>'.ABSPATH.'</strong></li>';
     echo '<li>Parent Directory: <strong>'.dirname(ABSPATH).'</strong></li>';
-$conffile = getConfig();
-if ( $f = @fopen( $conffile, 'a' ) ) {
-@fclose( $f );
-$copen = '<font color="red">';
-$cclose = '</font>';
-$wconf = __( 'writable', 'fdx-lang' );
-} else {
-$copen = '<font color="green">';
-$cclose = '</font>';
-$wconf = __( 'NO writable', 'fdx-lang' );
-}
 ?>
-<li><em>wp-config.php</em>: <strong><?php echo $conffile; ?></strong> <strong><?php echo $copen . $wconf . $cclose; ?></strong> </li>
-<?php
-$htaccess = ABSPATH . '.htaccess';
-if ( $f = @fopen( $htaccess, 'a' ) ) {
-@fclose( $f );
-$copen = '<font color="red">';
-$cclose = '</font>';
-$htaw = __( 'writable', 'fdx-lang' );
-} else {
-$copen = '<font color="green">';
-$cclose = '</font>';
-$htaw = __( 'NO writable', 'fdx-lang' );
-}
-?>
-<li><em>.htaccess</em>: <strong><?php echo $copen . $htaw . $cclose; ?></strong></li>
+
 </ul>
 </td>
 </tr></tbody></table>
@@ -345,18 +312,15 @@ $post_max = ini_get('post_max_size')
 	<table class="widefat">
 		<thead>
 			<tr>
-				<th><?php _e('No.', 'fdx-lang'); ?></th>
-				<th><?php _e('Tables', 'fdx-lang'); ?></th>
-				<th><?php _e('Records', 'fdx-lang'); ?></th>
-				<th><?php _e('Data Usage', 'fdx-lang'); ?></th>
-				<th><?php _e('Index Usage', 'fdx-lang'); ?></th>
-				<th><?php _e('Overhead', 'fdx-lang'); ?></th>
+				<th>N&deg;</th>
+				<th>Tables</th>
+				<th>Records</th>
+				<th>Data Usage</th>
+				<th>Index Usage</th>
+				<th>Overhead</th>
 			</tr>
 		</thead>
 <?php
-// If MYSQL Version More Than 3.23, Get More Info
-$sqlversion = $wpdb->get_var("SELECT VERSION() AS version");
-if($sqlversion >= '3.23') {
 	$tablesstatus = $wpdb->get_results("SHOW TABLE STATUS");
 	foreach($tablesstatus as  $tablestatus) {
     	if(@$no%2 == 0) {
@@ -380,15 +344,12 @@ if($sqlversion >= '3.23') {
 	}
 	echo '<tr class="thead">'."\n";
 	echo '<th>&nbsp;</th>'."\n";
-	echo '<th>'.sprintf(_n('%s Table', '%s Tables', $no, 'fdx-lang'), number_format_i18n($no)).'</th>'."\n";
-	echo '<th>'.sprintf(_n('%s Record', '%s Records', $row_usage, 'fdx-lang'), number_format_i18n($row_usage)).'</th>'."\n";
+	echo '<th>&nbsp;</th>'."\n";
+	echo '<th>'.number_format_i18n($row_usage).'</th>'."\n";
 	echo '<th>'.fdx_format_size($data_usage).'</th>'."\n";
 	echo '<th>'.fdx_format_size($index_usage).'</th>'."\n";
 	echo '<th>'.fdx_format_size($overhead_usage).'</th>'."\n";
 	echo '</tr>';
-} else {
-	echo '<tr><td colspan="6" align="center"><strong>'.__('Could Not Show Table Status Due To Your MYSQL Version Is Lower Than 3.23.', 'fdx-lang').'</strong></td></tr>';
-}
 ?>
 	</table>
 
