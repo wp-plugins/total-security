@@ -108,7 +108,7 @@ One of the best practices a WordPress site owner can do to keep their site secur
 
 == Changelog ==
 * 2.0.350
-    * updated for new wp version
+    * Compatibility with WordPress 3.5
 
 * 2.0.342
     * New version notation (x.y.zzz) |new feature|improvements or bug fixes|last WP core|
