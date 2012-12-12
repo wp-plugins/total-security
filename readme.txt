@@ -3,9 +3,9 @@ Plugin Name: Total Security
 Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
 Tags: Security,scan,scanner,hack,hackers,htaccess,injection,exploit,secure,malware,phishing,SQL Injection,vulnerability,attack,anything suspicious,total security, total, suspicious, malicious, log, binary, temporary files, Scours, Unsafe       
-Requires at least: 3.4.2
-Tested up to: 3.4.2
-Stable tag: 2.0.342
+Requires at least: 3.5
+Tested up to: 3.5
+Stable tag: 2.0.350
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -43,7 +43,6 @@ Scours your file system by suspicious or potentially malicious files, compressed
 * Detects log, binary, data and temporary files => |`.log`|`.dat`|`.bin`|`.tmp`|
 
 > Best practices on security combined into one plugin! It does not remove or modify anything. That is left to the user to do. 
-
 
 = Usage =
 
@@ -100,14 +99,17 @@ NOTE:Hiding your version of WordPress may break any plugins you have which are v
 One of the best practices a WordPress site owner can do to keep their site secure is to keep your software up to date. Because of this fact I do not test this plugin in anything but the latest stable version of WordPress and will only guarantee it works in the latest version.
 
 = MD5 hashes =
-* a85b9b972b05dbe1687ddc83441189a5
-* d41d8cd98f00b204e9800998ecf8427e
-* 02c0a96fe2b6143a4e959bf591a04b8a
-* 97e783343059cff771c1030f9cfde7b7
-* 39f71732a87dcb724c9b90c72f245984
+* #1: a85b9b972b05dbe1687ddc83441189a5
+* #2: d41d8cd98f00b204e9800998ecf8427e
+* #3: 02c0a96fe2b6143a4e959bf591a04b8a
+* #4: 97e783343059cff771c1030f9cfde7b7
+* #5: 39f71732a87dcb724c9b90c72f245984
 
 
 == Changelog ==
+* 2.0.350
+    * updated for new wp version
+
 * 2.0.342
     * New version notation (x.y.zzz) |new feature|improvements or bug fixes|last WP core|
     * Add new feature: Unsafe Files Search
