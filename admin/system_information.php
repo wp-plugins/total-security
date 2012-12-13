@@ -367,18 +367,24 @@ $post_max = ini_get('post_max_size')
 <p align="center"><a class="button" href="javascript:selectcopy('test.select1')"><?php _e('Select All', 'fdx-lang') ?></a></p>
  <div align="center">
 <textarea style="width:90%; height:200px;" name="select1">
-OS: <?php echo PHP_OS; ?>
+User Agent = <?php echo esc_html($_SERVER['HTTP_USER_AGENT']); ?>
 
-PHP: <?php echo phpversion(); ?>
+Server Software = <?php echo esc_html($_SERVER['SERVER_SOFTWARE']); ?>
 
-WP: <?php  global $wp_version; echo $wp_version; ?>
+PHP = <?php echo phpversion(); ?>
 
-Active Theme: <?php $theme = get_theme(get_current_theme()); echo $theme['Name'].' '.$theme['Version']; ?>
+URLOpen Method = <?php echo fdx_url_method(); ?>
 
-URLOpen Method: <?php echo fdx_url_method(); ?>
+=======================================
+WP = <?php  global $wp_version; echo $wp_version; ?>
 
+Language = <?php echo get_bloginfo('language'); ?>
 
----------Plugins---------
+Charset = <?php echo get_bloginfo('charset'); ?>
+
+Active Theme = <?php $theme = get_theme(get_current_theme()); echo $theme['Name'].' '.$theme['Version']; ?>
+
+=======================================
 <?php
 foreach (get_plugins() as $key => $plugin) {
     $isactive = "";
@@ -388,18 +394,6 @@ foreach (get_plugins() as $key => $plugin) {
     echo $plugin['Name'].' '.$plugin['Version'].' '.$isactive."\n";
 }
 ?>
-
----------MD5 hashes---------
-#1: <?php echo md5_file( FDX2_PLUGIN_URL. 'total-security.php'); ?>
-
-#2: <?php echo md5_file( FDX2_PLUGIN_URL. 'libs/hashes-'. $wp_version .'.php'); ?>
-
-#3: <?php echo md5_file( FDX2_PLUGIN_URL. 'admin/core_exploit_scanner.php'); ?>
-
-#4: <?php echo md5_file( FDX2_PLUGIN_URL. 'admin/unsafe_files.php'); ?>
-
-#5: <?php echo md5_file( FDX2_PLUGIN_URL. 'admin/vulnerability_scan.php'); ?>
-
 </textarea>
 </div>
    </form>
