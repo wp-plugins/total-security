@@ -2,7 +2,7 @@
 Plugin Name: Total Security
 Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
-Tags: Security,scan,scanner,hack,hackers,htaccess,injection,exploit,secure,malware,phishing,SQL Injection,vulnerability,attack,anything suspicious,total security, total, suspicious, malicious, log, binary, temporary files, Scours, Unsafe       
+Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total       
 Requires at least: 3.5
 Tested up to: 3.5
 Stable tag: 2.0.350
@@ -11,7 +11,7 @@ License: GPLv2 or later
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
 
 == Description ==
-The [Total Security](http://fabrix.net/total-security/ "Total Security") plugin is the must-have tool when it comes security of your WordPress installation. The plugin monitors your website for security weaknesses that hackers might exploit and tells you how to easily fix them.
+The **Total Security** plugin is the must-have tool when it comes security of your WordPress installation. The plugin monitors your website for security weaknesses that hackers might exploit and tells you how to easily fix them.
 
 = Vulnerability Scan =
 
