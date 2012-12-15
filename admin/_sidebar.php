@@ -42,7 +42,7 @@
 
 <?php } else { ?>
 
-<span class="ico_button ico_button_<?php echo WPLANG;?>"><?php _e('Translated by: <a href="http://fabrix.net"><strong>Fabrix DoRoMo</strong></a>', 'fdx-lang') ?></span>
+<span class="ico_button ico_button_<?php echo WPLANG;?>"><?php _e('Translated by: <a href="http://YOUR-LINK.COM"><strong>Your Name</strong></a>', 'fdx-lang') ?></span>
 
 <p><?php _e('If you find any spelling error in this translation or would like to contribute', 'fdx-lang') ?>, <a href="<?php echo FDX2_GLOTPRESS;?>" target="_blank"><?php _e('click here', 'fdx-lang') ?>.</a></p>
 
