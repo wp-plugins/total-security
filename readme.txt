@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total       
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 2.0.350
+Stable tag: 2.1.350
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -62,6 +62,10 @@ Color-coded results separate files into categories:
 
 A warning to redo the scan will be informed every 15 days of last inspection.
 
+= Languages Available =
+* English (default)
+* German (**de_DE**) translation by **Silvio Paschke**
+
 
 = How To Contribute =
 We'd love for you to get involved. Whatever your level of skill or however much time you can give, your contribution is greatly appreciated.
@@ -107,6 +111,9 @@ One of the best practices a WordPress site owner can do to keep their site secur
 
 
 == Changelog ==
+* 2.1.350
+    * Add German (de_DE) translation by Silvio Paschke
+
 * 2.0.350
     * Compatibility with WordPress 3.5
 

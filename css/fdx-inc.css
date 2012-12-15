@@ -1,6 +1,7 @@
 /* Language */
 .ico_button {padding:4px;display:block;padding-left:25px;background-repeat:no-repeat;background-position:5px 50%;text-decoration:none;border:none;}
 .ico_button_pt_BR, .ico_button_pt-BR, .ico_button_pt   {background-image:url(../images/flag_br.png);}
+.ico_button_de_DE, .ico_button_de-DE, .ico_button_de   {background-image:url(../images/flag_de.png);}  
 
 /* ************************sidebar common******************************* */
 div.hid { visibility: hidden; overflow: hidden; height: 1px; }  /* hack para input hiden */
