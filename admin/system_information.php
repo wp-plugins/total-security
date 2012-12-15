@@ -375,6 +375,8 @@ PHP = <?php echo phpversion(); ?>
 
 URLOpen Method = <?php echo fdx_url_method(); ?>
 
+FDX Framework =  <?php  if (class_exists('fdx')) {echo fdx::$fdxVersion;} else { echo "not installed";}  ?>
+
 =======================================
 WP = <?php  global $wp_version; echo $wp_version; ?>
 
