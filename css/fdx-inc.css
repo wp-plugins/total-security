@@ -1,7 +1,7 @@
 /* Language */
 .ico_button {padding:4px;display:block;padding-left:25px;background-repeat:no-repeat;background-position:5px 50%;text-decoration:none;border:none;}
 .ico_button_pt_BR, .ico_button_pt-BR, .ico_button_pt   {background-image:url(../images/flag_br.png);}
-.ico_button_de_DE, .ico_button_de-DE, .ico_button_de   {background-image:url(../images/flag_de.png);}  
+.ico_button_de_DE, .ico_button_de-DE, .ico_button_de   {background-image:url(../images/flag_de.png);}
 
 /* ************************sidebar common******************************* */
 div.hid { visibility: hidden; overflow: hidden; height: 1px; }  /* hack para input hiden */
@@ -25,6 +25,9 @@ a.sm_lang {background-image:url(../images/locate.png);}
 
 a.sm_star {background-image:url(../images/star.png);}
 a.sm_link {background-image:url(../images/link.png);}
+
+a.sm_bullet {background-image:url(../images/bullet.png);}
+em.none { color: #808080; font-size: 10px  }
 
 #icon-fdx-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent;}
 .admin-color-classic #icon-fdx-lock {background: url('../images/logo_icon.png') no-repeat scroll transparent !important;}

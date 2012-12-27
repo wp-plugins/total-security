@@ -70,13 +70,13 @@ function fdx_show_results( $results ) {
 		if ( ! empty($results[$l]) ) {
             $result .= '<p>&nbsp;</p><table class="widefat"><thead><tr>';
             if ( $l == '00' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/wan.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Log, Binary, Data and Temporary files', 'fdx-lang').'. (<strong style="color:#EFA800;">'. count($results[$l]) .' '. __('matches', 'fdx-lang').'</strong>)</th>
-                                          <th scope="col" style="width:130px"><img src="'.FDX2_PLUGIN_URL.'images/00.png" width="124" height="32" border="0" alt="*"></th>';
+                                          <th scope="col" style="width:157px"><img src="'.FDX2_PLUGIN_URL.'images/00.png" width="157" height="32" border="0" alt="*"></th>';
             if ( $l == '01' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/wan.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Compressed files', 'fdx-lang').'. (<strong style="color:#EFA800;">'. count($results[$l]) .' '. __('matches', 'fdx-lang').'</strong>)</th>
-                                          <th scope="col" style="width:191px"><img src="'.FDX2_PLUGIN_URL.'images/01.png" width="190" height="31" border="0" alt="*"></th>';
+                                          <th scope="col" style="width:190px"><img src="'.FDX2_PLUGIN_URL.'images/01.png" width="190" height="31" border="0" alt="*"></th>';
             if ( $l == '02' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/critical.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Dangerous and malicious files', 'fdx-lang').'. (<strong style="color:red;">'. count($results[$l]) .' '. __('matches', 'fdx-lang').' </strong>)</th>
-                                          <th scope="col" style="width:191px"><img src="'.FDX2_PLUGIN_URL.'images/02.png" width="190" height="31" border="0" alt="*"></th>';
+                                          <th scope="col" style="width:222px"><img src="'.FDX2_PLUGIN_URL.'images/02.png" width="222" height="31" border="0" alt="*"></th>';
             if ( $l == '03' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/critical.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Unknown file found in WP core', 'fdx-lang').'. (<strong style="color:red;">'. count($results[$l]) .' '. __('matches', 'fdx-lang').' </strong>)</th>
-                                        <th scope="col" style="width:130px"><img src="'.FDX2_PLUGIN_URL.'images/03.png" width="124" height="32" border="0" alt="*"></th>';
+                                        <th scope="col" style="width:124px"><img src="'.FDX2_PLUGIN_URL.'images/03.png" width="124" height="32" border="0" alt="*"></th>';
          	$result .= '</tr></thead><tbody>';
         		foreach ( $results[$l] as $r )
 				$result .= fdx_draw_row( $r );

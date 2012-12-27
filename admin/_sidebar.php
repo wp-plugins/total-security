@@ -16,7 +16,11 @@
 <div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('Do you like this Plugin?', 'fdx-lang') ?></span></h3>
 <div class="inside">
 <?php _e('Please help to support continued development of this plugin!', 'fdx-lang') ?>
-<div align="center"><a href="<?php echo FDX2_DONATELINK;?>" target="_blank"><img src="<?php echo FDX2_PLUGIN_URL;?>/images/btn_donateCC_LG.gif" width="147" height="47" border="0" alt="" /></a></div>
+<div align="center">
+<strong style="font-size: 15px"><?php _e('DONATE', 'fdx-lang') ?></strong><br />
+<a href="<?php echo FDX2_DONATELINK;?>" target="_blank"><img src="<?php echo FDX2_PLUGIN_URL;?>/images/paypal.png" width="101" height="64" border="0"  alt=""/></a>
+<a href="http://www.neteller.com/personal/send-money/" id="cl" target="_blank" title="fabrix@fabrix.net"><img src="<?php echo FDX2_PLUGIN_URL;?>/images/neteller.png" width="102" height="64" border="0" alt=""  style="margin-left: 25px" /></a>
+</div>
 <ul>
 <li><a class="sm_button sm_star" href="<?php echo FDX2_WPPAGE;?>" target="_blank"><?php _e('Rate the plugin 5 star on WordPress.org', 'fdx-lang') ?>.</a></li>
 <li><a class="sm_button sm_link" href="<?php echo FDX2_PLUGINPAGE ;?>" target="_blank"><?php _e('Blog about it and link to the plugin page', 'fdx-lang') ?>.</a></li>
@@ -27,10 +31,8 @@
 <a href="javascript:void(0);" onclick="PopupCenter('http://twitter.com/share?text=Plugin <?php echo FDX2_PLUGIN_NAME;?>:&amp;url=<?php echo FDX2_PLUGINPAGE;?>', 'twitter',600,450,'no');" title="<?php _e('Share on', 'fdx-lang') ?> Twitter" rel="nofollow"><img src="<?php echo FDX2_PLUGIN_URL;?>/images/twitter.png" width="24" height="24" border="0" alt="*" style="margin-right: 10px" /></a>
 <a href="javascript:void(0);" onclick="PopupCenter('https://plus.google.com/share?url=<?php echo FDX2_PLUGINPAGE;?>', 'googleplus',800,550,'no');" title="<?php _e('Share on', 'fdx-lang') ?> Google Plus" rel="nofollow"><img src="<?php echo FDX2_PLUGIN_URL;?>/images/googleplus.png" width="24" height="24" border="0" alt="*" /></a>
 </div>
-
 </div>
 </div>
-
 
 <div class="postbox">
 <div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('Translation', 'fdx-lang') ?> </span></h3>
@@ -59,12 +61,12 @@
     if ( is_object($rss) ) {
 
         if ( is_wp_error($rss) ) {
-            echo '<p>' . sprintf(__('Newsfeed could not be loaded.  Check the <a href="%s">Newsfeed</a> to check for updates.', 'fdx-lang'), 'http://feeds.feedburner.com/fdxplugins/') . '</p>';
+            echo 'Newsfeed could not be loaded.';
     		return;
         }
 
         echo '<ul>';
-		foreach ( $rss->get_items(0, 3) as $item ) {
+		foreach ( $rss->get_items(0, 5) as $item ) {
     		$link = $item->get_link();
     		while ( stristr($link, 'http') != $link )
     			$link = substr($link, 1);
@@ -72,17 +74,6 @@
     		$title = esc_attr(strip_tags($item->get_title()));
     		if ( empty($title) )
     			$title = __('Untitled');
-
-    		$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
-    		$desc = wp_html_excerpt( $desc, 360 );
-
-    		// Append ellipsis. Change existing [...] to [&hellip;].
-    		if ( '[...]' == substr( $desc, -5 ) )
-    			$desc = substr( $desc, 0, -5 ) . '[&hellip;]';
-    		elseif ( '[&hellip;]' != substr( $desc, -10 ) )
-    			$desc .= ' [&hellip;]';
-
-    		$desc = esc_html( $desc );
 
 			$date = $item->get_date();
             $diff = '';
@@ -97,8 +88,8 @@
 					$date = '';
 			}
         ?>
-          <li><a title="" target="_blank" href='<?php echo $link; ?>'><?php echo $title; ?></a>
-		  <em style="font-size: 10px"><?php echo $date; ?> ~ <strong><?php echo $diff; ?></strong></em><br /><?php echo $desc; ?></li>
+          <li style=" margin-top: -2px; margin-bottom: -2px"><a class="sm_button sm_bullet" title="<?php echo $date; ?>" target="_blank" href="<?php echo $link; ?>"><?php echo $title; ?> <em class="none"><?php echo $diff; ?></em></a>
+		  </li>
         <?php
         }
         echo '</ul>';

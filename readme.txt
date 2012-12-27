@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total       
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 2.1.350
+Stable tag: 2.2.350
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -89,6 +89,7 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 1. Activate the `Total Security` plugin in your WordPress admin `Plugins`
 1. That's it. You're ready to go!
 
+2. You can install **Total Security** directly from the WordPress admin! Visit the Plugins - > Add New page and search for **Total Security**. Click to install.
 
 == Frequently Asked Questions ==
 
@@ -111,6 +112,11 @@ One of the best practices a WordPress site owner can do to keep their site secur
 
 
 == Changelog ==
+* 2.2.350
+    * Performance improvements
+    * Detect `.cpl` and `.db`
+    * Cosmetic fixes  
+
 * 2.1.350
     * Add German (de_DE) translation by Silvio Paschke
 

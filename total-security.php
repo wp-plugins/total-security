@@ -4,7 +4,7 @@ Plugin Name: Total Security
 Plugin URI: http://fabrix.net/total-security/
 Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
 Author: Fabrix DoRoMo
-Version: 2.1.350
+Version: 2.2.350
 Author URI: http://fabrix.net/
 */
 /*
@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /*********************************************************************************/
 define('FDX2_PLUGIN_NAME', 'Total Security' );
-define('FDX2_PLUGIN_VERSION', '2.1.350' );
+define('FDX2_PLUGIN_VERSION', '2.2.350' );
 define('FDX2_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 define('FDX2_WPPAGE', 'http://wordpress.org/extend/plugins/total-security/');
@@ -72,14 +72,13 @@ class fdx_class {
       add_action( 'fdx_core_get_file_source', 'fdx_diff_page' );
        //------------------------------
        if ( isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P1 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P2 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P3 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P4)  {
+         wp_deregister_script('jquery');
          add_action('admin_enqueue_scripts', array(__CLASS__, 'fdx_enqueue_scripts'));
-        }
+       }
         add_action('wp_ajax_sn_core_get_file_source', array(__CLASS__, 'get_file_source'));
         add_action('wp_ajax_sn_core_restore_file', array(__CLASS__, 'restore_file_dialog'));
         add_action('wp_ajax_sn_core_restore_file_do', array(__CLASS__, 'restore_file'));
         add_action('wp_ajax_sn_core_run_scan', array(__CLASS__, 'scan_files'));
-        add_action('admin_notices', array(__CLASS__, 'run_tests_warning'));
-        add_action('admin_notices', array(__CLASS__, 'run_tests_warning2'));
         //++++++++++++++++++++++++++++++++++
         add_action( 'wp_ajax_fdx-scanner_file_scan', 'fdx_ajax_file_scan' );
         add_action( 'wp_ajax_fdx-run_end', 'fdx_run_end' );
@@ -90,6 +89,8 @@ class fdx_class {
 *------------------------------------------------------------*/
 function fdx_enqueue_scripts() {
       wp_enqueue_style('fdx-css', FDX2_PLUGIN_URL . 'css/fdx-inc.css', array(), FDX2_PLUGIN_VERSION);
+      wp_enqueue_script('jquery', FDX1_PLUGIN_URL . 'js/jquery-1.8.3.min.js', array(), '1.8.3');
+      wp_enqueue_script('fdx-js', FDX2_PLUGIN_URL . 'js/fdx-inc.js', array(), FDX2_PLUGIN_VERSION, true);
       wp_enqueue_script('fdx-cookie', FDX2_PLUGIN_URL . 'js/jquery.cookie.js', array('jquery'), FDX2_PLUGIN_VERSION, true);
       wp_enqueue_script('fdx-block', FDX2_PLUGIN_URL . 'js/jquery.blockUI.js', array(), FDX2_PLUGIN_VERSION, true);
 
@@ -112,16 +113,6 @@ function fdx_admin_menu(){
 
 }
 
-/* display warning if test were never run
-*------------------------------------------------------------*/
-  function run_tests_warning() {
-    $tests = get_option(FDX_OPTIONS_KEY);
-    if (!$tests['last_run']) {
-      echo '<div id="message" class="error"><p>Total Security '.__('(Vulnerability Scan) <strong>tests were never run.</strong> Click <strong>"'.__('One Click Scan', 'fdx-lang').'"</strong> to run them now and analyze your site for security vulnerabilities.', 'fdx-lang').'</p></div>';
-    } elseif ((current_time('timestamp') - 15*24*60*60) > $tests['last_run']) {
-      echo '<div id="message" class="error"><p>Total Security '.__('(Vulnerability Scan) <strong>tests were not run for more than 30 days.</strong> It\'s advisable to run them once in a while. Click <strong>"'.__('One Click Scan', 'fdx-lang').'"</strong> to run them now and analyze your site for security vulnerabilities.', 'fdx-lang').'</p></div>';
-    }
-  }
 
 /* PAGES
 *------------------------------------------------------------*/
@@ -334,17 +325,6 @@ require_once( dirname(__FILE__) . '/admin/unsafe_files.php' );
     }
     $out .= '</ul>';
     return $out;
-  }
-
-/* display warning if test were never run
-*------------------------------------------------------------*/
-  function run_tests_warning2() {
-    $tests = get_option(FDX_CS_OPTIONS_KEY);
-    if (!@$tests['last_run']) {
-      echo '<div id="message" class="error"><p>Total Security '.__('(Core Exploit Scanner) <strong>tests were never run.</strong> Click <strong>"'.__('One Click Scanner', 'fdx-lang'). '"</strong> to run them now and check your core files for exploits.', 'fdx-lang').'</p></div>';
-    } elseif ((current_time('timestamp') - 15*24*60*60) > $tests['last_run']) {
-      echo '<div id="message" class="error"><p>Total Security '.__('(Core Exploit Scanner) <strong>tests were not run for more than 30 days.</strong> It\'s advisable to run them once in a while. Click <strong>"'.__('One Click Scanner', 'fdx-lang'). '"</strong> to run them now check your core files for exploits.', 'fdx-lang').'</p></div>';
-    }
   }
 
 /* clean-up when deactivated
@@ -585,6 +565,7 @@ class File_FDX_Scanner extends FDX_C_Scanner {
                      substr( $file, -4 ) == '.bat' ||
                      substr( $file, -4 ) == '.com' ||
                      substr( $file, -4 ) == '.scr' ||
+                     substr( $file, -4 ) == '.cpl' ||
                      substr( $file, -4 ) == '.msi')  {
 					$this->add_result( '02', array(
 						'loc' => $file,
@@ -616,6 +597,11 @@ class File_FDX_Scanner extends FDX_C_Scanner {
 					$this->add_result( '00', array(
 						'loc' => $file,
 					) );
+//--------------------------------------------warning=00.xx
+               } else if ( substr( $file, -3 ) == '.db') {
+					$this->add_result( '00', array(
+						'loc' => $file,
+		  		) );
                }
 			}
 //--------------------------------------------end
