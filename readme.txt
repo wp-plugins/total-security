@@ -71,9 +71,7 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 We'd love for you to get involved. Whatever your level of skill or however much time you can give, your contribution is greatly appreciated.
 
 * **Users** - download the latest development version of the plugin, and submit bug/feature requests.
-
 * **Non-English Speaking Users** - Contribute a translation using the GlotPress web interface - no technical knowledge required ([how to](http://translate.fabrix.net/projects/total-security/)).
-
 * **Developers** - Fork the development version and submit a pull request, especially for any known issues
 
 
@@ -89,7 +87,7 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 1. Activate the `Total Security` plugin in your WordPress admin `Plugins`
 1. That's it. You're ready to go!
 
-2. You can install **Total Security** directly from the WordPress admin! Visit the Plugins - > Add New page and search for **Total Security**. Click to install.
+> You can install **Total Security** directly from the WordPress admin! Visit the Plugins - > Add New page and search for **Total Security**. Click to install.
 
 == Frequently Asked Questions ==
 
