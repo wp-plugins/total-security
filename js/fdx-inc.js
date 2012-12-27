@@ -8,7 +8,7 @@ var targetWin = window.open (pageURL, title, 'toolbar=no, location=no, directori
 
 /* alert
 -------------------------------------------------------------- */
-$(document).ready(function(){
+jQuery(document).ready(function($) {
 $("#cl").click(function(){
 alert("fabrix@fabrix.net");
 });

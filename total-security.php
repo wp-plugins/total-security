@@ -4,7 +4,7 @@ Plugin Name: Total Security
 Plugin URI: http://fabrix.net/total-security/
 Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
 Author: Fabrix DoRoMo
-Version: 2.2.350
+Version: 2.3.350
 Author URI: http://fabrix.net/
 */
 /*
@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /*********************************************************************************/
 define('FDX2_PLUGIN_NAME', 'Total Security' );
-define('FDX2_PLUGIN_VERSION', '2.2.350' );
+define('FDX2_PLUGIN_VERSION', '2.3.350' );
 define('FDX2_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 define('FDX2_WPPAGE', 'http://wordpress.org/extend/plugins/total-security/');
@@ -72,8 +72,7 @@ class fdx_class {
       add_action( 'fdx_core_get_file_source', 'fdx_diff_page' );
        //------------------------------
        if ( isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P1 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P2 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P3 || isset( $_GET['page'] ) && $_GET['page'] == FDX2_PLUGIN_P4)  {
-         wp_deregister_script('jquery');
-         add_action('admin_enqueue_scripts', array(__CLASS__, 'fdx_enqueue_scripts'));
+       add_action('admin_enqueue_scripts', array(__CLASS__, 'fdx_enqueue_scripts'));
        }
         add_action('wp_ajax_sn_core_get_file_source', array(__CLASS__, 'get_file_source'));
         add_action('wp_ajax_sn_core_restore_file', array(__CLASS__, 'restore_file_dialog'));
@@ -89,7 +88,7 @@ class fdx_class {
 *------------------------------------------------------------*/
 function fdx_enqueue_scripts() {
       wp_enqueue_style('fdx-css', FDX2_PLUGIN_URL . 'css/fdx-inc.css', array(), FDX2_PLUGIN_VERSION);
-      wp_enqueue_script('jquery', FDX1_PLUGIN_URL . 'js/jquery-1.8.3.min.js', array(), '1.8.3');
+      wp_enqueue_script('wpcore-js', admin_url() . 'load-scripts.php?c=0&amp;load=jquery-ui-core,jquery-ui-widget,jquery-ui-mouse,jquery-ui-sortable,postbox,post', array(), FDX2_PLUGIN_VERSION, true);
       wp_enqueue_script('fdx-js', FDX2_PLUGIN_URL . 'js/fdx-inc.js', array(), FDX2_PLUGIN_VERSION, true);
       wp_enqueue_script('fdx-cookie', FDX2_PLUGIN_URL . 'js/jquery.cookie.js', array('jquery'), FDX2_PLUGIN_VERSION, true);
       wp_enqueue_script('fdx-block', FDX2_PLUGIN_URL . 'js/jquery.blockUI.js', array(), FDX2_PLUGIN_VERSION, true);

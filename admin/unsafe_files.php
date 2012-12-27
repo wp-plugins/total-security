@@ -106,7 +106,6 @@ function fdx_draw_row( $r ) {
 </div>
 </div>
 </div><!-- /wrap -->
-<?php include('_footer_js.php'); ?>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$('#run-scanner').click( function() {

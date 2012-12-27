@@ -415,13 +415,6 @@ foreach (get_plugins() as $key => $plugin) {
 
 </div><!-- /wrap -->
 
-
-
-<?php include('_footer_js.php'); ?>
-
-
-
-
 <div class="clear"></div>
 <?php
 
