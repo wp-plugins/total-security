@@ -70,9 +70,9 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 = How To Contribute =
 We'd love for you to get involved. Whatever your level of skill or however much time you can give, your contribution is greatly appreciated.
 
-* **Users** - download the latest development version of the plugin, and submit bug/feature requests.
+* **Users** - download the latest development version of the plugin, and submit bug/feature requests.([GitHub](https://github.com/fabrix/total-security))
 * **Non-English Speaking Users** - Contribute a translation using the GlotPress web interface - no technical knowledge required ([how to](http://translate.fabrix.net/projects/total-security/)).
-* **Developers** - Fork the development version and submit a pull request, especially for any known issues
+* **Developers** - Fork the development version and submit a pull request, especially for any known issues.([GitHub](https://github.com/fabrix/total-security))
 
 
 == Screenshots ==
