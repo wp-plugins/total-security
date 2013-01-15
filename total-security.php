@@ -30,7 +30,7 @@ define('FDX2_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('FDX2_WPPAGE', 'http://wordpress.org/extend/plugins/total-security/');
 define('FDX2_PLUGINPAGE', 'http://fabrix.net/total-security/');
 define('FDX2_GLOTPRESS', 'http://translate.fabrix.net/projects/total-security/');
-define('FDX2_SUPFORUM', 'http://wmais.in/?forum=total-security');
+define('FDX2_SUPFORUM', 'https://github.com/fabrix/total-security');
 define('FDX2_DONATELINK', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y');
 
 define('FDX2_LAST_WP_VER', '3.5'); //Last version of wordpress
