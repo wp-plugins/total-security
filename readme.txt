@@ -3,9 +3,9 @@ Plugin Name: Total Security
 Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total       
-Requires at least: 3.5
-Tested up to: 3.5
-Stable tag: 2.3.350
+Requires at least: 3.5.1
+Tested up to: 3.5.1
+Stable tag: 2.3.351
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -103,6 +103,9 @@ One of the best practices a WordPress site owner can do to keep their site secur
 
 
 == Changelog ==
+* 2.3.351
+    * Compatibility with WordPress 3.5.1
+
 * 2.3.350
     * Performance improvements
     * Fix [Guidelines](http://wordpress.org/extend/plugins/about/guidelines/)
@@ -122,7 +125,6 @@ One of the best practices a WordPress site owner can do to keep their site secur
     * New version notation (x.y.zzz) |new feature|improvements or bug fixes|last WP core|
     * Add new feature: Unsafe Files Search
     * Performance improvements.
-
 
 * 1.1
     * Bug Fix

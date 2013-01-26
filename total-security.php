@@ -4,7 +4,7 @@ Plugin Name: Total Security
 Plugin URI: http://fabrix.net/total-security/
 Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
 Author: Fabrix DoRoMo
-Version: 2.3.350
+Version: 2.3.351
 Author URI: http://fabrix.net/
 */
 /*
@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /*********************************************************************************/
 define('FDX2_PLUGIN_NAME', 'Total Security' );
-define('FDX2_PLUGIN_VERSION', '2.3.350' );
+define('FDX2_PLUGIN_VERSION', '2.3.351' );
 define('FDX2_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 define('FDX2_WPPAGE', 'http://wordpress.org/extend/plugins/total-security/');
@@ -33,7 +33,7 @@ define('FDX2_GLOTPRESS', 'http://translate.fabrix.net/projects/total-security/')
 define('FDX2_SUPFORUM', 'https://github.com/fabrix/total-security');
 define('FDX2_DONATELINK', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y');
 
-define('FDX2_LAST_WP_VER', '3.5'); //Last version of wordpress
+define('FDX2_LAST_WP_VER', '3.5.1'); //Last version of wordpress
 
 define('FDX2_PLUGIN_P1', 'total-security' ); //link1, plugin prefix (.mo)
 define('FDX2_PLUGIN_P2', 'total-security-core' ); //link2
