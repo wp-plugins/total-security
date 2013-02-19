@@ -38,7 +38,7 @@ The **Total Security** plugin is the must-have tool when it comes security of yo
 Scours your file system by suspicious or potentially malicious files, compressed, log, binary, data, and temporary files. And any unknown file in WP core.
  
 * Detects unknown file found in WP core => |any file|
-* Detects suspicious or potentially malicious files => |`.exe`|`.com`|`.scr`|`.bat`|`.msi`|`.vb`|
+* Detects suspicious or potentially malicious files => |`.exe`|`.com`|`.scr`|`.bat`|`.msi`|`.vb`|`.cpl`|
 * Detects compressed files => |`.zip`|`.rar`|`.7z`|`.gz`|`.tar`|`.bz2`|
 * Detects log, binary, data and temporary files => |`.log`|`.dat`|`.bin`|`.tmp`|
 
