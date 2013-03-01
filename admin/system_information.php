@@ -384,7 +384,7 @@ Language = <?php echo get_bloginfo('language'); ?>
 
 Charset = <?php echo get_bloginfo('charset'); ?>
 
-Active Theme = <?php $theme = get_theme(get_current_theme()); echo $theme['Name'].' '.$theme['Version']; ?>
+Active Theme = <?php $theme = wp_get_theme(); echo $theme['Name'].' '.$theme['Version']; ?>
 
 =======================================
 <?php
