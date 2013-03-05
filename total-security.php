@@ -4,7 +4,7 @@ Plugin Name: Total Security
 Plugin URI: http://fabrix.net/total-security/
 Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
 Author: Fabrix DoRoMo
-Version: 2.4.351
+Version: 2.5.351
 Author URI: http://fabrix.net/
 */
 /*
@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /*********************************************************************************/
 define('FDX2_PLUGIN_NAME', 'Total Security' );
-define('FDX2_PLUGIN_VERSION', '2.4.351' );
+define('FDX2_PLUGIN_VERSION', '2.5.351' );
 define('FDX2_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 define('FDX2_WPPAGE', 'http://wordpress.org/extend/plugins/total-security/');
@@ -52,12 +52,10 @@ define('FDX_DIC', plugin_dir_path(__FILE__) . 'libs/brute-force-dictionary.txt')
 include 'config.php'; //if there is possibility to change parameters
 require_once 'admin/vulnerability_scan_inc.php';
 
-/* I18n - http://codex.wordpress.org/I18n_for_WordPress_Developers
+/* Locale
 *------------------------------------------------------------*/
-$currentLocale = get_locale();
-			if(!empty($currentLocale)) {
-				$moFile = dirname(__FILE__) . "/languages/".FDX2_PLUGIN_P1."-" . $currentLocale . ".mo";
-				if(@file_exists($moFile) && is_readable($moFile)) load_textdomain('fdx-lang', $moFile);
+function fdx2_lang_init(){
+load_plugin_textdomain('fdx-lang', false, dirname(plugin_basename( __FILE__ )).'/languages');
 }
 
 /* main Class
@@ -682,5 +680,6 @@ require_once( dirname(__FILE__) . '/admin/system_information.php' );
 /* hook everything up
 *------------------------------------------------------------*/
 add_action('init', array('fdx_class', 'fdx_init'));
+add_action('init', 'fdx2_lang_init');
 register_deactivation_hook( __FILE__, array('fdx_class', 'fdx_deactivate')); // when deativated clean up
 ?>

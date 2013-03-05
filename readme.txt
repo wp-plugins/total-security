@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total       
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 2.4.351
+Stable tag: 2.5.351
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -103,6 +103,9 @@ One of the best practices a WordPress site owner can do to keep their site secur
 
 
 == Changelog ==
+* 2.5.351
+    * Performance improvements
+
 * 2.4.351
     * Minor bug fixes
 
