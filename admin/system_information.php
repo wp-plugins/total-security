@@ -41,7 +41,7 @@ function fdx_url_method() {
 
 ?>
 <div class="wrap"><?php echo get_screen_icon('fdx-lock');?>
-<h2><?php echo FDX2_PLUGIN_NAME;?>: <?php _e('System Information', 'fdx-lang') ?></h2>
+<h2><?php echo FDX2_PLUGIN_NAME;?>: <?php _e('System Information', 'total-security') ?></h2>
 <div id="poststuff">
 <div id="post-body" class="metabox-holder columns-2">
 
@@ -52,19 +52,19 @@ function fdx_url_method() {
 
 
 <div class="postbox">
-<div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('System Information', 'fdx-lang'); ?></span></h3>
+<div class="handlediv" title="<?php _e('Click to toggle', 'total-security') ?>"><br /></div><h3 class='hndle'><span><?php _e('System Information', 'total-security'); ?></span></h3>
 <div class="inside">
      <br />
 
     <?php
  echo '<table style="width:100%;" class="widefat">';
 	echo '<thead><tr>';
-	echo '<th style="width:25%;text-align: right">'. __('File/Dir', 'fdx-lang') .'</th>';
+	echo '<th style="width:25%;text-align: right">'. __('File/Dir', 'total-security') .'</th>';
     echo '<th style="width:25%;text-align: center">&nbsp;</th>';
-    echo '<th style="width:25%;text-align: center">'. __('Recommended Chmod', 'fdx-lang') .'<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="margin-left:5px" /></a></th>';
-    echo '<th style="width:25%;text-align: center">'. __('Current Chmod', 'fdx-lang') .'</th>';
+    echo '<th style="width:25%;text-align: center">'. __('Recommended Chmod', 'total-security') .'<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="margin-left:5px" /></a></th>';
+    echo '<th style="width:25%;text-align: center">'. __('Current Chmod', 'total-security') .'</th>';
 	echo '</tr></thead>';
-    fdx_check_perms(__('root', 'fdx-lang'),"../","755");
+    fdx_check_perms(__('root', 'total-security'),"../","755");
     fdx_check_perms("wp-admin/","../wp-admin","755");
 	fdx_check_perms("wp-includes/","../wp-includes","755");
 	fdx_check_perms("wp-content/","../wp-content","755");
@@ -121,18 +121,18 @@ function fdx_url_method() {
 	if (extension_loaded('memcache')) {
 	$memcache = new Memcache;
 	@$memcache->connect('localhost', 11211);
-	echo '<li>'.__('is Loaded', 'fdx-lang').__('Version: ', 'fdx-lang').@$memcache->getVersion();
+	echo '<li>'.__('is Loaded', 'total-security').__('Version: ', 'total-security').@$memcache->getVersion();
 	} else {
-		_e('is NOT Loaded', 'fdx-lang');
+		_e('is NOT Loaded', 'total-security');
 	}
 	echo '</strong></li>';
 	echo '<li>Memcached: <strong>';
 	if (extension_loaded('memcached')) {
 	$memcached = new Memcached();
 	@$memcached->addServer('localhost', 11211);
-	echo '<li>'.__('is Loaded', 'fdx-lang').__('Version: ', 'fdx-lang').@$memcached->getVersion();
+	echo '<li>'.__('is Loaded', 'total-security').__('Version: ', 'total-security').@$memcached->getVersion();
 	} else {
-		_e('is NOT Loaded', 'fdx-lang');
+		_e('is NOT Loaded', 'total-security');
 	}
 	echo '</strong></li>';
     echo '<li>Browser Compression Supported: <strong>'.esc_html($_SERVER['HTTP_ACCEPT_ENCODING']).'</strong></li>';
@@ -150,12 +150,12 @@ function fdx_url_method() {
 	if (is_array($mysqlinfo)) {
 	$sql_mode = $mysqlinfo[0]->Value;
     if (empty($sql_mode)) {
-	$sql_mode = '<strong>'.__('Not Set', 'fdx-lang').'</strong>';
+	$sql_mode = '<strong>'.__('Not Set', 'total-security').'</strong>';
 	} else {
-	$sql_mode = '<strong>'.__('Off', 'fdx-lang').'</strong>';
+	$sql_mode = '<strong>'.__('Off', 'total-security').'</strong>';
 	}}
 	echo $sql_mode;
-	echo '<a href="http://fabrix.net/total-security/msys/#sql_mode" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<a href="http://fabrix.net/total-security/msys/#sql_mode" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	?>
      </ul>
              </td>
@@ -173,73 +173,73 @@ $post_max = ini_get('post_max_size')
   <ul class="fdxlist"><?php
 	echo '<li>PHP Version: <strong>'.PHP_VERSION.'</strong></li>';
 	echo '<li>PHP Memory Usage: <strong>'.round(memory_get_usage() / 1024 / 1024, 2) . ' MB</strong></li>';
-	echo '<li>PHP Memory Limit: <strong>'.$memory_limit.'</strong><a href="http://fabrix.net/total-security/msys/#php_memory_limit" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<li>PHP Memory Limit: <strong>'.$memory_limit.'</strong><a href="http://fabrix.net/total-security/msys/#php_memory_limit" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP Base Memory Limit: <strong>'.WP_MEMORY_LIMIT.'</strong></li>';
 	echo '<li>PHP Actual Configuration Memory Limit: <strong>'.get_cfg_var('memory_limit').'</strong></li>';
-	echo '<li>PHP Max Upload Size: <strong>'.$upload_max.'</strong><a href="http://fabrix.net/total-security/msys/#php_max_upload_size" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
-	echo '<li>PHP Max Post Size: <strong>'.$post_max.'</strong><a href="http://fabrix.net/total-security/msys/#php_max_post_size" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<li>PHP Max Upload Size: <strong>'.$upload_max.'</strong><a href="http://fabrix.net/total-security/msys/#php_max_upload_size" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<li>PHP Max Post Size: <strong>'.$post_max.'</strong><a href="http://fabrix.net/total-security/msys/#php_max_post_size" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP Safe Mode: ';
 	if (ini_get('safe_mode') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text;
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text;
 	}
-	echo '<a href="http://fabrix.net/total-security/msys/#php_safe_mode" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li><li>PHP Allow URL fopen: ';
+	echo '<a href="http://fabrix.net/total-security/msys/#php_safe_mode" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li><li>PHP Allow URL fopen: ';
 	if (ini_get('allow_url_fopen') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text;
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text;
 	}
-	echo '<a href="http://fabrix.net/total-security/msys/#php_allow_url_fopen" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li><li>PHP Allow URL Include: ';
+	echo '<a href="http://fabrix.net/total-security/msys/#php_allow_url_fopen" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li><li>PHP Allow URL Include: ';
 	if (ini_get('allow_url_include') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	}
 	echo '<li>PHP Display Errors: ';
 	if (ini_get('display_errors') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	}
 	echo '<li>PHP Display Startup Errors: ';
 	if (ini_get('display_startup_errors') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	}
 	echo '<li>PHP Expose PHP: ';
 	if (ini_get('expose_php') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	}
 	echo '<li>PHP Register Globals: ';
 	if (ini_get('register_globals') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	}
 	echo '<li>PHP MySQL Allow Persistent Connections: ';
 	if (ini_get('mysql.allow_persistent') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	}
 	echo '<li>PHP Output Buffering: ';
@@ -250,13 +250,13 @@ $post_max = ini_get('post_max_size')
 	echo '<font color="green"><strong>'.$output_buffering.'</strong></font></li>';
 	}
 	echo '<li>PHP Max Script Execution Time: '; $max_execute = ini_get('max_execution_time');
-	echo '<strong>'.$max_execute.' Seconds</strong><a href="http://fabrix.net/total-security/msys/#php_max_script_execute_time" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+	echo '<strong>'.$max_execute.' Seconds</strong><a href="http://fabrix.net/total-security/msys/#php_max_script_execute_time" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP Magic Quotes GPC: ';
 	if (ini_get('magic_quotes_gpc') == 1) {
-	$text = '<font color="red"><strong>'.__('On', 'fdx-lang').'</strong></font>';
+	$text = '<font color="red"><strong>'.__('On', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	} else {
-	$text = '<font color="green"><strong>'.__('Off', 'fdx-lang').'</strong></font>';
+	$text = '<font color="green"><strong>'.__('Off', 'total-security').'</strong></font>';
 	echo $text.'</li>';
 	}
 	echo '<li>PHP open_basedir: ';
@@ -264,35 +264,35 @@ $post_max = ini_get('post_max_size')
 	if ($open_basedir != '') {
 	echo '<strong>'.$open_basedir.'</strong></li>';
 	} else {
-	echo '<strong>'.__('not in use', 'fdx-lang').'</strong></li>';
+	echo '<strong>'.__('not in use', 'total-security').'</strong></li>';
 	}
 	echo '<li>PHP XML Support: ';
 	if (is_callable('xml_parser_create')) {
-	$text = '<strong>'.__('Yes', 'fdx-lang').'</strong></font>';
+	$text = '<strong>'.__('Yes', 'total-security').'</strong></font>';
 	echo $text;
 	} else {
-	$text = '<strong>'.__('No', 'fdx-lang').'</strong></font>';
+	$text = '<strong>'.__('No', 'total-security').'</strong></font>';
 	echo $text;
 	}
-    echo '<a href="http://fabrix.net/total-security/msys/#php_xml_support" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+    echo '<a href="http://fabrix.net/total-security/msys/#php_xml_support" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP IPTC Support: ';
 	if (is_callable('iptcparse')) {
-	$text = '<strong>'.__('Yes', 'fdx-lang').'</strong></font>';
+	$text = '<strong>'.__('Yes', 'total-security').'</strong></font>';
 	echo $text;
 	} else {
-	$text = '<strong>'.__('No', 'fdx-lang').'</strong></font>';
+	$text = '<strong>'.__('No', 'total-security').'</strong></font>';
 	echo $text;
 	}
-      echo '<a href="http://fabrix.net/total-security/msys/#php_iptc_support" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+      echo '<a href="http://fabrix.net/total-security/msys/#php_iptc_support" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 	echo '<li>PHP Exif Support: ';
 	if (is_callable('exif_read_data')) {
-	$text = '<strong>'.__('Yes', 'fdx-lang').' (v' . substr(phpversion('exif'),0,4) . ')</strong></font>';
+	$text = '<strong>'.__('Yes', 'total-security').' (v' . substr(phpversion('exif'),0,4) . ')</strong></font>';
 	echo $text;
 	} else {
-	$text = '<strong>'.__('No', 'fdx-lang').'</strong></font>';
+	$text = '<strong>'.__('No', 'total-security').'</strong></font>';
 	echo $text;
     }
-     echo '<a href="http://fabrix.net/total-security/msys/#php_exif_support" target="_blank" title="'.__('Information', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'fdx-lang').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
+     echo '<a href="http://fabrix.net/total-security/msys/#php_exif_support" target="_blank" title="'.__('Information', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'/images/info.png" width="16" height="16" border="0"  alt="'.__('Information', 'total-security').'" style="vertical-align: middle; margin-left:5px" /></a></li>';
 
 	?>
 
@@ -306,7 +306,7 @@ $post_max = ini_get('post_max_size')
 <!-- ######################################################### -->
 
  <div class="postbox closed">
-<div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('Database: Tables Information', 'fdx-lang'); ?></span></h3>
+<div class="handlediv" title="<?php _e('Click to toggle', 'total-security') ?>"><br /></div><h3 class='hndle'><span><?php _e('Database: Tables Information', 'total-security'); ?></span></h3>
 <div class="inside">
           <br />
 	<table class="widefat">
@@ -360,11 +360,11 @@ $post_max = ini_get('post_max_size')
 
 
 <div class="postbox closed">
-<div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('Debug Information', 'fdx-lang'); ?></span></h3>
+<div class="handlediv" title="<?php _e('Click to toggle', 'total-security') ?>"><br /></div><h3 class='hndle'><span><?php _e('Debug Information', 'total-security'); ?></span></h3>
 <div class="inside">
-<p align="center"><?php _e('Debug information is used to provide help. You should include this information in your posts on support forum. ', 'fdx-lang') ?> </p>
+<p align="center"><?php _e('Debug information is used to provide help. You should include this information in your posts on support forum. ', 'total-security') ?> </p>
  <form name="test">
-<p align="center"><a class="button" href="javascript:selectcopy('test.select1')"><?php _e('Select All', 'fdx-lang') ?></a></p>
+<p align="center"><a class="button" href="javascript:selectcopy('test.select1')"><?php _e('Select All', 'total-security') ?></a></p>
  <div align="center">
 <textarea style="width:90%; height:200px;" name="select1">
 User Agent = <?php echo esc_html($_SERVER['HTTP_USER_AGENT']); ?>
