@@ -55,7 +55,7 @@ require_once 'admin/vulnerability_scan_inc.php';
 /* Locale
 *------------------------------------------------------------*/
 function fdx2_lang_init(){
-load_plugin_textdomain('fdx-lang', false, dirname(plugin_basename( __FILE__ )).'/languages');
+load_plugin_textdomain('total-security', false, dirname(plugin_basename( __FILE__ )).'/languages');
 }
 
 /* main Class
@@ -103,10 +103,10 @@ function fdx_enqueue_scripts() {
 *------------------------------------------------------------*/
 function fdx_admin_menu(){
 	add_menu_page('Total Security','Total Security', 'manage_options', FDX2_PLUGIN_P1, array(__CLASS__, 'fdx_tests_table'), FDX2_PLUGIN_URL . '/images/menu.png' );
-    add_submenu_page(FDX2_PLUGIN_P1, __('Vulnerability Scan', 'fdx-lang'), __('Vulnerability Scan', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P1, array(__CLASS__, 'fdx_tests_table'));
-    add_submenu_page(FDX2_PLUGIN_P1, __('Core Exploit Scanner', 'fdx-lang'), __('Core Exploit Scanner', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P2, array(__CLASS__, 'core_page'));
-    add_submenu_page(FDX2_PLUGIN_P1, __('Unsafe Files Search', 'fdx-lang'), __('Unsafe Files Search', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P3, array(__CLASS__, 'unsafe_files'));
-    add_submenu_page(FDX2_PLUGIN_P1, __('System Information', 'fdx-lang'), __('System Information', 'fdx-lang'), 'manage_options', FDX2_PLUGIN_P4, 'system_inf');
+    add_submenu_page(FDX2_PLUGIN_P1, __('Vulnerability Scan', 'total-security'), __('Vulnerability Scan', 'total-security'), 'manage_options', FDX2_PLUGIN_P1, array(__CLASS__, 'fdx_tests_table'));
+    add_submenu_page(FDX2_PLUGIN_P1, __('Core Exploit Scanner', 'total-security'), __('Core Exploit Scanner', 'total-security'), 'manage_options', FDX2_PLUGIN_P2, array(__CLASS__, 'core_page'));
+    add_submenu_page(FDX2_PLUGIN_P1, __('Unsafe Files Search', 'total-security'), __('Unsafe Files Search', 'total-security'), 'manage_options', FDX2_PLUGIN_P3, array(__CLASS__, 'unsafe_files'));
+    add_submenu_page(FDX2_PLUGIN_P1, __('System Information', 'total-security'), __('System Information', 'total-security'), 'manage_options', FDX2_PLUGIN_P4, 'system_inf');
 
 }
 
@@ -290,11 +290,11 @@ require_once( dirname(__FILE__) . '/admin/unsafe_files.php' );
       die(json_encode($out));
     }
     if (self::check_file_write()) {
-      $out['out'] = '<p>'.__('By clicking the "restore file" button a copy of the original file will be downloaded from wordpress.org and the modified file will be overwritten. Please note that there is no undo!', 'fdx-lang').'<br /><br /><br />
-      <input type="button" value="'.__('Restore file', 'fdx-lang').'" data-filename="' . stripslashes(@$_POST['filename']) . '" id="fdx-restore-file" class="button-primary" /></p>';
+      $out['out'] = '<p>'.__('By clicking the "restore file" button a copy of the original file will be downloaded from wordpress.org and the modified file will be overwritten. Please note that there is no undo!', 'total-security').'<br /><br /><br />
+      <input type="button" value="'.__('Restore file', 'total-security').'" data-filename="' . stripslashes(@$_POST['filename']) . '" id="fdx-restore-file" class="button-primary" /></p>';
     } else {
-      $out['out'] = '<p>'.__('Your WordPress core files are not writable from PHP. This is not a bad thing as it increases your security but you will have to restore the file manually by logging on to your FTP account and overwriting the file. You can', 'fdx-lang').'
-       <a target="_blank" href="http://core.trac.wordpress.org/browser/tags/' . get_bloginfo('version') . '/' . str_replace(ABSPATH, '', stripslashes($_POST['filename'])) . '?format=txt' . '">'.__('download the file directly from worpress.org', 'fdx-lang').  '</a>.</p>';
+      $out['out'] = '<p>'.__('Your WordPress core files are not writable from PHP. This is not a bad thing as it increases your security but you will have to restore the file manually by logging on to your FTP account and overwriting the file. You can', 'total-security').'
+       <a target="_blank" href="http://core.trac.wordpress.org/browser/tags/' . get_bloginfo('version') . '/' . str_replace(ABSPATH, '', stripslashes($_POST['filename'])) . '?format=txt' . '">'.__('download the file directly from worpress.org', 'total-security').  '</a>.</p>';
     }
     die(json_encode($out));
   }
@@ -308,15 +308,15 @@ require_once( dirname(__FILE__) . '/admin/unsafe_files.php' );
       $out .= '<li>';
       $out .= '<code>' . ABSPATH . $file . '</code>';
       if ($view) {
-        $out .= ' <a data-hash="' . md5(FDX_CS_SALT . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#source-dialog" class="fdx-show-source" title="'.__('View file source', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'images/ico2.png" width="16" height="16" border="0" alt="'.__('View file source', 'fdx-lang').'" /></a>';
+        $out .= ' <a data-hash="' . md5(FDX_CS_SALT . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#source-dialog" class="fdx-show-source" title="'.__('View file source', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'images/ico2.png" width="16" height="16" border="0" alt="'.__('View file source', 'total-security').'" /></a>';
        }
       if ($view && $restore ) {
         $url = add_query_arg( array( 'view' => 'diff', 'file' => $file ), menu_page_url( FDX2_PLUGIN_P2, false ) );
 		$url = wp_nonce_url( $url );
-		$out .= ' <a href="#" onclick="PopupCenter(\''.$url.'\', \''.esc_attr($file).'\',700,500,\'yes\');" title="'.__('See what has been modified', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'images/ico3.png" width="16" height="16" border="0" alt="'.__('See what has been modified', 'fdx-lang').'" /></a>';
+		$out .= ' <a href="#" onclick="PopupCenter(\''.$url.'\', \''.esc_attr($file).'\',700,500,\'yes\');" title="'.__('See what has been modified', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'images/ico3.png" width="16" height="16" border="0" alt="'.__('See what has been modified', 'total-security').'" /></a>';
        }
       if ($restore) {
-        $out .= ' <a data-hash="' . md5(FDX_CS_SALT . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#restore-dialog" class="fdx-restore-source" title="'.__('Restore file', 'fdx-lang').'"><img src="'.FDX2_PLUGIN_URL.'images/ico1.png" width="16" height="16" border="0" alt="'.__('Restore file', 'fdx-lang').'" /></a>';
+        $out .= ' <a data-hash="' . md5(FDX_CS_SALT . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#restore-dialog" class="fdx-restore-source" title="'.__('Restore file', 'total-security').'"><img src="'.FDX2_PLUGIN_URL.'images/ico1.png" width="16" height="16" border="0" alt="'.__('Restore file', 'total-security').'" /></a>';
       }
       $out .= '</li>';
     }
@@ -345,7 +345,7 @@ require_once( dirname(__FILE__) . '/admin/unsafe_files.php' );
 function fdx_diff_page() {
 	$file = $_GET['file'];
     echo '<style> #adminmenuwrap,#adminmenuwrap, #adminmenuback, #wpadminbar, #message, #footer { display: none !important }</style>';
-	echo '<h2>'.__('Changes made to file', 'fdx-lang'). ': <code>' . esc_html($file) . '</code></h2>';
+	echo '<h2>'.__('Changes made to file', 'total-security'). ': <code>' . esc_html($file) . '</code></h2>';
 	echo fdx_display_file_diff( $file );
 }
 
@@ -432,7 +432,7 @@ function fdx_ajax_file_scan() {
 	check_ajax_referer( 'fdx-scanner_scan' );
 
 	if ( ! isset($_POST['start']) )
-		die( json_encode( array( 'status' => 'error', 'data' => __('Error: start not set.', 'fdx-lang') ) ) );
+		die( json_encode( array( 'status' => 'error', 'data' => __('Error: start not set.', 'total-security') ) ) );
 	else
 		$start = (int) $_POST['start'];
 
@@ -449,7 +449,7 @@ function fdx_ajax_file_scan() {
 	} else if ( $result ) {
 		echo json_encode( array( 'status' => 'complete' ) );
 	} else {
-		echo json_encode( array( 'status' => 'running', 'data' => __('Scanner filesystem', 'fdx-lang'). ': ' . ($start+$max) . '...' ) );
+		echo json_encode( array( 'status' => 'running', 'data' => __('Scanner filesystem', 'total-security'). ': ' . ($start+$max) . '...' ) );
 	}
 
 	exit;

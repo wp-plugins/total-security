@@ -1,12 +1,12 @@
 <?php
   // this plugin requires Last version
         if (!version_compare(get_bloginfo('version'), FDX2_LAST_WP_VER,  '>=')) {
-         echo '<div id="message" class="error" style="top: 250px; position: absolute; padding: 15px"><div align="center"><img src="'.FDX2_PLUGIN_URL.'/images/warning.png" width="48" height="48" border="0" alt="" /></div><strong>'.__('Unsafe Files Search', 'fdx-lang').'</strong> '.__('requires the latest WordPress version', 'fdx-lang').' (<a href="' . admin_url('update-core.php') . '" title="'.__('Update WP core', 'fdx-lang').'">' . FDX2_LAST_WP_VER . '</a>) '.__('to function properly. You\'re using WordPress version', 'fdx-lang').' (<strong>' . get_bloginfo('version') . ')</strong>. '.__('Please', 'fdx-lang'). ' <strong><a href="' . admin_url('update-core.php') . '" title="'.__('Update WP core', 'fdx-lang').'">'.__('update', 'fdx-lang').'</a></strong>.</div>';
+         echo '<div id="message" class="error" style="top: 250px; position: absolute; padding: 15px"><div align="center"><img src="'.FDX2_PLUGIN_URL.'/images/warning.png" width="48" height="48" border="0" alt="" /></div><strong>'.__('Unsafe Files Search', 'total-security').'</strong> '.__('requires the latest WordPress version', 'total-security').' (<a href="' . admin_url('update-core.php') . '" title="'.__('Update WP core', 'total-security').'">' . FDX2_LAST_WP_VER . '</a>) '.__('to function properly. You\'re using WordPress version', 'total-security').' (<strong>' . get_bloginfo('version') . ')</strong>. '.__('Please', 'total-security'). ' <strong><a href="' . admin_url('update-core.php') . '" title="'.__('Update WP core', 'total-security').'">'.__('update', 'total-security').'</a></strong>.</div>';
     return;
     }
 ?>
 <div class="wrap"><?php echo get_screen_icon('fdx-lock');?>
-<h2><?php echo FDX2_PLUGIN_NAME;?>: <?php _e('Unsafe Files Search', 'fdx-lang') ?></h2>
+<h2><?php echo FDX2_PLUGIN_NAME;?>: <?php _e('Unsafe Files Search', 'total-security') ?></h2>
 <div id="poststuff">
 <div id="post-body" class="metabox-holder columns-2">
 
@@ -17,7 +17,7 @@
 
 
 <div class="postbox">
-<div class="handlediv" title="<?php _e('Click to toggle', 'fdx-lang') ?>"><br /></div><h3 class='hndle'><span><?php _e('Unsafe Files Search', 'fdx-lang'); ?></span></h3>
+<div class="handlediv" title="<?php _e('Click to toggle', 'total-security') ?>"><br /></div><h3 class='hndle'><span><?php _e('Unsafe Files Search', 'total-security'); ?></span></h3>
 <div class="inside">
 <!-- ****************************************************** -->
 <?php
@@ -39,11 +39,11 @@ function fdx_results_page() {
 	delete_transient( 'fdx_files' );
 	$results = get_option( 'fdx_results' );
 ?>
-<?php _e('Scours your file system by suspicious or potentially malicious files, compressed, log, binary, data, and temporary files. And any unknown file in WP core.', 'fdx-lang'); ?>
+<?php _e('Scours your file system by suspicious or potentially malicious files, compressed, log, binary, data, and temporary files. And any unknown file in WP core.', 'total-security'); ?>
 	<form action="<?php admin_url( 'tools.php?page=fdx-scanner' ); ?>" method="post">
 		<?php wp_nonce_field( 'fdx-scan_all' ); ?>
 		<input type="hidden" name="action" value="scan" />
-	 		<div align="center" class="submit"><input type="submit" id="run-scanner" class="button-primary" value="<?php _e('One Click Search', 'fdx-lang'); ?>" /></div>
+	 		<div align="center" class="submit"><input type="submit" id="run-scanner" class="button-primary" value="<?php _e('One Click Search', 'total-security'); ?>" /></div>
 	</form>
 
 	<div id="scan-results">
@@ -60,7 +60,7 @@ fdx_results_page();
  */
 function fdx_show_results( $results ) {
 	if ( ! is_array($results) ) {
-		echo __('Unfortunately the results appear to be malformed/corrupted. Try scanning again.', 'fdx-lang');
+		echo __('Unfortunately the results appear to be malformed/corrupted. Try scanning again.', 'total-security');
 		return;
 	}
 
@@ -69,13 +69,13 @@ function fdx_show_results( $results ) {
 	foreach ( array('03','02','01', '00') as $l ) {
 		if ( ! empty($results[$l]) ) {
             $result .= '<p>&nbsp;</p><table class="widefat"><thead><tr>';
-            if ( $l == '00' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/wan.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Log, Binary, Data and Temporary files', 'fdx-lang').'. (<strong style="color:#EFA800;">'. count($results[$l]) .' '. __('matches', 'fdx-lang').'</strong>)</th>
+            if ( $l == '00' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/wan.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Log, Binary, Data and Temporary files', 'total-security').'. (<strong style="color:#EFA800;">'. count($results[$l]) .' '. __('matches', 'total-security').'</strong>)</th>
                                           <th scope="col" style="width:157px"><img src="'.FDX2_PLUGIN_URL.'images/00.png" width="157" height="32" border="0" alt="*"></th>';
-            if ( $l == '01' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/wan.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Compressed files', 'fdx-lang').'. (<strong style="color:#EFA800;">'. count($results[$l]) .' '. __('matches', 'fdx-lang').'</strong>)</th>
+            if ( $l == '01' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/wan.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Compressed files', 'total-security').'. (<strong style="color:#EFA800;">'. count($results[$l]) .' '. __('matches', 'total-security').'</strong>)</th>
                                           <th scope="col" style="width:190px"><img src="'.FDX2_PLUGIN_URL.'images/01.png" width="190" height="31" border="0" alt="*"></th>';
-            if ( $l == '02' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/critical.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Dangerous and malicious files', 'fdx-lang').'. (<strong style="color:red;">'. count($results[$l]) .' '. __('matches', 'fdx-lang').' </strong>)</th>
+            if ( $l == '02' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/critical.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Dangerous and malicious files', 'total-security').'. (<strong style="color:red;">'. count($results[$l]) .' '. __('matches', 'total-security').' </strong>)</th>
                                           <th scope="col" style="width:222px"><img src="'.FDX2_PLUGIN_URL.'images/02.png" width="222" height="31" border="0" alt="*"></th>';
-            if ( $l == '03' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/critical.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Unknown file found in WP core', 'fdx-lang').'. (<strong style="color:red;">'. count($results[$l]) .' '. __('matches', 'fdx-lang').' </strong>)</th>
+            if ( $l == '03' ) $result .= '<th scope="col"><img src="'.FDX2_PLUGIN_URL.'images/critical.png" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Unknown file found in WP core', 'total-security').'. (<strong style="color:red;">'. count($results[$l]) .' '. __('matches', 'total-security').' </strong>)</th>
                                         <th scope="col" style="width:124px"><img src="'.FDX2_PLUGIN_URL.'images/03.png" width="124" height="32" border="0" alt="*"></th>';
          	$result .= '</tr></thead><tbody>';
         		foreach ( $results[$l] as $r )
@@ -111,8 +111,8 @@ function fdx_draw_row( $r ) {
 		$('#run-scanner').click( function() {
 		   //-----------------------------------
 		    $(this).attr('disabled', 'disabled')
-           .val('<?php _e('Searching filesystem, please wait!', 'fdx-lang') ?>');
-		$.blockUI({ message: '<img src="<?php echo FDX2_PLUGIN_URL; ?>images/loading3.gif" width="24" height="24" border="0" alt="" /><br /><div id="scan-loader" style="display:none;"><span><?php _e('Scanner filesystem', 'fdx-lang') ?>: 0...</span></div>' });
+           .val('<?php _e('Searching filesystem, please wait!', 'total-security') ?>');
+		$.blockUI({ message: '<img src="<?php echo FDX2_PLUGIN_URL; ?>images/loading3.gif" width="24" height="24" border="0" alt="" /><br /><div id="scan-loader" style="display:none;"><span><?php _e('Scanner filesystem', 'total-security') ?>: 0...</span></div>' });
            //-----------------------------------
 		   max = <?php echo FDX_MAX_BATCH_SIZE; ?> ;
   			$.ajaxSetup({
@@ -121,7 +121,7 @@ function fdx_draw_row( $r ) {
 				complete: function(xhr,status) {
 					if ( status != 'success' ) {
 						$('#scan-loader img').hide();
-						$('#scan-loader span').html( '<?php _e('An error occurred. Please try again later', 'fdx-lang'); ?>.' );
+						$('#scan-loader span').html( '<?php _e('An error occurred. Please try again later', 'total-security'); ?>.' );
 					}
 				}
 			});
@@ -158,14 +158,14 @@ function fdx_draw_row( $r ) {
 			}
 		});
 	}, fdx_db_scan = function() {
-		jQuery('#scan-loader span').html('<?php _e('Scan complete', 'fdx-lang'); ?>...');
+		jQuery('#scan-loader span').html('<?php _e('Scan complete', 'total-security'); ?>...');
 		jQuery.ajax({
 			data: {
 				action: 'fdx-run_end',
 				_ajax_nonce: fdx_nonce
 			}, success: function(r) {
 				jQuery('#scan-loader img').hide();
-				jQuery('#scan-loader span').html('<?php _e('Refresh the page to view the results', 'fdx-lang'); ?>.');
+				jQuery('#scan-loader span').html('<?php _e('Refresh the page to view the results', 'total-security'); ?>.');
 				window.location.reload(false);
 			}
 		});
