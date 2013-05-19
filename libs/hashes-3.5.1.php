@@ -1,7 +1,5 @@
 <?php
 $filehashes = array(
-'wp-config.php' => '',//******
-'.htaccess' => '',//******
 'index.php' => 'd2772ff9b72031e121b0a1a6be0bb9e5',
 'license.txt' => 'b7d6694302f24cbe13334dfa6510fd02',
 'readme.html' => '05d50a04ef19bd4b0a280362469bf22f',

@@ -2,10 +2,10 @@
 Plugin Name: Total Security
 Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
-Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total       
+Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404       
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 2.6.351
+Stable tag: 2.7
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -41,6 +41,14 @@ Scours your file system by suspicious or potentially malicious files, compressed
 * Detects suspicious or potentially malicious files => |`.exe`|`.com`|`.scr`|`.bat`|`.msi`|`.vb`|`.cpl`|
 * Detects compressed files => |`.zip`|`.rar`|`.7z`|`.gz`|`.tar`|`.bz2`|
 * Detects log, binary, data and temporary files => |`.log`|`.dat`|`.bin`|`.tmp`|
+
+
+= Error 404 Log =
+
+Logs 404 (Page Not Found) errors on your site, this also gives the added benefit of helping you find hidden problems causing 404 errors on unseen parts of your site as all errors will be logged.
+
+
+
 
 > Best practices on security combined into one plugin! It does not remove or modify anything. That is left to the user to do. 
 
@@ -103,6 +111,10 @@ One of the best practices a WordPress site owner can do to keep their site secur
 
 
 == Changelog ==
+* 2.7
+    * Add new feature: Error 404 Log
+    * Cosmetic fixes
+
 * 2.6.351
     * Performance improvements
 
@@ -131,7 +143,6 @@ One of the best practices a WordPress site owner can do to keep their site secur
     * Compatibility with WordPress 3.5
 
 * 2.0.342
-    * New version notation (x.y.zzz) |new feature|improvements or bug fixes|last WP core|
     * Add new feature: Unsafe Files Search
     * Performance improvements.
 
