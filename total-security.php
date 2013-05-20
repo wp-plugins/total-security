@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 2.7
+ * Version: 2.8
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -14,29 +14,37 @@
 
 class Total_Security {
         public $min_wp_ver 	        = '3.5.1'; // hashes: 3.5.1
-  		public $pluginversion 	    = '2.7';
+  		public $pluginversion 	    = '2.8';
         public $pluginname			= 'Total Security';
         public $hook 				= 'total-security';
         public $_p2 	            = 'vulnerability_scan';
         public $_p3 	            = 'unsafe_files_search';
-        public $_p4 	            = '404_logs';
+        public $_p4 	            = 'error-404-log';
         public $_p5 	            = 'core_exploit_scanner'; // $this->hook . '-'.$this->_p5
-        public $accesslvl			= 'manage_options';
+        public $_p6 	            = 'settings';
+       public $accesslvl			= 'manage_options';
         //p2
-        public $p2_options_key   	= 'cookie269765'; // $this->p2_options_key
+        public $p2_options_key   	= 'cookie269765'; //
         //p5
         public $p5_options_key   	= 'cookie359759';
         public $p5_salt         	= 'hash45757';
         public $p5_snippet         	= 'ide-msvcpp'; // http://steamdev.com/snippet/
+        //p6
+        public $p6_slug         	= 'login_key'; // /wp-login.php?login_key=1234
+
         public $fdx_defaults        = array(
                  'p2_op1'             => '200', //OK
                  'p2_check_1'         => 1, //OK
                  'p3_op1'             => '500',
                  'p4_check_1'         => 1,
+
+                 'p6_check_1'         => 0,
+                 'p6_key'             => '1234',
+                 'p6_url'             => ''//
        );
 
 	function __construct() {
-        load_plugin_textdomain( $this->hook, false, dirname( plugin_basename( __FILE__ ) ) . '/lang' ); // Load plugin text domain
+	    load_plugin_textdomain( $this->hook, false, dirname( plugin_basename( __FILE__ ) ) . '/lang' ); // Load plugin text domain
     	add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );  // Register admin styles
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );// Register admin scripts
         add_action( 'admin_menu', array( $this, 'action_menu_pages' ) ); // Registers all WordPress admin menu items
@@ -59,6 +67,17 @@ class Total_Security {
         require_once( 'modules/class-process.php' );
         new FDX_Process();
 
+      //-------------P6
+        $settings = FDX_Process::fdx_get_settings();
+      if ( $settings['p6_check_1'] ) {
+        add_action('init', array( $this, 'init' ), 1);
+        add_action('site_url', array( $this, 'add_login_key_to_action_from' ), 101, 4 );
+        add_filter('login_url', array( $this,'add_key_login_to_url'), 101, 2);
+        add_filter('lostpassword_url', array( $this,'add_key_login_to_url'), 101, 2);
+        add_filter('register', array( $this,'add_key_login_to_url'), 101, 2);
+        add_filter('logout_url', array( $this,'fdx_logout_home'), 101, 2 );
+      }
+
      //-------------P2
         require_once( 'modules/class-p2.php' );
         new FDX_CLASS_P2();
@@ -73,6 +92,23 @@ class Total_Security {
         $fdx_lg = new FDX_CLASS_P4();
 
 }//end construct
+
+
+/*
+ * Get settings defaults
+ */
+function fdx_get_settings() {
+	$settings = $this->fdx_defaults;
+	$wordpress_settings = get_option( 'fdx_settings' );
+	if ( $wordpress_settings ) {
+		foreach( $wordpress_settings as $key => $value ) {
+			$settings[ $key ] = $value;
+		}
+	}
+	return $settings;
+}
+
+
 
 /*
  * Registers and enqueues admin-specific styles.
@@ -121,16 +157,6 @@ function action_menu_pages() {
 				plugins_url( 'images/_16x16.png', __FILE__)
 			);
 
-               add_submenu_page(
-					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Error 404 Log', $this->hook ),
-					__( 'Error 404 Log', $this->hook ),
-					$this->accesslvl,
-                      $this->hook . '-'.$this->_p4,
-					array( $this, 'fdx_options_subpanel_p4' )
-				);
-
-
 				add_submenu_page(
 					$this->hook,
 					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Vulnerability Scan', $this->hook ),
@@ -151,12 +177,31 @@ function action_menu_pages() {
 
                 add_submenu_page(
 					$this->hook,
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Error 404 Log', $this->hook ),
+					__( 'Error 404 Log', $this->hook ),
+					$this->accesslvl,
+                      $this->hook . '-'.$this->_p4,
+					array( $this, 'fdx_options_subpanel_p4' )
+				);
+
+                add_submenu_page(
+					$this->hook,
 					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Core Exploit Scanner', $this->hook ),
 					__( 'Core Exploit Scanner', $this->hook ),
 					$this->accesslvl,
-                    $this->hook . '-'.$this->_p5,
+                    $this->hook . '-'.$this->_p6,
 					array( $this, 'fdx_options_subpanel_p5' )
 				);
+
+               add_submenu_page(
+					$this->hook,
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Settings and Setup', $this->hook ),
+					__( 'Settings', $this->hook ),
+					$this->accesslvl,
+                    $this->hook . '-'.$this->_p5,
+					array( $this, 'fdx_options_subpanel_p6' )
+				);
+
 
 				//Make the dashboard the first submenu item and the item to appear when clicking the parent.
 				global $submenu;
@@ -374,9 +419,6 @@ require_once ('modules/inc-p4.php');
  */
 
 
-
-
-
 /********************************** P5 ******************************************
 ************* Core Exploit Scanner
 ********************************************************************************/
@@ -574,6 +616,72 @@ require_once( 'modules/class-p5.php' );
 	$r .= "</table>";
 	return $r;
 }
+
+/********************************** P6 ******************************************
+************* Settings and Setup
+********************************************************************************/
+function fdx_options_subpanel_p6() {
+require_once ('modules/inc-p6.php');
+}
+
+function add_login_key_to_action_from($url, $path, $scheme, $blog_id ){
+$settings = FDX_Process::fdx_get_settings();
+if ($url)
+        	if ($scheme=='login' || $scheme=='login_post' )
+            	return add_query_arg($this->p6_slug, $settings['p6_key'], $url);
+        return $url;
+    }
+
+
+function add_key_login_to_url($url, $redirect='0'){
+$settings = FDX_Process::fdx_get_settings();
+	  	if ($url)
+       		return add_query_arg($this->p6_slug, $settings['p6_key'], $url);
+    }
+
+
+function fdx_logout_home($logouturl, $redir) {
+       $redir = get_option('siteurl');
+         return $logouturl . '&amp;redirect_to=' . urlencode($redir);
+}
+
+    /**
+     * block_access()
+     */
+    function block_access(){
+      $settings = FDX_Process::fdx_get_settings();
+       $url=esc_url('http'.(empty($_SERVER['HTTPS'])?'':'s').'://'.$_SERVER['SERVER_NAME']. $_SERVER['REQUEST_URI']);
+         status_header( 404 );
+          nocache_headers();
+          if ( !$settings['p6_url'] ) {
+          require_once( get_404_template() );
+          } else {
+          header( 'Location: '. $settings['p6_url'] ) ;
+          }
+
+   die();
+    }
+
+    function init(){
+     $settings = FDX_Process::fdx_get_settings();
+
+       if (strpos(strtolower($_SERVER['REQUEST_URI']), '/wp-admin/')!==false) {
+                      if ( !is_user_logged_in() ) {
+                      $this->block_access();
+                      }
+               }
+ //--------------------------
+
+        if ( (isset($_GET[$this->p6_slug]) && $_GET[$this->p6_slug]==$settings['p6_key']) )  { //off
+
+           } else { //on
+
+            if (strpos(strtolower($_SERVER['REQUEST_URI']), '/wp-login.php')!==false) {
+                $this->block_access();
+            }
+
+        }
+  }
 
 
 

@@ -3,12 +3,12 @@ ESPECIFIC OF PLUGIN
 *******************************************************************************/
 td.time, td.host, td.uri, td.referrer {font-size: x-small !important;   }
 
-th#cb, td.cb  { width: 5%; }
+th#cb, td.cb  { width: 4%; }
 
-th#time, td.time { width: 10%; vertical-align: middle}
-th#host, td.host { width: 15%; vertical-align: middle}
-th#uri, td.uri  { width: 30%;vertical-align: middle }
-th#referrer, td.referrer {width: 40% ;vertical-align: middle }
+th#time, td.time { width: 15%; vertical-align: middle}
+th#host, td.host { width: 13%; vertical-align: middle}
+th#uri, td.uri  { width: 34%;vertical-align: middle }
+th#referrer, td.referrer {width: 34% ;vertical-align: middle }
 
 .widefat tbody th.check-column {padding: 0; vertical-align: middle; }
 p.search-box { margin: 0 0 10px 0;  }
@@ -19,21 +19,10 @@ tfoot tr { display: none; }
 .crop { overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis;
-  width:225px; }
+  width:250px; }
 
+#grenn a { color: #008000; }
 
- /* rack wp table gen*/ 
-.tablenav.bottom { display:  none !important; }
-
-  /* crop text */
- a.morelink {
-    text-decoration:none;
-    outline: none;
-}
-.morecontent span {
-    display: none;
-}
-.comment { margin: 0; padding: 0}
 
 /* hacks */
 .last_scan { font-size: 11px; float: right;  font-style: italic ; margin-right:  }
@@ -42,6 +31,8 @@ tfoot tr { display: none; }
 
 #hiddenoff { }
 
+.light { font-weight: bold; border: 1px solid #DDDDDD; background: #EEEEEE; padding: 4px; margin: 10px 0 10px 0 }
+.light a { text-decoration: none; }
 
 
 /*******************************************************************************
@@ -126,6 +117,7 @@ small { color: #535353; }
 
 code.red {font-family: Verdana, Arial, Helvetica, sans-serif;  background-color:#FFCC66; color:#000000; padding:0px 5px 0px 5px; height:20px;border:1px solid #FF6600;border-radius:3px;}
 span#butpop a  {  text-decoration: none !important }
+
 h5 { padding: 0!important; margin: 0 !important; font-size: 11px !important }
 
 a.sm_button {padding:4px;display:block;padding-left:25px;background-repeat:no-repeat;background-position:5px 50%;text-decoration:none;border:none;}

@@ -21,8 +21,6 @@ $("#hiddenoff  :input").attr("disabled", true);
 END;
  }
 
-//display warning if test were never run
-
 
 //abc
 if ( isset($_POST['fdx_page']) ) {
@@ -52,42 +50,11 @@ echo '</form>';
 echo '<div class="clear"></div></div></div>';
 //--------------------
 
-//form
-echo '<form method="post" action="">';
-      wp_nonce_field();
-echo '<input type="hidden" name="fdx_page" value="fdx_form_p4" />';
 
-//------------postbox 2
-echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Basic Settings', $this->hook) . '</span></h3>';
-echo '<div class="inside">';
-echo '<div class="fdx-left-content">';
-//----------------------------------------- ?>
-
-<p><strong><?php _e( 'Enable or Disable the Error 404 Log reporting', $this->hook ); ?> </strong></p>
-
-
-<?php
-//--------------------right
-echo '</div><div class="fdx-right-content">';
-//----------------------------------------- ?>
-
-
-<p><input type="checkbox" class="check" id="p4_check_1" name="p4_check_1"<?php if ( $settings['p4_check_1'] ) echo ' checked'; ?> /> <?php _e( 'Enable 404 Detection', $this->hook ); ?></p>
-
-
-<?php
-//------------ right content | #clear# | inside | postbox
-echo '</div><div class="clear"></div></div></div>';
-//-----------------------------------------
 
 // buttons
-echo '<div class="button_submit">';
-echo submit_button( __('Save all options', $this->hook ), 'primary', 'Submit', false, array( 'id' => '' ) ) ;
-echo '</div>';
-echo '</form>'; //form 1
 
-echo '<div class="button_reset">';
+echo '<div class="button_submit">';
 echo '<form method="post" action="">';
 echo '<input type="hidden" name="fdx_page" value="fdx_clean" />';
 echo submit_button( __('Delete all log entries', $this->hook ), 'secondary', 'Submit' , false, array( 'id' => 'space', 'onclick' => 'return confirm(\'' . esc_js( __( 'Are you sure you want to delete all log entries?',  $this->hook ) ) . '\');' ) );

@@ -6,7 +6,7 @@ function __construct() {
 			  add_filter('init', array( $this, 'fdx_update_post_settings') );
               }
 
-$this->fdx_gen_table(); //executa  funçoes
+$this->fdx_gen_table(); //exe
 }
 
 
@@ -49,15 +49,8 @@ function fdx_get_settings() {
  */
 function fdx_update_post_settings() {
 		   switch ( $_POST['fdx_page'] ) {
-
-                    case 'fdx_form_p2':
-					$this->fdx_process_p2();
-					break;
-                    case 'fdx_form_p3':
-					$this->fdx_process_p3();
-					break;
-                    case 'fdx_form_p4':
-					$this->fdx_process_p4();
+                    case 'fdx_form_all':
+					$this->fdx_process_all();
 					break;
                     case 'fdx_reset':
 				    update_option( 'fdx_settings', false );
@@ -65,16 +58,13 @@ function fdx_update_post_settings() {
                     case 'fdx_clean':
 				    $this->fdx_process_clean();
 					break;
-
-         }
-
-
+    }
 }
 
 /*
- * Process P2
+ * Process All
  */
-function fdx_process_p2(){
+function fdx_process_all(){
             if ( isset( $_POST['p2_check_1'] ) ) {
 				$settings['p2_check_1'] = true;
 			} else {
@@ -83,66 +73,50 @@ function fdx_process_p2(){
 
             if ( isset( $_POST['p2_select_1'] ) ) {
         	$settings['p2_op1'] = $_POST['p2_select_1'];
+            }
 
-       }
-    		update_option( 'fdx_settings', $settings );
-}
-
-
-/*
- * Process P3
- */
-function fdx_process_p3(){
             if ( isset( $_POST['p3_select_1'] ) ) {
         	$settings['p3_op1'] = $_POST['p3_select_1'];
             }
 
-
-    		update_option( 'fdx_settings', $settings );
-}
-
-
-
-
-
-/*
- * Process P4
- */
-function fdx_process_p4(){
             if ( isset( $_POST['p4_check_1'] ) ) {
 				$settings['p4_check_1'] = true;
 			} else {
 				$settings['p4_check_1'] = false;
 			}
+
+             if ( isset( $_POST['p6_check_1'] ) ) {
+				$settings['p6_check_1'] = true;
+			} else {
+				$settings['p6_check_1'] = false;
+			}
+
+            if ( isset($_POST['p6_key']) ) {
+				$p6_key = $_POST['p6_key'];
+			} else {
+				$p6_key = '';
+			}
+
+            if ( isset($_POST['p6_url']) ) {
+				$p6_url = $_POST['p6_url'];
+			} else {
+				$p6_url = '';
+			}
+
+            $settings['p6_key'] = stripslashes( $p6_key );
+            $settings['p6_url'] = stripslashes( $p6_url );
+
     		update_option( 'fdx_settings', $settings );
 }
 
 
-
-
-
-
-
 /*
- * Process P4 - Clean Database
+ * P4 - Clean Database
  */
 function fdx_process_clean(){
 global $wpdb;
     $wpdb->query( "DELETE FROM " . $wpdb->base_prefix . "total_security_log" );
-
-//    echo '<div id="message" class="updated"><p>fabrizio</p></div>';
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }// end class

@@ -2,10 +2,10 @@
 Plugin Name: Total Security
 Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
-Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404       
+Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login       
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 2.7
+Stable tag: 2.8
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -45,9 +45,14 @@ Scours your file system by suspicious or potentially malicious files, compressed
 
 = Error 404 Log =
 
-Logs 404 (Page Not Found) errors on your site, this also gives the added benefit of helping you find hidden problems causing 404 errors on unseen parts of your site as all errors will be logged.
+* Logs 404 (Page Not Found) errors on your site, this also gives the added benefit of helping you find hidden problems causing 404 errors on unseen parts of your site as all errors will be logged.
 
 
+= Secure Hidden Login =
+
+* Allows you to create custom URLs for user's login, logout and admin's login page, without editing any `.htaccess` files. 
+* Those attempting to gain access to your login form will be automatcally redirected to a customizable URL.
+* Hide "wp-admin" folder.
 
 
 > Best practices on security combined into one plugin! It does not remove or modify anything. That is left to the user to do. 
@@ -111,6 +116,10 @@ One of the best practices a WordPress site owner can do to keep their site secur
 
 
 == Changelog ==
+* 2.8
+    * Add new feature: Secure Hidden Login
+    * Cosmetic fixes
+
 * 2.7
     * Add new feature: Error 404 Log
     * Cosmetic fixes

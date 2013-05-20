@@ -25,13 +25,6 @@ END;
 //display warning if test were never run
 }
 
-
-
-//abc
-if ( isset($_POST['fdx_page']) ) {
-echo '<div class="updated fade"><p><strong>' . __( 'Settings updated', $this->hook ) . '.</strong></p></div>';
-}
-
 /* poststuff and sidebar
 *********************************************************************************/
 echo '<div id="poststuff"><div id="post-body" class="metabox-holder columns-2">';
@@ -65,10 +58,6 @@ self::fdx_results_page();
 echo '<div class="clear"></div></div></div></form>';
 //--------------------
 
-//form
-echo '<form method="post" action="">';
-      wp_nonce_field();
-echo '<input type="hidden" name="fdx_page" value="fdx_form_p3" />';
 
 //------------postbox 2
 echo '<div class="postbox">';

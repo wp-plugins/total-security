@@ -167,7 +167,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 		 *
 		 **/
 		function column_time( $item ) {
-            $r = date( 'Y/m/d H:i:s', $item['timestamp'] );
+            $r = date( 'y/m/d - H:i:s', $item['timestamp'] );
             return $r;
 		}
 
@@ -190,8 +190,8 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
   		 *
 		 **/
 		function column_uri( $item ) {
-            $r = '<div class="comment more">' . $item['uri'] . '</div>';
-            return $r;
+                 $r = '<div class="crop"><a href="' . $item['uri'] . '" target="_blank" title="' . $item['uri'] . '">' . $item['uri'] . '</a></div>';
+           return $r;
        		}
 
 		/**
@@ -199,7 +199,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 		 *
 		 **/
 		function column_referrer( $item ) {
-             $r = '<div class="crop"><a href="' . $item['referrer'] . '" target="_blank" title="' . $item['referrer'] . '">' . $item['referrer'] . '</a></div>';
+             $r = '<div class="crop" id="grenn"><a href="' . $item['referrer'] . '" target="_blank" title="' . $item['referrer'] . '">' . $item['referrer'] . '</a></div>';
             return $r;
 		}
 

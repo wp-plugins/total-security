@@ -10,14 +10,9 @@ echo '<h2>'. $this->pluginname . ' : ' . __('Vulnerability Scan', $this->hook) .
 //display warning if test were never run
 if (!$tests['last_run']) {
     echo '<div class="error" id="errorimg"><p>'.__('Not yet executed!', $this->hook).'</p></div>';
-    } elseif ((current_time('timestamp') - 1*24*60*60) > $tests['last_run']) {
-    echo '<div class="error" id="errorimg"><p>'. sprintf( __('Executed for more than <code>%s</code> days. Click in button "Execute" for a new analysis.' , $this->hook) , '1' ) . '</p></div>';
+    } elseif ((current_time('timestamp') - 15*24*60*60) > $tests['last_run']) {
+    echo '<div class="error" id="errorimg"><p>'. sprintf( __('Executed for more than <code>%s</code> days. Click in button "Execute" for a new analysis.' , $this->hook) , '15' ) . '</p></div>';
     }
-
-//abc
-if ( isset($_POST['fdx_page']) ) {
-echo '<div class="updated fade"><p><strong>' . __( 'Settings updated', $this->hook ) . '.</strong></p></div>';
-}
 
 /* poststuff and sidebar
 *********************************************************************************/
@@ -72,61 +67,6 @@ echo '</h3><div class="inside">';
 echo '<div class="clear"></div></div></div>';
 //--------------------
 
-//form
-echo '<form method="post" action="">';
-      wp_nonce_field();
-echo '<input type="hidden" name="fdx_page" value="fdx_form_p2" />';
-
-//------------postbox 2
-echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Basic Settings', $this->hook) . '</span></h3>';
-echo '<div class="inside">';
-echo '<div class="fdx-left-content">';
-//----------------------------------------- ?>
-
-<p><?php echo sprintf( __('This analyze contains <strong>%s</strong> separate security tests. Once you click the "Execute" button all tests will be run.', $this->hook ) , '32' ) ?></p>
-<p><?php _e('Depending on various parameters of your site this can take from ten seconds to 2-3 minutes. Please don\'t reload the page until testing is done.', $this->hook) ?></p>
-<p><?php _e('If no test results show up after the page reloads, please configure max script execution time.', $this->hook) ?></p>
-
-<?php
-//--------------------right
-echo '</div><div class="fdx-right-content">';
-//----------------------------------------- ?>
-
-<p><strong><?php _e( 'Brute-force attack', $this->hook ); ?> </strong></p>
-<p><input type="checkbox" class="check" id="p2_check_1" name="p2_check_1"<?php if ( $settings['p2_check_1'] ) echo ' checked'; ?> /> <?php echo sprintf( __('Check admin password strength with a <strong>%s</strong> most commonly used.', $this->hook ) , '600' ) ?></p>
-
-<hr class="sep">
-
-<p><strong><?php _e( 'Maximum script execution time', $this->hook ); ?></strong></p>
-<p>
-<select name="p2_select_1">
-<option value="200"<?php if ( $settings['p2_op1'] == '200' ) echo " selected"; ?>>200</option>
-<option value="300"<?php if ( $settings['p2_op1'] == '300' ) echo " selected"; ?>>300</option>
-<option value="400"<?php if ( $settings['p2_op1'] == '400' ) echo " selected"; ?>>400</option>
-<option value="500"<?php if ( $settings['p2_op1'] == '500' ) echo " selected"; ?>>500</option>
-<option value="0"<?php if ( $settings['p2_op1'] == '0' ) echo " selected"; ?>>~0~</option>
-</select>
- <?php _e( 'Maximum number of seconds tests are allowed to run.', $this->hook ); ?>
-</p>
-
-<?php
-//------------ right content | #clear# | inside | postbox
-echo '</div><div class="clear"></div></div></div>';
-//-----------------------------------------
-
-// buttons
-echo '<div class="button_submit">';
-echo submit_button( __('Save all options', $this->hook ), 'primary', 'Submit', false, array( 'id' => '' ) ) ;
-echo '</div>';
-echo '</form>'; //form 1
-
-echo '<div class="button_reset">';
-echo '<form method="post" action="">';
-echo '<input type="hidden" name="fdx_page" value="fdx_reset" />';
-echo submit_button( __('Restore Defaults', $this->hook ), 'secondary', 'Submit' , false, array( 'id' => 'space', 'onclick' => 'return confirm(\'' . esc_js( __( 'Restore Default Settings?',  $this->hook ) ) . '\');' ) );
-echo '</form>';//form 2
-echo '</div>';
 
 //------------ meta-box-sortables | postbox-container | post-body | poststuff | wrap
 echo '</div></div></div></div></div>';

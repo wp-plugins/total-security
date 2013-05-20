@@ -26,10 +26,9 @@ END;
 //display warning if test were never run
 $tests = get_option($this->p5_options_key);
 if (!$tests['last_run']) {
-$days_last = 1;
       echo '<div class="error" id="errorimg"><p>'.__('Not yet executed!', $this->hook).'</p></div>';
-    } elseif ((current_time('timestamp') - 1*24*60*60) > $tests['last_run']) {
-    echo '<div class="error" id="errorimg"><p>'. sprintf( __('Executed for more than <code>%s</code> days. Click in button "Execute" for a new analysis.' , $this->hook) , $days_last ) . '</p></div>';
+    } elseif ((current_time('timestamp') - 15*24*60*60) > $tests['last_run']) {
+    echo '<div class="error" id="errorimg"><p>'. sprintf( __('Executed for more than <code>%s</code> days. Click in button "Execute" for a new analysis.' , $this->hook) , '15' ) . '</p></div>';
     }
 
 }
