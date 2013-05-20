@@ -55,7 +55,7 @@ Scours your file system by suspicious or potentially malicious files, compressed
 * Hide "wp-admin" folder.
 
 
-> Best practices on security combined into one plugin! It does not remove or modify anything. That is left to the user to do. 
+> Best practices on security combined into one plugin! 
 
 = Usage =
 
