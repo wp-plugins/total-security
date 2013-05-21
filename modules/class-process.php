@@ -6,29 +6,38 @@ function __construct() {
 			  add_filter('init', array( $this, 'fdx_update_post_settings') );
               }
 
-$this->fdx_gen_table(); //exe
+$this->fdx_exe_function();
 }
 
 
 /*
- * Set up log table
+ * Exe Global Function
  */
-function fdx_gen_table() {
-global $wpdb;
-//
+
+function fdx_exe_function() {
+global $wpdb, $fdx_db_version;
+$fdx_db_version = '1.0';
+$installed_ver = get_option( 'fdx_db1_version' );
+
+// if no exist or different versions
+if( !get_site_option( 'fdx_db1_version' )  || get_site_option( 'fdx_db1_version' ) != $fdx_db_version ) {
+
 $tables = "CREATE TABLE " . $wpdb->base_prefix . "total_security_log (
 id int(11) NOT NULL AUTO_INCREMENT ,
 timestamp int(10) NOT NULL ,
 host varchar(20) ,
 url varchar(255) ,
 referrer varchar(255) ,
-data MEDIUMTEXT ,
 PRIMARY KEY  (id)
 );";
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 dbDelta( $tables );
+
+update_option( 'fdx_db1_version', $fdx_db_version ); //remove only uninstall
+     }
 }
+
 
 /*
  * Get settings defaults

@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 2.8
+ * Version: 2.8.1
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -14,7 +14,7 @@
 
 class Total_Security {
         public $min_wp_ver 	        = '3.5.1'; // hashes: 3.5.1
-  		public $pluginversion 	    = '2.8';
+  		public $pluginversion 	    = '2.8.1';
         public $pluginname			= 'Total Security';
         public $hook 				= 'total-security';
         public $_p2 	            = 'vulnerability_scan';
@@ -45,7 +45,6 @@ class Total_Security {
         add_action( 'admin_menu', array( $this, 'action_menu_pages' ) ); // Registers all WordPress admin menu items
 
       //-------------P2
-        register_deactivation_hook( __FILE__, array( $this, 'fdx_deactivate' ) );
         add_action('wp_ajax_sn_run_tests', array($this, 'run_tests'));
 
       //-------------P3
@@ -59,6 +58,7 @@ class Total_Security {
         add_action('wp_ajax_sn_core_run_scan', array($this, 'scan_files'));
 
       //--------------ALL
+        register_deactivation_hook( __FILE__, array( $this, 'fdx_deactivate' ) );
         require_once( 'modules/class-process.php' );
         new FDX_Process();
 

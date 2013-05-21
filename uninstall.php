@@ -5,11 +5,12 @@
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit ();
 
-//get_option('XXX_YYY_options');
-
-global $wpdb;
-//drop database tables
-$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->base_prefix . "total_security_log" );
-
-//Settings
+// ALL Settings
 delete_option('fdx_settings');
+
+//database version (total_security_log)
+delete_option( 'fdx_db1_version' );
+
+//drop database tables
+global $wpdb;
+$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->base_prefix . "total_security_log" );

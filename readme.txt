@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login       
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 2.8
+Stable tag: 2.8.1
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -93,6 +93,8 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 2. Core Exploit Scanner
 3. Unsafe Files Search
 4. System Information
+5. Secure Hidden Login - Setup
+6. Error 404 Log
 
 == Installation ==
 
@@ -104,18 +106,18 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 == Frequently Asked Questions ==
 
-= How do I change the file permissions on my WordPress installation?  =
-[Changing File Permissions](http://codex.wordpress.org/Changing_File_Permissions)
+= How do i uninstall completely this plugin =
 
-= Why do I need to hide my version of WordPress?  =
-Many attackers and automated tools will try and determine software versions before launching exploit code. Removing your WordPress blog version may discourage some attackers and certainly will mitigate virus and malware programs that rely on software versions.
-NOTE:Hiding your version of WordPress may break any plugins you have which are version dependant.
-
-= Why does Total Security require WordPress the latest version? =
-One of the best practices a WordPress site owner can do to keep their site secure is to keep your software up to date. Because of this fact I do not test this plugin in anything but the latest stable version of WordPress and will only guarantee it works in the latest version.
+* If deactivate the plugin on the plugins page, the plugin should clean up most of the files created and modified.
+* The uninstall function is manage by "uninstall.php" file, the plugin is completely removed when actively deleted (not just deactivated) through the WordPress Admin.
 
 
 == Changelog ==
+
+* 2.8.1
+    * Performance improvements
+    * Minor bug fixes
+
 * 2.8
     * Add new feature: Secure Hidden Login
     * Cosmetic fixes
