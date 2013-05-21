@@ -167,7 +167,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 		 *
 		 **/
 		function column_time( $item ) {
-            $r = date( 'y/m/d - H:i:s', $item['timestamp'] );
+            $r = date( 'y/m/d(H:i:s)', $item['timestamp'] );
             return $r;
 		}
 
