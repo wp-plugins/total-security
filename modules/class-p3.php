@@ -65,7 +65,7 @@ class File_FDX_Scanner extends FDX_CLASS_P3 {
 	function get_files( $s ) {
 	   global $wp_version;
    		if ( 0 == $s ) {
-			unset( $filehashes ); /**********************use hashes of WP version*************************/
+			unset( $filehashes ); // use hashes of WP version
          	$hashes = dirname(dirname(__FILE__)) . '/libs/hashes-'.$wp_version.'.php';
 	 		include( $hashes );
   			$this->recurse_directory( $this->path );
@@ -86,7 +86,7 @@ class File_FDX_Scanner extends FDX_CLASS_P3 {
    						) );
 					}
 				}
-//--------------------------------------------severe=02.xxx
+                // severe=02.xxx
 				if ( substr( $file, -4 ) == '.exe' ||
                      substr( $file, -4 ) == '.bat' ||
                      substr( $file, -4 ) == '.com' ||
@@ -96,12 +96,12 @@ class File_FDX_Scanner extends FDX_CLASS_P3 {
 					$this->add_result( '02', array(
 						'loc' => $file,
 					) );
-//--------------------------------------------severe=02.xx
+                  // severe=02.xx
                 } else if ( substr( $file, -3 ) == '.vb' ) {
 					$this->add_result( '02', array(
 						'loc' => $file,
 					) );
-//--------------------------------------------warning=01.xxx
+                 // warning=01.xxx
                 } else if ( substr( $file, -4 ) == '.rar' ||
                             substr( $file, -4 ) == '.zip' ||
                             substr( $file, -4 ) == '.tar' ||
@@ -109,13 +109,13 @@ class File_FDX_Scanner extends FDX_CLASS_P3 {
 					$this->add_result( '01', array(
 						'loc' => $file,
 					) );
-//--------------------------------------------warning=01.xx
+                // warning=01.xx
                } else if ( substr( $file, -3 ) == '.7z' ||
                            substr( $file, -3 ) == '.gz' ) {
 					$this->add_result( '01', array(
 						'loc' => $file,
 					) );
-//--------------------------------------------warning=00.xxx
+                // warning=00.xxx
                } else if ( substr( $file, -4 ) == '.log' ||
                            substr( $file, -4 ) == '.dat' ||
                            substr( $file, -4 ) == '.bin' ||
@@ -123,14 +123,20 @@ class File_FDX_Scanner extends FDX_CLASS_P3 {
 					$this->add_result( '00', array(
 						'loc' => $file,
 					) );
-//--------------------------------------------warning=00.xx
+               //warning=00.xx
                } else if ( substr( $file, -3 ) == '.db') {
 					$this->add_result( '00', array(
 						'loc' => $file,
 		  		) );
+
+                } else if ( substr( $file, -4 ) == '')  {
+                   $this->add_result( '44', array(
+						'loc' => false,
+                 	) );
                }
-			}
-//--------------------------------------------end
+
+        	}
+               //end
 			$this->files = array_values( $this->files );
 			$result = set_transient( 'fdx_files', $this->files, 3600 );
 
