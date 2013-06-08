@@ -14,3 +14,6 @@ delete_option( 'fdx_db1_version' );
 //drop database tables
 global $wpdb;
 $wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->base_prefix . "total_security_log" );
+
+// donate time d1
+delete_option('fdx1_hidden_time');

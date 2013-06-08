@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login       
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 2.8.1
+Stable tag: 2.9
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -37,10 +37,10 @@ The **Total Security** plugin is the must-have tool when it comes security of yo
 
 Scours your file system by suspicious or potentially malicious files, compressed, log, binary, data, and temporary files. And any unknown file in WP core.
  
-* Detects unknown file found in WP core => |any file|
-* Detects suspicious or potentially malicious files => |`.exe`|`.com`|`.scr`|`.bat`|`.msi`|`.vb`|`.cpl`|
-* Detects compressed files => |`.zip`|`.rar`|`.7z`|`.gz`|`.tar`|`.bz2`|
-* Detects log, binary, data and temporary files => |`.log`|`.dat`|`.bin`|`.tmp`|
+* Detects unknown file found in WP core => |*any file|
+* Detects suspicious or potentially malicious files => |`*.exe`|`*.com`|`*.scr`|`*.bat`|`*.msi`|`*.vb`|`*.cpl`|
+* Detects compressed files => |`*.zip`|`*.rar`|`*.7z`|`*.gz`|`*.tar`|`*.bz2`|
+* Detects log, binary, data and temporary files => |`*.log`|`*.dat`|`*.bin`|`*.tmp`|
 
 
 = Error 404 Log =
@@ -77,7 +77,7 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 = Languages Available =
 * English (default)
-* German (**de_DE**) translation by **Silvio Paschke**
+
 
 
 = How To Contribute =
@@ -89,10 +89,10 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 
 == Screenshots ==
-1. Vulnerability Scan
-2. Core Exploit Scanner
+1. Dashboard
+2. Vulnerability Scan
 3. Unsafe Files Search
-4. System Information
+4. Core Exploit Scanner
 5. Secure Hidden Login - Setup
 6. Error 404 Log
 
@@ -113,6 +113,9 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 
 == Changelog ==
+* 2.9
+    * Performance improvements
+    * Minor interface tweaks
 
 * 2.8.1
     * Performance improvements

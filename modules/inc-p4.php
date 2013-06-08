@@ -4,7 +4,7 @@ $tests = get_option($this->p2_options_key);
 
 /* wrap
 *********************************************************************************/
-echo '<div class="wrap">'. screen_icon('options-general');
+echo '<div class="wrap">'. get_screen_icon('fdx-lock');
 echo '<h2>'. $this->pluginname . ' : ' . __('Error 404 Log', $this->hook) . '</h2>';
 
  if( ! get_option( 'permalink_structure' ) ) {

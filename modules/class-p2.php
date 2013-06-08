@@ -1,571 +1,207 @@
 <?php
-// class fdx_tests extends fdx_class {
    class FDX_CLASS_P2 {
 static $security_tests = array(
+'ver_check'                => array(),
+'plugins_ver_check'        => array(),
+'themes_ver_check'         => array(),
+'install_file_check'       => array(),
+'upgrade_file_check'       => array(),
+'db_password_check'        => array(),
+'salt_keys_check'          => array(),
+'db_table_prefix_check'    => array(),
+'debug_check'              => array(),
+'blog_site_url_check'      => array(),
+'uploads_browsable'        => array(),
+'anyone_can_register'      => array(),
+'file_editor'              => array(),
+'user_exists'              => array(),
+'id1_user_check'           => array(),
+'bruteforce_login'         => array(),
+'secure_hidden_login'      => array() ); //end
 
-'ver_check' => array('msg_ok' => '%s',
-                    'msg_bad' => '%s'
-),
+function __construct() {
+$fail1 = get_site_option( 'fdx_p2_red1' );// p2
+$fail2 = get_site_option( 'fdx_p2_red2' );// p2
+$fail3 = get_site_option( 'fdx_p2_red3' );// p2
 
-'plugins_ver_check' => array('msg_ok' => '%s',
-                            'msg_bad' => '%s'
-),
+$fail4 = get_site_option( 'fdx_p2_red4' );
+$fail5 = get_site_option( 'fdx_p2_red5' );
+$fail6 = get_site_option( 'fdx_p2_red6' );
+$fail7 = get_site_option( 'fdx_p2_red7' );
+$fail8 = get_site_option( 'fdx_p2_red8' );
+$fail9 = get_site_option( 'fdx_p2_red9' );
+$fail10 = get_site_option( 'fdx_p2_red10' );
+$fail11 = get_site_option( 'fdx_p2_red11' );
+$fail12 = get_site_option( 'fdx_p2_red12' );
+$fail13 = get_site_option( 'fdx_p2_red13' );
+$fail14 = get_site_option( 'fdx_p2_red14' );
+$fail_p2_t = $fail1+$fail2+$fail3+$fail4+$fail5+$fail6+$fail7+$fail8+$fail9+$fail10+$fail11+$fail12+$fail13+$fail14;  //14
+update_option('fdx_p2_red_total', $fail_p2_t );
 
-'themes_ver_check' => array('msg_ok' => '%s',
-                           'msg_bad' => '%s'
-),
+$fail15 = get_site_option( 'fdx_p2_yel1' );
+$fail16 = get_site_option( 'fdx_p2_yel2' );
+$fail17 = get_site_option( 'fdx_p2_yel3' );
+$fail18 = get_site_option( 'fdx_p2_yel4' ); // p2
+$fail19 = get_site_option( 'fdx_p2_yel5' ); // p2
 
-'wp_header_meta' => array('msg_ok' => '%s',
-                     'msg_warning' => '%s',
-                         'msg_bad' => '%s'
-),
+$fail_p2_t2 = $fail15+$fail16+$fail17+$fail18+$fail19; //2.5
+update_option('fdx_p2_yel_total', $fail_p2_t2 );
 
-'wp_xmlrpc_meta' => array('msg_ok' => '%s',
-                     'msg_warning' => '%s',
-                         'msg_bad' => '%s'
-),
-
-'wp_wlwmanifest_meta' => array('msg_ok' => '%s',
-                          'msg_warning' => '%s',
-                              'msg_bad' => '%s'
-),
-
-'readme_check' => array('msg_ok' => '%s',
-                   'msg_warning' => '%s',
-                       'msg_bad' => '%s'
-),
-
-'install_file_check' => array('msg_ok' => '%s',
-                         'msg_warning' => '%s',
-                             'msg_bad' => '%s'
-),
-
-'upgrade_file_check' => array('msg_ok' => '%s',
-                         'msg_warning' => '%s',
-                             'msg_bad' => '%s'
-),
-
-'config_chmod' => array('msg_ok' => '%s',
-                   'msg_warning' => '%s',
-                       'msg_bad' => '%s'
-),
-
-'htaccess_chmod' => array('msg_ok' => '%s',
-                   'msg_warning' => '%s',
-                       'msg_bad' => '%s'
-),
-
-'php_headers' => array('msg_ok' => '%s',
-                      'msg_bad' => '%s'
-),
-
-'blog_site_url_check' => array('msg_ok' => '%s',
-                              'msg_bad' => '%s'
-),
-
-'salt_keys_check' => array('msg_ok' => '%s',
-                          'msg_bad' => '%s'
-),
-
-'db_table_prefix_check' => array('msg_ok' => '%s',
-                                'msg_bad' => '%s'
-),
-
-'db_password_check' => array('msg_ok' => '%s',
-                            'msg_bad' => '%s'
-),
-
-'debug_check' => array('msg_ok' => '%s',
-                      'msg_bad' => '%s'
-),
-
-'db_debug_check' => array('msg_ok' => '%s',
-                         'msg_bad' => '%s'
-),
-
-'script_debug_check' => array('msg_ok' => '%s',
-                             'msg_bad' => '%s'
-),
-
-
-'expose_php_check' => array('msg_ok' => '%s',
-                           'msg_bad' => '%s'
-),
-
-'display_errors_check' => array('msg_ok' => '%s',
-                               'msg_bad' => '%s'
-),
-
-'register_globals_check' => array('msg_ok' => '%s',
-                                 'msg_bad' => '%s'
-),
-
-
-'allow_url_include_check' => array('msg_ok' => '%s',
-                                  'msg_bad' => '%s'
-),
-
-'safe_mode_check' => array('msg_ok' => '%s',
-                          'msg_bad' => '%s'
-),
-
-'file_editor' => array('msg_ok' => '%s',
-                      'msg_bad' => '%s'
-),
-
-'uploads_browsable' => array('msg_ok' => '%s',
-                        'msg_warning' => '%s',
-                            'msg_bad' => '%s'
-),
-
-'anyone_can_register' => array('msg_ok' => '%s',
-                              'msg_bad' => '%s'
-),
-
-'user_exists' => array('msg_ok' => '%s',
-                      'msg_bad' => '%s'
-),
-
-'check_failed_login_info' => array('msg_ok' => '%s',
-                                  'msg_bad' => '%s'
-),
-
-'id1_user_check' => array('msg_ok' => '%s',
-                                  'msg_bad' => '%s'
-),
-
-'mysql_external' => array('msg_ok' => '%s',
-                              'msg_warning' => '%s'
-
-
-),
-
-//------end
-'bruteforce_login' => array('msg_ok' => '%s',
-                           'msg_bad' => '%s',
-                       'msg_warning' => '%s')
-
-); //end $security_tests
-
-// check WP version
+}
+/* -------1
+ * check WP version
+ */
   function ver_check() {
-   $msgTIT = __('UP to date: WordPress core', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
+   global $wp_version;
+   $msgTIT = __('Check if WordPress core is up to date.', $this->hook);
+ if (!version_compare(get_bloginfo('version'), $this->min_wp_ver,  '>=')) {
+     $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+     $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT . '</span></td><td><a href="'.admin_url('update-core.php').'" title="'.__('Fix', $this->hook ).'"><strong>'.__('outdated', $this->hook ).':</strong> <code>v'.$wp_version.'</code></a></td>';
+     update_option('fdx_p2_red4', '1' );
 
-   $return = array();
-
-    if (!function_exists('get_preferred_from_update_core') ) {
-      require_once(ABSPATH . 'wp-admin/includes/update.php');
-    }
-
-    // get version
-    wp_version_check();
-    $latest_core_update = get_preferred_from_update_core();
-
-    if (isset($latest_core_update->response) && ($latest_core_update->response == 'upgrade') ){
-      $return['status'] = 0;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
      } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-     }
+     $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+     $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+     update_option('fdx_p2_red4', '0' );
 
+}
     return $return;
   }
 
-  // check if plugins are up to date
+/* -------2
+ * check if plugins are up to date
+ */
   function plugins_ver_check() {
-   $msgTIT = __('UP to date: Plugins.', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
-
-    $return = array();
-
-    //Get the current update info
-    $current = get_site_transient('update_plugins');
-
+   $msgTIT = __('Check if plugins are up to date.', $this->hook);
+   $current = get_site_transient('update_plugins');
     if (!is_object($current)) {
       $current = new stdClass;
     }
-
     set_site_transient('update_plugins', $current);
-
-    // run the internal plugin update check
-    wp_update_plugins();
-
-    $current = get_site_transient('update_plugins');
-
+     $current = get_site_transient('update_plugins');
     if (isset($current->response) && is_array($current->response) ) {
       $plugin_update_cnt = count($current->response);
     } else {
       $plugin_update_cnt = 0;
     }
-
     if($plugin_update_cnt > 0){
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error"><code>' . sizeof($current->response) . '</code> ' . $msgNO . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.admin_url('plugins.php').'" title="'.__('Fix', $this->hook ).'"><strong>'.__('outdated', $this->hook ).':</strong> <code>'. sizeof($current->response) .'</code></a></td>';
+      update_option('fdx_p2_red5', '1' );
     } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+      update_option('fdx_p2_red5', '0' );
     }
-
     return $return;
   }
 
-
-  // check themes versions
+/* -------3
+ * check themes versions
+ */
   function themes_ver_check() {
-   $msgTIT = __('UP to date: Themes', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
-
-    $return = array();
-
-    $current = get_site_transient('update_themes');
-
-    if (!is_object($current)){
+   $msgTIT = __('Check if themes are up to date.', $this->hook);
+   $current = get_site_transient('update_themes');
+   if (!is_object($current)){
       $current = new stdClass;
     }
-
     set_site_transient('update_themes', $current);
-    wp_update_themes();
-
     $current = get_site_transient('update_themes');
-
     if (isset($current->response) && is_array($current->response)) {
       $theme_update_cnt = count($current->response);
     } else {
       $theme_update_cnt = 0;
     }
-
     if($theme_update_cnt > 0){
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error"><code>' . sizeof($current->response) . '</code> ' . $msgNO . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.admin_url('themes.php').'" title="'.__('Fix', $this->hook ).'"><strong>'.__('outdated', $this->hook ).':</strong> <code>'. sizeof($current->response) .'</code></a></td>';
+      update_option('fdx_p2_red6', '1' );
     } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+       update_option('fdx_p2_red6', '0' );
     }
-
     return $return;
   }
 
-  // check for WP version in meta tags
-  function wp_header_meta() {
-   $msgTIT = __('Header: Reveal full WordPress version info', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-   $return = array();
-
-    if (!class_exists('WP_Http')) {
-      require( ABSPATH . WPINC . '/class-http.php' );
-    }
-
-    $http = new WP_Http();
-    $response = (array) $http->request(get_bloginfo('wpurl'));
-    $html = $response['body'];
-
-    if ($html) {
-      $return['status'] = 10;
-        $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-      // extract content in <head> tags
-      $start = strpos($html, '<head');
-      $len = strpos($html, 'head>', $start + strlen('<head'));
-      $html = substr($html, $start, $len - $start + strlen('head>'));
-      // find all Meta Tags
-      preg_match_all('#<meta([^>]*)>#si', $html, $matches);
-      $meta_tags = $matches[0];
-
-      foreach ($meta_tags as $meta_tag) {
-        if (stripos($meta_tag, 'generator') !== false &&
-            stripos($meta_tag, get_bloginfo('version')) !== false) {
-          $return['status'] = 0;
-          $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-          break;
-        }
-      }
-    } else {
-      // error
-      $return['status'] = 5;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-    }
-
-    return $return;
-  }
-//###############################################################################################
-
-
-
- // ++++++++++ xmlrpc
-  function wp_xmlrpc_meta() {
-   $msgTIT = __('Header: RSD (Really Simple Discovery) mechanism used by XML-RPC clients', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-   $return = array();
-
-    if (!class_exists('WP_Http')) {
-      require( ABSPATH . WPINC . '/class-http.php' );
-    }
-
-    $http = new WP_Http();
-    $response = (array) $http->request(get_bloginfo('wpurl'));
-    $html = $response['body'];
-
-    if ($html) {
-      $return['status'] = 10;
-        $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-      // extract content in <head> tags
-      $start = strpos($html, '<head');
-      $len = strpos($html, 'head>', $start + strlen('<head'));
-      $html = substr($html, $start, $len - $start + strlen('head>'));
-      // find all Meta Tags
-      preg_match_all('#<link([^>]*)>#si', $html, $matches);
-      $meta_tags = $matches[0];
-
-      foreach ($meta_tags as $meta_tag) {
-        if (stripos($meta_tag, 'EditURI') !== false) {
-          $return['status'] = 0;
-          $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-          break;
-        }
-      }
-    } else {
-      // error
-      $return['status'] = 5;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-    }
-
-    return $return;
-  }
-
-// ++++++++++ wlwmanifest
-  function wp_wlwmanifest_meta() {
-   $msgTIT = __('Header: Windows Live Writer or other blogging clients', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-   $return = array();
-
-    if (!class_exists('WP_Http')) {
-      require( ABSPATH . WPINC . '/class-http.php' );
-    }
-
-    $http = new WP_Http();
-    $response = (array) $http->request(get_bloginfo('wpurl'));
-    $html = $response['body'];
-
-    if ($html) {
-      $return['status'] = 10;
-        $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-      // extract content in <head> tags
-      $start = strpos($html, '<head');
-      $len = strpos($html, 'head>', $start + strlen('<head'));
-      $html = substr($html, $start, $len - $start + strlen('head>'));
-      // find all Meta Tags
-      preg_match_all('#<link([^>]*)>#si', $html, $matches);
-      $meta_tags = $matches[0];
-
-      foreach ($meta_tags as $meta_tag) {
-        if (stripos($meta_tag, 'wlwmanifest') !== false) {
-          $return['status'] = 0;
-          $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-          break;
-        }
-      }
-    } else {
-      // error
-      $return['status'] = 5;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-    }
-
-    return $return;
-  }
-
-
-
-
-//###############################################################################################
-
-
-  // does readme.html exist?
-  function readme_check() {
-   $msgTIT = '<code>readme.html</code> '.__('file is accessible via HTTP on the default location.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-   $return = array();
-    $url = get_bloginfo('wpurl') . '/readme.html?rnd=' . rand();
-    $response = wp_remote_get($url);
-
+/* -------4
+ * does WP install.php file exist?
+ */
+  function install_file_check() {
+   $msgTIT = sprintf( __('Check if %s file is accessible via HTTP on the default location.' , $this->hook) , '<code>install.php</code>' );
+   $url2 = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'install_file_check' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+   $url = get_bloginfo('wpurl') . '/wp-admin/install.php?rnd=' . rand();
+   $response = wp_remote_get($url);
     if(is_wp_error($response)) {
-      $return['status'] = 5;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-desat">&Oslash;</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><code>-----</code></td>';
     } elseif ($response['response']['code'] == 200) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-info">&#10003;</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.$url2.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Yes', $this->hook).'</strong></a></td>';
     } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
     }
-
     return $return;
   }
 
- // check if php headers contain php version
-  function php_headers() {
-   $msgTIT = __('Check if server response headers contain detailed PHP version info.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-   $return = array();
-
-    if (!class_exists('WP_Http')) {
-      require( ABSPATH . WPINC . '/class-http.php' );
-    }
-
-    $http = new WP_Http();
-    $response = (array) $http->request(get_bloginfo('siteurl'));
-
-    if((isset($response['headers']['server']) && stripos($response['headers']['server'], phpversion()) !== false) || (isset($response['headers']['x-powered-by']) && stripos($response['headers']['x-powered-by'], phpversion()) !== false)) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
+/* -------5
+ * does WP upgrade.php file exist?
+ */
+  function upgrade_file_check() {
+   $msgTIT = sprintf( __('Check if %s file is accessible via HTTP on the default location.' , $this->hook) , '<code>upgrade.php</code>' );
+   $url2 = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'upgrade_file_check' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+   $url = get_bloginfo('wpurl') . '/wp-admin/upgrade.php?rnd=' . rand();
+   $response = wp_remote_get($url);
+    if(is_wp_error($response)) {
+      $return['status'] = '<span class="pb_label pb_label-desat">&Oslash;</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><code>-----</code></td>';
+    } elseif ($response['response']['code'] == 200) {
+      $return['status'] = '<span class="pb_label pb_label-info">&#10003;</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.$url2.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Yes', $this->hook).'</strong></a></td>';
     } else {
-      $return['status'] = 10;
-    $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
     }
-
     return $return;
   }
 
-
-    // check if expose_php is off
-   function expose_php_check() {
-   $msgTIT = 'PHP (<em>expose_php</em>): '.__('Check if directive is turned off.', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
-
-    $return = array();
-
-    $check = (bool) ini_get('expose_php');
-    if ($check) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
+/* -------6
+ * check database password
+ */
+  function db_password_check() {
+   $msgTIT = __('Test the strength of WordPress database password.', $this->hook);
+   $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'db_password_check' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+   $password = DB_PASSWORD;
+    if (empty($password)) {
+      $return['status'] = '<span class="pb_label pb_label-warning">!</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT  . '</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Weak Password', $this->hook).'</strong></a>&nbsp;<span class="fdx-info"><a class="pluginbuddy_tip" href="javascript:void(0)" title="' . __('password is empty', $this->hook) . '"></a></span></td>';
+      update_option('fdx_p2_yel1', '1' );
+    } elseif (strlen($password) < 8) {
+      $return['status'] = '<span class="pb_label pb_label-warning">!</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT  . '</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Weak Password', $this->hook).'</strong></a>&nbsp;<span class="fdx-info"><a class="pluginbuddy_tip" href="javascript:void(0)" title="' . __('password length is only', $this->hook).' \''. strlen($password) .'\' '. __('chars', $this->hook) . '"></a></span></td>';
+     update_option('fdx_p2_yel1', '1' );
+    } elseif (sizeof(count_chars($password, 1)) < 6) {
+      $return['status'] = '<span class="pb_label pb_label-warning">!</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT  . '</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Weak Password', $this->hook).'</strong></a>&nbsp;<span class="fdx-info"><a class="pluginbuddy_tip" href="javascript:void(0)" title="' . __('password is too simple', $this->hook) . '"></a></span></td>';
+       update_option('fdx_p2_yel1', '1' );
     } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+      update_option('fdx_p2_yel1', '0' );
     }
-
-    return $return;
-   }
-
-   // check if certain username exists
-  function user_exists($username = 'admin') {
-   $msgTIT = __('Check if user with username <em>"admin"</em> exists.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-    $return = array();
-
-    // Define the function
-    require_once(ABSPATH . WPINC . '/registration.php');
-
-    if (username_exists($username) ) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
     return $return;
   }
 
-   // check if anyone can register on the site
-   function anyone_can_register() {
-   $msgTIT = __('Check if <em>"anyone can register"</em> option is enabled.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-     $return = array();
-     $test = get_option('users_can_register');
-
-     if ($test) {
-       $return['status'] = 0;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-     } else {
-       $return['status'] = 10;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-     }
-
-     return $return;
-   }
-
-  // check for unnecessary information on failed login
-  function check_failed_login_info() {
-   $msgTIT = __('Check for display of unnecessary information on failed login attempts.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-    $return = array();
-
-    $params = array('log' => 'fdx-test_3453344355',
-                    'pwd' => 'fdx-test_2344323335');
-
-    if (!class_exists('WP_Http')) {
-      require( ABSPATH . WPINC . '/class-http.php' );
-    }
-
-    $http = new WP_Http();
-    $response = (array) $http->request(get_bloginfo('wpurl') . '/wp-login.php', array('method' => 'POST', 'body' => $params));
-
-    if (stripos($response['body'], 'invalid username') !== false){
-      $return['status'] = 0;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-  }
-
-   // check DB table prefix
-  function db_table_prefix_check() {
-    global $wpdb;
-    $msgTIT = 'Database: '.__('Check if table prefix is the default one (<em>wp_</em>).', $this->hook);
-    $msgOK = __('No', $this->hook);
-    $msgNO = __('Yes', $this->hook);
-
-    $return = array();
-
-    if ($wpdb->prefix == 'wp_' || $wpdb->prefix == 'wordpress_' || $wpdb->prefix == 'wp3_') {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-  }
-
-  // unique config keys check
+/* -------7
+ * unique config keys check
+ */
   function salt_keys_check() {
+   $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'salt_keys_check' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
    $msgTIT = __('Check if security keys and salts have proper values.', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
-
-    $return = array();
-    $ok = true;
-    $keys = array('AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY',
+   $ok = true;
+   $keys = array('AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY',
                   'AUTH_SALT', 'SECURE_AUTH_SALT', 'LOGGED_IN_SALT', 'NONCE_SALT');
-
     foreach ($keys as $key) {
       $constant = @constant($key);
       if (empty($constant) || trim($constant) == 'put your unique phrase here' || strlen($constant) < 50) {
@@ -573,470 +209,243 @@ static $security_tests = array(
         $ok = false;
       }
     } // foreach
-
     if ($ok == true) {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+       $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+       $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+       update_option('fdx_p2_red7', '0' );
     } else {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<code>' . implode(', ', $bad_keys). '</code> <span class="fdx-error">' . $msgNO . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT. '</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Bad keys', $this->hook).'</strong></a>&nbsp;<span class="fdx-info"><a class="pluginbuddy_tip" href="javascript:void(0)" title="' . implode(' ,', $bad_keys). '"></a></span></td>';
+      update_option('fdx_p2_red7', '1' );
     }
-
     return $return;
   }
 
-  // check database password
-  function db_password_check() {
-   $msgTIT = 'Database: '.__('Test the strength of config password.', $this->hook);
-   $msgOK = __('Database password is strong enough.', $this->hook);
-
-    $return = array();
-    $password = DB_PASSWORD;
-
-    if (empty($password)) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . __('password is empty', $this->hook) . '</span>)';
-    } elseif (self::dictionary_attack($password)) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . __('password is a simple word from the dictionary', $this->hook). '</code>)';
-    } elseif (strlen($password) < 6) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . __('password length is only', $this->hook). strlen($password) . __('chars', $this->hook) . '</span>)';
-    } elseif (sizeof(count_chars($password, 1)) < 5) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . __('password is too simple', $this->hook) . '</span>)';
-
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-
-    }
-
-    return $return;
-  }
-
-  // check if global WP debugging is enabled
-  function debug_check() {
-   $msgTIT = __('Check if Debug mode is enabled', $this->hook) .': '.__('General .', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-    $return = array();
-
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-  }
-
- // check if DB debugging is enabled
-  function db_debug_check() {
+/* -------8
+ * check DB table prefix
+ */
+  function db_table_prefix_check() {
     global $wpdb;
-   $msgTIT = __('Check if Debug mode is enabled', $this->hook) .': '.__('Database .', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-    $return = array();
-
-    if ($wpdb->show_errors == true) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+    $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'db_table_prefix_check' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+    $msgTIT = __('Check if table prefix is the default one <em>"wp_"</em>.', $this->hook);
+    if ($wpdb->prefix == 'wp_' || $wpdb->prefix == 'wordpress_' || $wpdb->prefix == 'wp3_') {
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Yes', $this->hook).'</strong></a></td>';
+      update_option('fdx_p2_red8', '1' );
+   } else {
+       $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+       $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+       update_option('fdx_p2_red8', '0' );
     }
-
     return $return;
   }
 
-  // check if global WP JS debugging is enabled
-  function script_debug_check() {
-   $msgTIT = __('Check if Debug mode is enabled', $this->hook).': '.__('JavaScript .', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-    $return = array();
-
-    if (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
+/* -------9
+ * check if global WP debugging is enabled
+ */
+  function debug_check() {
+  $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'debug_check' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+   $msgTIT = __('Check if general debug mode is enabled.', $this->hook);
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+     $return['status'] = '<span class="pb_label pb_label-warning">!</span>';
+     $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Enabled', $this->hook).'</strong></a></td>';
+     update_option('fdx_p2_yel2', '1' );
     } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+     update_option('fdx_p2_yel2', '0' );
     }
-
     return $return;
   }
 
-    // check if display_errors is off
-   function display_errors_check() {
-   $msgTIT = 'PHP (<em>display_errors</em>): '.__('Check if directive is turned off.', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
-
-    $return = array();
-
-    $check = (bool) ini_get('display_errors');
-    if ($check) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-   }
-
-  // compare WP Blog Url with WP Site Url
+/* -------10
+ * compare WP Blog Url with WP Site Url
+ */
   function blog_site_url_check() {
    $msgTIT = __('Check if WordPress installation address is the same as the site address.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-    $return = array();
-
-    $siteurl = get_bloginfo('siteurl');
+     $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'blog_site_url_check' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+    $siteurl = get_bloginfo('url');
     $wpurl = get_bloginfo('wpurl');
-
     if ($siteurl == $wpurl) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
+       $return['status'] = '<span class="pb_label pb_label-warning">!</span>';
+       $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Yes', $this->hook).'</strong></a></td>';
+    update_option('fdx_p2_yel3', '1' );
     } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+       $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+       $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+    update_option('fdx_p2_yel3', '0' );
     }
-
     return $return;
   }
 
-  // check if wp-config.php has the right chmod
-  function config_chmod() {
-   $msgTIT = '<code>wp-config.php</code> '.__(' file has the writable.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-    $return = array();
-
-    $mode = substr(sprintf('%o', fileperms(ABSPATH . '/wp-config.php')), -4);
-    $htaccess = ABSPATH . 'wp-config.php';
-
-    if (!$mode) {
-     $return['status'] = 5;
-     $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-    } elseif ($f = @fopen( $htaccess, 'a' )) {
-      @fclose( $f );
-       $return['status'] = 0;
-       $return['msg'] = $msgTIT . ' (<code>chmod: '. $mode .'</code> <span class="fdx-error">' . $msgNO . '</span>)';
-      } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<code>chmod: '. $mode .'</code> <span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-  }
-
-  // check if .htaccess has the right chmod
-  function htaccess_chmod() {
-   $msgTIT = '<code>.htaccess</code> '.__(' file has the writable.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-    $return = array();
-
-    $mode = substr(sprintf('%o', fileperms(ABSPATH . '/.htaccess')), -4);
-    $htaccess = ABSPATH . '.htaccess';
-
-    if (!$mode) {
-     $return['status'] = 5;
-     $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-    } elseif ($f = @fopen( $htaccess, 'a' )) {
-      @fclose( $f );
-       $return['status'] = 0;
-       $return['msg'] = $msgTIT . ' (<code>chmod: '. $mode .'</code> <span class="fdx-error">' . $msgNO . '</span>)';
-      } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<code>chmod: '. $mode .'</code> <span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-  }
-
-
-  // does WP install.php file exist?
-  function install_file_check() {
-   $msgTIT = '<code>install.php</code> '.__('file is accessible via HTTP on the default location.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-    $return = array();
-    $url = get_bloginfo('wpurl') . '/wp-admin/install.php?rnd=' . rand();
-    $response = wp_remote_get($url);
-
-    if(is_wp_error($response)) {
-      $return['status'] = 5;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-    } elseif ($response['response']['code'] == 200) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-  }
-
-  // does WP install.php file exist?
-  function upgrade_file_check() {
-   $msgTIT = '<code>upgrade.php</code> '.__('file is accessible via HTTP on the default location.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-    $return = array();
-    $url = get_bloginfo('wpurl') . '/wp-admin/upgrade.php?rnd=' . rand();
-    $response = wp_remote_get($url);
-
-    if(is_wp_error($response)) {
-      $return['status'] = 5;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-    } elseif ($response['response']['code'] == 200) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-  }
-
-// check if register_globals is off
-   function register_globals_check() {
-   $msgTIT = 'PHP (<em>register_globals</em>): '.__('Check if directive is turned off.', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
-
-   $return = array();
-
-    $check = (bool) ini_get('register_globals');
-    if ($check) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-   }
-
-   // check if safe mode is off
-   function safe_mode_check() {
-   $msgTIT = 'PHP (safe mode): '.__('Check if is disabled.', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
-
-  $return = array();
-
-    $check = (bool) ini_get('safe_mode');
-    if ($check) {
-      $return['status'] = 0;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-   }
-
-   // check if allow_url_include is off
-   function allow_url_include_check() {
-   $msgTIT = 'PHP (<em>allow_url_include</em>): '.__('Check if directive is turned off.', $this->hook);
-   $msgOK = __('Yes', $this->hook);
-   $msgNO = __('No', $this->hook);
-
-   $return = array();
-
-    $check = (bool) ini_get('allow_url_include');
-    if ($check) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    }
-
-    return $return;
-   }
-
-   // is theme/plugin editor disabled?
-   function file_editor() {
-   $msgTIT = __('Check if plugins/themes file editor is enabled.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-   $return = array();
-
-    if (defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT) {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-    } else {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-    }
-
-    return $return;
-   }
-
-// check if user with DB ID 1 exists
-   function id1_user_check() {
-   $msgTIT = __('Test if user with ID "1" exists.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-
-     $return = array();
-
-     $check = get_userdata(1);
-     if ($check) {
-       $return['status'] = 0;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-error">' . $msgNO . '</span>)';
-     } else {
-       $return['status'] = 10;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-     }
-
-     return $return;
-   }
-
-
-   // check if the WP MySQL user can connect from an external host
-   function mysql_external() {
-       $msgTIT = __('Check if you can only connect to the MySQL from localhost.', $this->hook);
-       $msgOK = __('Yes', $this->hook);
-       $msgWA = __('Warning', $this->hook);
-
-     $return = array();
-     global $wpdb;
-
-     $check = $wpdb->get_var('SELECT CURRENT_USER()');
-     if (strpos($check, '@127.0.0.1') !== false || stripos($check, '@localhost') !== false) {
-       $return['status'] = 10;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
-     } else {
-       $return['status'] = 5;
-       $return['msg'] = $check;
-       $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-     }
-
-     return $return;
-   } // mysql_external
-
-
-
-
-// uploads_browsable
+/* -------11
+ * uploads_browsable
+ */
  function uploads_browsable() {
-  $msgTIT = __('Check if <em>uploads</em> folder is browsable by browsers.', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Unable', $this->hook);
-
-    $return = array();
-    $upload_dir = wp_upload_dir();
-
-    $args = array('method' => 'GET', 'timeout' => 5, 'redirection' => 0,
+   $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'uploads_browsable' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+   $msgTIT = __('Check if <em>uploads</em> folder is browsable by browsers.', $this->hook);
+   $upload_dir = wp_upload_dir();
+   $args = array('method' => 'GET', 'timeout' => 5, 'redirection' => 0,
                   'httpversion' => 1.0, 'blocking' => true, 'headers' => array(), 'body' => null, 'cookies' => array());
     $response = wp_remote_get(rtrim($upload_dir['baseurl'], '/') . '/?nocache=' . rand(), $args);
-
     if (is_wp_error($response)) {
-      $return['status'] = 5;
-      $return['msg'] = $msgTIT . ' (<code><a href="'.$upload_dir['baseurl'].'/" target="_blank">'.$upload_dir['baseurl'] . '/</a></code> <span class="fdx-warning">'. $msgWA . '</span>)';
-
+       $return['status'] = '<span class="pb_label pb_label-desat">&Oslash;</span>';
+       $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions" style="text-decoration: line-through">' .$msgTIT  . '</span></td><td><code>-----</code></td>';
     } elseif ($response['response']['code'] == '200' && stripos($response['body'], 'index') !== false) {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<code><a href="'.$upload_dir['baseurl'].'/" target="_blank">'.$upload_dir['baseurl'] . '/</a></code> <span class="fdx-error">' . $msgNO . '</span>)';
-     } else {
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT  . '</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Yes', $this->hook).'</strong></td>';
+      update_option('fdx_p2_red9', '1' );
+    } else {
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+       update_option('fdx_p2_red9', '0' );
     }
-
     return $return;
   }
 
-//bruteforce user login
+/* -------12
+ * check if anyone can register on the site
+ */
+   function anyone_can_register() {
+   $msgTIT = __('Check if <em>"anyone can register"</em> option is enabled.', $this->hook);
+   $test = get_option('users_can_register');
+   if ($test) {
+       $return['status'] = '<span class="pb_label pb_label-info">&#10003;</span>';
+       $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.admin_url('options-general.php').'" title="'.__('Fix', $this->hook ).'"><strong>'.__('Enabled', $this->hook).'</strong></a></td>';
+     } else {
+        $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+        $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+     }
+     return $return;
+   }
 
+/* -------13
+ * is theme/plugin editor disabled?
+ */
+   function file_editor() {
+   $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'file_editor' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+   $msgTIT = __('Check if plugins/themes file editor is enabled.', $this->hook);
+    if (defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT) {
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+      update_option('fdx_p2_red10', '0' );
+    } else {
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Enabled', $this->hook).'</strong></a></td>';
+      update_option('fdx_p2_red10', '1' );
+    }
+    return $return;
+   }
+
+/* -------14
+ * check if "admin" exists
+ */
+  function user_exists($username = 'admin') {
+   $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'user_exists' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+   $msgTIT = __('Check if user with username <em>"admin"</em> exists.', $this->hook);
+    // Define the function
+    if (username_exists($username) ) {
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Yes', $this->hook).'</strong></a></td>';
+      update_option('fdx_p2_red11', '1' );
+    } else {
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+     $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+     update_option('fdx_p2_red11', '0' );
+    }
+    return $return;
+  }
+
+/* -------15
+ * check if user with DB ID 1 exists
+ */
+   function id1_user_check() {
+   $url = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'id1_user_check' ), menu_page_url( $this->hook . '-'.$this->_p2, false ) );
+   $msgTIT = __('Test if user with <em> "ID=1" </em> is administrator.', $this->hook);
+   $check = get_userdata(1);
+     if ($check) {
+       if( user_can( 1, 'activate_plugins' ) ) {
+       // id 1 is adm
+       $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+       $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT  . '</span></td><td><a href="'.$url.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Yes', $this->hook).'</strong></a>';
+       update_option('fdx_p2_red12', '1' );
+  }
+else {
+       //id 1 no adm
+       $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+       $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+       update_option('fdx_p2_red12', '0' );
+}
+    } else {
+      // id 1 no exist
+       $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+       $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</td><td>&nbsp;</td>';
+       update_option('fdx_p2_red12', '0' );
+ }
+    return $return;
+   }
+
+
+
+/* -------16
+ * bruteforce user login
+ */
+//-1
  function try_login($username, $password) {
     $user = apply_filters('authenticate', null, $username, $password);
-
     if (isset($user->ID) && !empty($user->ID)) {
       return true;
     } else {
       return false;
     }
   }
-
+//-2
 function bruteforce_login() {
-   $settings = FDX_Process::fdx_get_settings();
-
-   $msgTIT = __('Brute-force attack: Check admin password strength with a <em>600 most commonly used</em>', $this->hook);
-   $msgOK = __('No', $this->hook);
-   $msgNO = __('Yes', $this->hook);
-   $msgWA = __('Disabled.', $this->hook);
-
-    $return = array();
-    $passwords = file(plugins_url( 'libs/brute-force-dictionary.txt', dirname(__FILE__)), FILE_IGNORE_NEW_LINES);
-    $bad_usernames = array();
-
-    if ( !$settings['p2_check_1'] ) {
-      $return['status'] = 5;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-warning">'. $msgWA . '</span>)';
-      return $return;
-    }
-
+   $msgTIT = sprintf( __('Check admin password strength with a <em>%s</em> most commonly used' , $this->hook) , '600' );
+   $passwords = file(plugins_url( 'libs/brute-force-dictionary.txt', dirname(__FILE__)), FILE_IGNORE_NEW_LINES);
+   $bad_usernames = array();
     $users = get_users(array('role' => 'administrator'));
-
     foreach ($users as $user) {
       foreach ($passwords as $password) {
         if (self::try_login($user->user_login, $password)) {
           $bad_usernames[] = $user->user_login;
           break;
         }
-      } // foreach $passwords
-    } // foreach $users
-
+      }
+    }
     if (empty($bad_usernames)){
-      $return['status'] = 10;
-      $return['msg'] = $msgTIT . ' (<span class="fdx-success">'. $msgOK . '</span>)';
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>&nbsp;</td>';
+      update_option('fdx_p2_red13', '0' );
     } else {
-      $return['status'] = 0;
-      $return['msg'] = $msgTIT . ' (<code>'.implode(', ', $bad_usernames).'</code> <span class="fdx-error">'. $msgNO . '</span> )';
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT . '</span></td><td><a href="'. admin_url('profile.php'). '" title="'.__('Fix', $this->hook ).'"><strong>'.__('Weak Password', $this->hook).'</strong></a>&nbsp; <span class="fdx-info"><a class="pluginbuddy_tip" href="javascript:void(0)" title="'.__('Following users have extremely weak passwords: ', $this->hook).implode(' ,', $bad_usernames).'"></a></span></td>';
+      update_option('fdx_p2_red13', '1' );
     }
-
     return $return;
-  } // bruteforce_login
-
-
-// brute force attack on password
-  function dictionary_attack($password) {
-    $dictionary = file(plugins_url( 'libs/brute-force-dictionary.txt', dirname(__FILE__)), FILE_IGNORE_NEW_LINES);
-
-    if (in_array($password, $dictionary)) {
-      return true;
-    } else {
-      return false;
-    }
   }
+//------------------------------------------------------------------------
+
+/* -------17
+ *
+ */
+  function secure_hidden_login() {
+  $settings = FDX_Process::fdx_get_settings();
+
+   $msgTIT = __('Check if', $this->hook).' <em>"'. __('Secure Hidden Login', $this->hook).'"</em> &nbsp;'.__('is enabled', $this->hook);
+    // Define the function
+    if ( !$settings['p6_check_1'] ) {
+      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p6). '" title="'.__('Fix', $this->hook ).'"><strong>'. __('Disabled', $this->hook) .'</strong></a></td>';
+      update_option('fdx_p2_red14', '1' );
+    } else {
+      $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
+      $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>'. __('Enabled', $this->hook) .'</td>';
+      update_option('fdx_p2_red14', '0' );
+    }
+    return $return;
+  }
+
 
 
 } // class fdx_tests

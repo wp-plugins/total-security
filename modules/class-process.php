@@ -60,12 +60,25 @@ function fdx_update_post_settings() {
 		   switch ( $_POST['fdx_page'] ) {
                     case 'fdx_form_all':
 					$this->fdx_process_all();
+                    # first donation hidding time 'now'
+                    if( !get_site_option( 'fdx1_hidden_time' ) ) {
+                    $time = time();
+                    update_option('fdx1_hidden_time', $time ); //grava o tempo em
+                    }
 					break;
+
                     case 'fdx_reset':
 				    update_option( 'fdx_settings', false );
 					break;
+
                     case 'fdx_clean':
 				    $this->fdx_process_clean();
+					break;
+
+                    case 'hide_message':
+				    # Hide donation message for 33 days
+                    $time = time() + 33 * 24 * 60 * 60;
+                    update_option('fdx1_hidden_time', $time );
 					break;
     }
 }
@@ -74,12 +87,6 @@ function fdx_update_post_settings() {
  * Process All
  */
 function fdx_process_all(){
-            if ( isset( $_POST['p2_check_1'] ) ) {
-				$settings['p2_check_1'] = true;
-			} else {
-				$settings['p2_check_1'] = false;
-			}
-
             if ( isset( $_POST['p2_select_1'] ) ) {
         	$settings['p2_op1'] = $_POST['p2_select_1'];
             }
@@ -114,7 +121,6 @@ function fdx_process_all(){
 
             $settings['p6_key'] = stripslashes( $p6_key );
             $settings['p6_url'] = stripslashes( $p6_url );
-
     		update_option( 'fdx_settings', $settings );
 }
 

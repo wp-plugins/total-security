@@ -3,7 +3,7 @@ $settings = FDX_Process::fdx_get_settings();
 
 /* wrap
 *********************************************************************************/
-echo '<div class="wrap">'. screen_icon('options-general');
+echo '<div class="wrap">'. get_screen_icon('fdx-lock');
 echo '<h2>'. $this->pluginname . ' : ' . __('Unsafe Files Search', $this->hook) . '</h2>';
 
 // minimal version of WP core
@@ -23,6 +23,13 @@ END;
 
 } else {
 //display warning if test were never run
+if( !get_site_option( 'p3_log_time' ) ) {
+     echo '<div class="error" id="errorimg"><p>'.__('Not yet executed!', $this->hook).'</p></div>';
+    } elseif ((current_time('timestamp') - 15*24*60*60) > get_site_option( 'p3_log_time' ) ) {
+    echo '<div class="error" id="errorimg"><p>'. sprintf( __('Warning: Executed for more than <code>%s</code> days. Click in button "Execute" for a new analysis.' , $this->hook) , '15' ) . '</p></div>';
+    } else {
+     echo '<div class="updated"><p>'.__('Last run on', $this->hook).': ' . date(get_option('date_format') . ', ' . get_option('time_format'), get_site_option( 'p3_log_time') ) . '</p></div>';
+    }
 }
 
 /* poststuff and sidebar
@@ -47,23 +54,33 @@ echo '<div class="postbox">';
 echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Unsafe Files Search', $this->hook) . '</span>&nbsp;&nbsp;&nbsp;';
 submit_button( __('Execute', $this->hook ), 'primary', 'Submit', false, array( 'id' => 'run-scanner' ) );
 echo '</h3><div class="inside">';
+echo '<p>' . __('Scours your file system by suspicious or potentially malicious files, compressed, log, binary, data, and temporary files. And any unknown file in WP core.', $this->hook ).'</p><p>';
+
+echo __('Detects unknown file found in WP core', $this->hook ).': <code>*'.__('any file', $this->hook ).'</code><br />';
+echo __('Detects suspicious or potentially malicious files', $this->hook ).': <code>*.exe</code> | <code>*.com</code> | <code>*.scr</code> | <code>*.bat</code> | <code>*.msi</code> | <code>*.vb</code> | <code>*.cpl</code><br />';
+echo __('Detects compressed files', $this->hook ).': <code>*.zip</code> | <code>*.rar</code> | <code>*.7z</code> | <code>*.gz</code> | <code>*.tar</code> | <code>*.bz2</code><br />';
+echo __('Detects log, binary, data and temporary files', $this->hook ).': <code>*.log</code> | <code>*.dat</code> | <code>*.bin</code> | <code>*.tmp</code></p>';
+
+
+
+
 //-----------------------------------------
+
+if( !get_site_option( 'p3_log_time' ) ) {
+   echo '<table class="widefat">';
+      echo '<thead><tr>';
+      echo '<th class="fdx-status1" id="red">'.__('Unexecuted!', $this->hook).'</th>';
+      echo '</tr></thead>';
+      echo '<tbody>';
+      echo '</table>';
+
+} else {
 
 /**
  * Display results.
  */
-
 self::fdx_results_page();
-
-
-/*      echo '<table class="widefat">';
-      echo '<thead><tr>';
-      echo '<th>&nbsp;</th>';
-      echo '<th class="fdx-status" id="red">'.__('Unexecuted!', $this->hook). ' </th>';
-      echo '<th>&nbsp;</th>';
-      echo '</tr></thead>';
-      echo '<tbody>';
-      echo '</table>';*/
+}
 
 
 //--------------------
@@ -82,7 +99,7 @@ echo '</div></div></div></div></div>';
 		   //-----------------------------------
 		    $(this).attr('disabled', 'disabled')
            .val('<?php _e('Executing, please wait!', $this->hook) ?>');
-    		$.blockUI({ message: '<img src="<?php echo plugins_url( 'images/loading3.gif',dirname(__FILE__));?>" width="24" height="24" border="0" alt="" /><br /><div id="scan-loader" style="display:none;"><span><?php _e('Scanner filesystem', $this->hook) ?>: 0...</span></div>' });
+    		$.blockUI({ message: '<img src="<?php echo plugins_url( 'images/loading.gif',dirname(__FILE__));?>" width="24" height="24" border="0" alt="" /><br /><div id="scan-loader" style="display:none;"><span><?php _e('Executing, please wait!', $this->hook) ?></span></div>' });
            //-----------------------------------
           max = <?php echo $settings['p3_op1']; ?> ;
   			$.ajaxSetup({

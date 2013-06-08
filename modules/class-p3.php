@@ -203,5 +203,8 @@ class File_FDX_Scanner extends FDX_CLASS_P3 {
 class RunEnd extends FDX_CLASS_P3 {
 	function RunEnd() {
 	  $this->store_results(true);
+
+      $time = time();
+      update_option('p3_log_time', $time );
       }
 }

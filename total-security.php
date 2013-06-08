@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 2.8.1
+ * Version: 2.9
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -14,7 +14,11 @@
 
 class Total_Security {
         public $min_wp_ver 	        = '3.5.1'; // hashes: 3.5.1
-  		public $pluginversion 	    = '2.8.1';
+  		public $pluginversion 	    = '2.9';
+
+        public $php_lastver 	    = '5.4.16'; // PHP - http://php.net/downloads.php
+        public $mySQL_lastver 	    = '5.5.32'; // MYSQL - http://dev.mysql.com/downloads/
+
         public $pluginname			= 'Total Security';
         public $hook 				= 'total-security';
         public $_p2 	            = 'vulnerability_scan';
@@ -22,21 +26,27 @@ class Total_Security {
         public $_p4 	            = 'error-404-log';
         public $_p5 	            = 'core_exploit_scanner'; // $this->hook . '-'.$this->_p5
         public $_p6 	            = 'settings';
+        public $_p7 	            = 'database-backup';
         public $accesslvl			= 'manage_options';
-        public $p2_options_key   	= 'cookie269765';
-        public $p5_options_key   	= 'cookie359759';
-        public $p5_salt         	= 'hash45757';
-        public $p5_snippet         	= 'ide-msvcpp'; // http://steamdev.com/snippet/
+        public $p2_options_key   	= 'p2_log_time';
+        public $p5_options_key   	= 'p5_log_time';
+        public $p5_salt         	= 'p5_hash';
+        public $p5_snippet         	= 'acid'; // ide-msvcpp | http://steamdev.com/snippet/
         public $p6_slug         	= 'login_key'; // /wp-login.php?login_key=1234
         public $fdx_defaults        = array(
                  'p2_op1'             => '200',
-                 'p2_check_1'         => 1,
-                 'p3_op1'             => '500',
+                 'p3_op1'             => '1000',
                  'p4_check_1'         => 1,
                  'p6_check_1'         => 0,
                  'p6_key'             => '1234',
                  'p6_url'             => ''//,
-       );
+                  );
+        //----------------------------------------------
+        public $sbar_homepage       = 'http://fabrix.net/total-security/';
+        public $sbar_glotpress      = 'http://translate.fabrix.net/projects/total-security/';
+        public $sbar_supportpage    = 'http://wordpress.org/extend/plugins/total-security/';
+        public $sbar_paypalcode     = '8DHY4NXW35T4Y';
+        public $sbar_rss            = 'http://feeds.feedburner.com/fdxplugins/';
 
 	function __construct() {
 	    load_plugin_textdomain( $this->hook, false, dirname( plugin_basename( __FILE__ ) ) . '/lang' ); // Load plugin text domain
@@ -93,9 +103,9 @@ class Total_Security {
  */
 public function register_admin_styles() {
              if ( isset( $_GET['page'] ) && strpos( $_GET['page'], $this->hook ) !== false ) {
+             wp_enqueue_style('wp-jquery-ui-dialog');
              wp_enqueue_style('fdx-core', plugins_url( 'css/admin.css',__FILE__ ), array(), $this->pluginversion );
              //-------------P5
-             wp_enqueue_style('wp-jquery-ui-dialog');
              wp_enqueue_style('fdx-snippet', plugins_url( 'css/snippet.min.css',__FILE__ ), array(), $this->pluginversion );
 //---------------------------------------------
     }
@@ -106,16 +116,12 @@ public function register_admin_styles() {
  */
 public function register_admin_scripts() {
               if ( isset( $_GET['page'] ) && strpos( $_GET['page'], $this->hook ) !== false ) {
+              wp_enqueue_script('jquery-ui-dialog');
               wp_enqueue_script('dashboard');
               wp_enqueue_script('postbox');
-            //wp_enqueue_script( 'media-upload' );
               wp_enqueue_script( 'admin-core', plugins_url( 'js/admin.js',__FILE__), array(), $this->pluginversion);
-
-            //-------------P2-p5
-              wp_enqueue_script( 'fdx-cookie', plugins_url( 'js/jquery.cookie.js',__FILE__), array(), $this->pluginversion);
+            //-------------P2-p3-p5
               wp_enqueue_script( 'fdx-blockUI', plugins_url( 'js/jquery.blockUI.js',__FILE__), array(), $this->pluginversion);
-            //-------------p5
-              wp_enqueue_script('jquery-ui-dialog');
               wp_enqueue_script( 'fdx-snippet', plugins_url( 'js/snippet.min.js',__FILE__), array(), $this->pluginversion);
            //---------------------------------------------
     }
@@ -125,34 +131,38 @@ public function register_admin_scripts() {
  * Registers all WordPress admin menu items.
  */
 function action_menu_pages() {
+$p2_red_total = get_site_option( 'fdx_p2_red_total' );
+//p3
+$p3_red_op1 = get_site_option( 'fdx_p3_red_op1' );
+$p3_red_op2 = get_site_option( 'fdx_p3_red_op2' );
+$p3_red_total = $p3_red_op1+$p3_red_op2;
+//p5
+$p5_red_total = get_site_option( 'fdx_p5_red_total' );
+
+if ($p5_red_total != '0'){ $p5_red = '1';} else { $p5_red = '0';};
+if ($p3_red_total != '0'){ $p3_red = '1';} else { $p3_red = '0';};
+
+$fail_total = $p2_red_total+$p5_red+$p3_red;
+
+//--------------------------------------
+if ( $p2_red_total == '0' && $p5_red_total == '0' && $p3_red_total == '0'  ){
+$fdx_menu_title = __( $this->pluginname, $this->hook );
+$fdx_menu_ico = plugins_url( 'images/_16x16.png', __FILE__);
+} else {
+$fdx_menu_title = __( $this->pluginname, $this->hook )."<span class='update-plugins count-" . $fail_total . "'><span class='plugin-count'>" . number_format_i18n( $fail_total ) . "</span></span>";
+$fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
+}
+//--------------------------------------
  			add_menu_page(
 				__( $this->pluginname, $this->hook ) . ' - ' . __( 'Dashboard', $this->hook ),
-				__( $this->pluginname, $this->hook ),
+				$fdx_menu_title,
 				$this->accesslvl,
 				$this->hook,
 				array( $this, 'fdx_options_subpanel_p1' ),
-				plugins_url( 'images/_16x16.png', __FILE__)
+		    	$fdx_menu_ico
 			);
 
-				add_submenu_page(
-					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Vulnerability Scan', $this->hook ),
-					__( 'Vulnerability Scan', $this->hook ),
-					$this->accesslvl,
-                      $this->hook . '-'.$this->_p2,
-					array( $this, 'fdx_options_subpanel_p2' )
-				);
-
-                add_submenu_page(
-					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Unsafe Files Search', $this->hook ),
-					__( 'Unsafe Files Search', $this->hook ),
-					$this->accesslvl,
-                      $this->hook . '-'.$this->_p3,
-					array( $this, 'fdx_options_subpanel_p3' )
-				);
-
-                add_submenu_page(
+            add_submenu_page(
 					$this->hook,
 					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Error 404 Log', $this->hook ),
 					__( 'Error 404 Log', $this->hook ),
@@ -161,13 +171,40 @@ function action_menu_pages() {
 					array( $this, 'fdx_options_subpanel_p4' )
 				);
 
+			add_submenu_page(
+					$this->hook,
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Vulnerability Scan', $this->hook ),
+					'Check ~ Vulnerability',
+					$this->accesslvl,
+                      $this->hook . '-'.$this->_p2,
+					array( $this, 'fdx_options_subpanel_p2' )
+				);
+
+                add_submenu_page(
+					$this->hook,
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Unsafe Files Search', $this->hook ),
+					'Check ~ File System',
+					$this->accesslvl,
+                      $this->hook . '-'.$this->_p3,
+					array( $this, 'fdx_options_subpanel_p3' )
+				);
+
                 add_submenu_page(
 					$this->hook,
 					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Core Exploit Scanner', $this->hook ),
-					__( 'Core Exploit Scanner', $this->hook ),
+				    'Check ~ WP Core',
 					$this->accesslvl,
-                    $this->hook . '-'.$this->_p6,
+                    $this->hook . '-'.$this->_p5,
 					array( $this, 'fdx_options_subpanel_p5' )
+				);
+
+               add_submenu_page(
+					$this->hook,
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Database Backup', $this->hook ),
+					'BackUp*',
+					$this->accesslvl,
+                    $this->hook . '-'.$this->_p7,
+					array( $this, 'fdx_options_subpanel_p7' )
 				);
 
                add_submenu_page(
@@ -175,16 +212,25 @@ function action_menu_pages() {
 					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Settings and Setup', $this->hook ),
 					__( 'Settings', $this->hook ),
 					$this->accesslvl,
-                    $this->hook . '-'.$this->_p5,
+                    $this->hook . '-'.$this->_p6,
 					array( $this, 'fdx_options_subpanel_p6' )
 				);
+
 
 				//Make the dashboard the first submenu item and the item to appear when clicking the parent.
 				global $submenu;
 				if ( isset( $submenu[$this->hook] ) ) {
 					$submenu[$this->hook][0][0] = __( 'Dashboard', $this->hook );
-				}
-
+    			}
+   //p5 popup
+   if ( isset($_GET['view']) && 'diff' == $_GET['view'] ) {
+    self::fdx_diff_page();
+    die();
+   //p2 popup
+   } elseif ( isset($_GET['popup']) && 'pp_page' == $_GET['popup'] ) {
+    self::fdx_popup_page();
+    die();
+   }
 }
 
 /*********************************** P1 *****************************************
@@ -217,36 +263,29 @@ require_once ('modules/inc-p2.php');
         continue;
       }
       $response = FDX_CLASS_P2::$test_name();
-      $test_description['test'][$test_name]['status'] = $response['status'];
       if (!isset($response['msg'])) {
         $response['msg'] = '';
       }
-      if ($response['status'] == 10) {
-        $test_description['test'][$test_name]['msg'] = sprintf($test['msg_ok'], $response['msg']);
-      } elseif ($response['status'] == 0) {
-        $test_description['test'][$test_name]['msg'] = sprintf($test['msg_bad'], $response['msg']);
-      } else {
-        $test_description['test'][$test_name]['msg'] = sprintf($test['msg_warning'], $response['msg']);
-      }
+      $test_description['test'][$test_name]['status'] = $response['status'];
+      $test_description['test'][$test_name]['msg'] = sprintf($response['msg']);
+
+
       $test_count++;
     } // foreach
     update_option($this->p2_options_key, $test_description);
     die('1');
   }
 
-/*
- * convert status integer to button
+
+/**
+ * +++++ popup
  */
-  function status($int) {
-    if ($int == 0) {
-      $string = '<img src="'.plugins_url( 'images/critical.png',__FILE__).'" width="32" height="32" border="0" alt="*" />';
-    } elseif ($int == 10) {
-      $string = '<img src="'.plugins_url( 'images/clean.png',__FILE__).'" height="32" border="0" alt="*" />';
-    } else {
-      $string = '<img src="'.plugins_url( 'images/wan.png',__FILE__).'" width="32" height="32" border="0" alt="*" />';
+function fdx_popup_page() {
+     $target = $_GET['target'];
+    if ($target){
+    include('modules/inc-popup.php');
     }
-    return $string;
-  }
+}
 
 /*********************************** P3 *****************************************
 ************* Unsafe Files Search
@@ -301,19 +340,23 @@ public function fdx_show_results( $results ) {
     $result = '';
 
    //  severe=03 warning=02 note=01
-	foreach ( array('03','02','01', '00') as $l ) {
+	foreach ( array('03','02','00', '01') as $l ) {
 		if ( ! empty($results[$l]) ) {
-            $result .= '<div class="last_scan">&nbsp;</div><table class="widefat"><thead><tr>';
-            if ( $l == '00' ) $result .= '<th><img src="'. plugins_url( 'images/wan.png',__FILE__) . '" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Log, Binary, Data and Temporary files', $this->hook).'. (<strong style="color:#EFA800;">'. count($results[$l]) .' '. __('matches', $this->hook).'</strong>)</th>';
-            if ( $l == '01' ) $result .= '<th><img src="'. plugins_url( 'images/wan.png',__FILE__) . '" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Compressed files', $this->hook).'. (<strong style="color:#EFA800;">'. count($results[$l]) .' '. __('matches', $this->hook).'</strong>)</th>';
-            if ( $l == '02' ) $result .= '<th><img src="'. plugins_url( 'images/critical.png',__FILE__) . '" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Dangerous and malicious files', $this->hook).'. (<strong style="color:red;">'. count($results[$l]) .' '. __('matches', $this->hook).' </strong>)</th>';
-            if ( $l == '03' ) $result .= '<th><img src="'. plugins_url( 'images/critical.png',__FILE__) . '" width="32" height="32" border="0" alt="*" style="vertical-align: middle" />'. __('Unknown file found in WP core', $this->hook).'. (<strong style="color:red;">'. count($results[$l]) .' '. __('matches', $this->hook).' </strong>)</th>';
-         	$result .= '<th>&nbsp;</th></tr></thead><tbody>';
+            $result .= '<table class="widefat"><thead><tr>';
+            if ( $l == '00' ) $result .= '<th>'. __('Log, Binary, Data and Temporary files', $this->hook).'.<div style="float: right"><code>'. count($results[$l]) .' '. __('matches', $this->hook).'</code><span class="pb_label pb_label-info">&#10003;</span></div></th>' ;
+            if ( $l == '01' ) $result .= '<th>'. __('Compressed files', $this->hook).'.<div style="float: right"><code>'. count($results[$l]) .' '. __('matches', $this->hook).'</code><span class="pb_label pb_label-info">&#10003;</span></div></th>';
+            if ( $l == '02' ) $result .= '<th>'. __('Dangerous and malicious files', $this->hook).'.<div style="float: right"><code>'. count($results[$l]) .' '. __('matches', $this->hook).'</code><span class="pb_label pb_label-important">X</span></div></th>';
+            if ( $l == '03' ) $result .= '<th>'. __('Unknown file found in WP core', $this->hook).'.<div style="float: right"><code>'. count($results[$l]) .' '. __('matches', $this->hook).'</code><span class="pb_label pb_label-important">X</span></div></th>';
+         	$result .= '</tr></thead><tbody><tr><td><ul class="fdx-list">';
         		foreach ( $results[$l] as $r )
 				$result .= self::fdx_draw_row( $r );
-			$result .= '</tbody></table><br />';
-		}
+			$result .= '</ul></td></tr></tbody></table>';
+
+
+        }
 	}
+    update_option('fdx_p3_red_op1', count($results['02']) );
+    update_option('fdx_p3_red_op2', count($results['03']) );
 	echo $result;
 }
 
@@ -321,9 +364,10 @@ public function fdx_show_results( $results ) {
  * Draw a single result row.
  */
 public function fdx_draw_row( $r ) {
-	$html = '<tr><td>' . esc_html( $r['loc'] );
-	$html .= '</td><td>';
-	return $html . '</td></tr>';
+    $ext = pathinfo($r['loc'], PATHINFO_EXTENSION); //show only file extension
+	$html = '<li id="ext-'.$ext.'" >' . esc_html( $r['loc'] ). '</li>';
+
+ 	return $html;
 }
 
 
@@ -335,10 +379,10 @@ public function fdx_results_page() {
 	delete_transient( 'fdx_files' );
 	$results = get_option( 'fdx_results' );
      if ( ! $results ) {
-echo '<div class="last_scan">&nbsp;</div><table class="widefat">';
+echo '<table class="widefat">';
 echo '<thead>';
-echo '<tr><th><img src="'. plugins_url( 'images/clean.png',__FILE__).'" width="32" height="32" border="0" alt="*" style="vertical-align: middle" /> <strong style="color:green;">'. __('Nothing Found!', $this->hook).'</strong> </th>';
-echo '<th>&nbsp;</th></tr></thead>';
+echo '<tr><th>'. __('Nothing Found!', $this->hook).'<div style="float: right"><span class="pb_label pb_label-success">&#10003;</span></div></th>';
+echo '</tr></thead><tbody><tr><td>-</td></tr></tbody>';
 echo '</table>';
 } else {
         self::fdx_show_results( $results );
@@ -358,13 +402,8 @@ require_once ('modules/inc-p4.php');
 ********************************************************************************/
 
 function fdx_options_subpanel_p5() {
-
- if ( isset($_GET['view']) && 'diff' == $_GET['view'] ) {
-self::fdx_diff_page();
-die;
-   	} else {
 require_once ('modules/inc-p5.php');
-   }
+
 }
 
 /**
@@ -397,8 +436,7 @@ function get_file_source() {
  */
   function scan_files() {
     global $wp_version;
-    $results['missing_ok'] =  $results['missing_bad'] = array();
-    $results['changed_ok'] = $results['changed_bad'] = array();
+    $results['missing_ok'] = $results['missing_bad'] = $results['changed_bad'] = array();
     $results['ok'] = array();
     $results['last_run'] = current_time('timestamp');
     $results['total'] = 0;
@@ -406,8 +444,6 @@ function get_file_source() {
     $missing_ok = array('readme.html', 'license.txt', 'wp-config-sample.php',
                         'wp-admin/install.php', 'wp-admin/upgrade.php');
 
-    $all_exclude = array('readme.html', 'license.txt', 'wp-config-sample.php',
-                        'wp-admin/install.php', 'wp-admin/upgrade.php');
       // hashes files
       require 'libs/hashes-'. $wp_version.'.php';
       $results['total'] = sizeof($filehashes);
@@ -491,18 +527,18 @@ function get_file_source() {
     $out = '';
     $out .= '<ul class="fdx-list">';
     foreach ($files as $file) {
-      $out .= '<li>';
-      $out .= '<code>' . ABSPATH . $file . '</code>';
+      $ext = pathinfo($file, PATHINFO_EXTENSION); //show only file extension
+      $out .= '<li id="ext-'.$ext.'" >';
+      $out .=  ABSPATH . $file;
       if ($view) {
-        $out .= ' <a data-hash="' . md5($this->p5_salt . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#source-dialog" class="fdx-show-source" title="'.__('View file source', $this->hook).'"><img src="'.plugins_url( 'images/ico2.png',__FILE__).'" width="16" height="16" border="0" alt="'.__('View file source', $this->hook).'" /></a>';
+        $out .= ' <a data-hash="' . md5($this->p5_salt . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#source-dialog" class="fdx-show-source" title="'.__('View file source', $this->hook).'"><code id="c0">S</code></a>';
        }
       if ($view && $restore ) {
         $url = add_query_arg( array( 'view' => 'diff', 'file' => $file ), menu_page_url( $this->hook . '-'.$this->_p5, false ) );
-		$url = wp_nonce_url( $url );
-		$out .= ' <a href="#" onclick="PopupCenter(\''.$url.'\', \''.esc_attr($file).'\',700,500,\'yes\');" title="'.__('See what has been modified', $this->hook).'"><img src="'.plugins_url( 'images/ico3.png',__FILE__).'" width="16" height="16" border="0" alt="'.__('See what has been modified', $this->hook).'" /></a>';
+        $out .= ' <a  href="' . esc_attr($url) . '" class="fdx-dialog" title="'.__('See what has been modified', $this->hook).'"><code id="c0">&ETH;</code></a>';
        }
       if ($restore) {
-        $out .= ' <a data-hash="' . md5($this->p5_salt . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#restore-dialog" class="fdx-restore-source" title="'.__('Restore file', $this->hook).'"><img src="'.plugins_url( 'images/ico1.png',__FILE__).'" width="16" height="16" border="0" alt="'.__('Restore file', $this->hook).'" /></a>';
+        $out .= ' <a data-hash="' . md5($this->p5_salt . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#restore-dialog" class="fdx-restore-source" title="'.__('Restore file', $this->hook).'"><code id="c0">&darr;</code></a>';
       }
       $out .= '</li>';
     }
@@ -515,9 +551,10 @@ function get_file_source() {
  */
 function fdx_diff_page() {
 	$file = $_GET['file'];
-    echo '<style> #adminmenuwrap,#adminmenuwrap, #adminmenuback, #wpadminbar, #message, #footer { display: none !important }</style>';
+    echo '<div class="fdx-popup"';
 	echo '<h2>'.__('Changes made to file', $this->hook). ': <code>' . esc_html($file) . '</code></h2>';
 	echo self::fdx_display_file_diff( $file );
+    echo '</div>';
 }
 
 /**
@@ -629,15 +666,52 @@ function fdx_logout_home($logouturl, $redir) {
         }
   }
 
+/********************************** P7 ******************************************
+************* database backup
+********************************************************************************/
+function fdx_options_subpanel_p7() {
+require_once ('modules/inc-p7.php');
+}
+
+
 /*
  * @ ALL
  *
  * @ clean-up when deactivated
  */
  function fdx_deactivate() {
-    delete_option($this->p2_options_key);
-    delete_option($this->p5_options_key);
+    delete_option($this->p2_options_key); //p2_log_time
+    delete_option($this->p5_options_key); //p5_log_time
     delete_option( 'fdx_results' ); //p3
+    delete_option( 'p3_log_time' ); //p3 log
+
+// red
+delete_option('fdx_p2_red1');
+delete_option('fdx_p2_red2');
+delete_option('fdx_p2_red3');
+delete_option('fdx_p2_red4');
+delete_option('fdx_p2_red5');
+delete_option('fdx_p2_red6');
+delete_option('fdx_p2_red7');
+delete_option('fdx_p2_red8');
+delete_option('fdx_p2_red9');
+delete_option('fdx_p2_red10');
+delete_option('fdx_p2_red11');
+delete_option('fdx_p2_red12');
+delete_option('fdx_p2_red13');
+delete_option('fdx_p2_red14');
+//yel
+delete_option('fdx_p2_yel1');
+delete_option('fdx_p2_yel2');
+delete_option('fdx_p2_yel3');
+delete_option('fdx_p2_yel4');
+delete_option('fdx_p2_yel5');
+//total
+delete_option('fdx_p2_yel_total');
+delete_option('fdx_p2_red_total');
+delete_option('fdx_p5_red_total');
+delete_option('fdx_p3_red_op1');
+delete_option('fdx_p3_red_op2');
 }
 
 

@@ -2,7 +2,7 @@
 $settings = FDX_Process::fdx_get_settings();
 /* wrap
 *********************************************************************************/
-echo '<div class="wrap">'. screen_icon('options-general');
+echo '<div class="wrap">'. get_screen_icon('fdx-lock');
 echo '<h2>'. $this->pluginname . ' : ' . __('Settings and Setup', $this->hook) . '</h2>';
 
 
@@ -61,7 +61,6 @@ echo '<div class="inside">';
 echo '<div class="fdx-left-content">';
 //left
 
-echo '<p>' . sprintf( __('This analyze contains <strong>%s</strong> separate security tests. Once you click the "Execute" button all tests will be run.', $this->hook ) , '32' ) . '</p>';
 echo '<p>' . __('Depending on various parameters of your site this can take from ten seconds to 2-3 minutes. Please don\'t reload the page until testing is done.', $this->hook) . '</p> ';
 echo '<p>' . __('If no test results show up after the page reloads, please configure max script execution time.', $this->hook).'</p>';
 
@@ -69,14 +68,11 @@ echo '<p>' . __('If no test results show up after the page reloads, please confi
 echo '</div><div class="fdx-right-content">';
 //------------------------------------------?>
 
-<p><strong><?php _e( 'Brute-force attack', $this->hook ); ?> </strong></p>
-<p><input type="checkbox" class="check" id="p2_check_1" name="p2_check_1"<?php if ( $settings['p2_check_1'] ) echo ' checked'; ?> /> <?php echo sprintf( __('Check admin password strength with a <strong>%s</strong> most commonly used.', $this->hook ) , '600' ) ?></p>
-
-<hr class="sep">
 
 <p><strong><?php _e( 'Maximum script execution time', $this->hook ); ?></strong></p>
 <p>
 <select name="p2_select_1">
+<option value="100"<?php if ( $settings['p2_op1'] == '100' ) echo " selected"; ?>>100</option>
 <option value="200"<?php if ( $settings['p2_op1'] == '200' ) echo " selected"; ?>>200</option>
 <option value="300"<?php if ( $settings['p2_op1'] == '300' ) echo " selected"; ?>>300</option>
 <option value="400"<?php if ( $settings['p2_op1'] == '400' ) echo " selected"; ?>>400</option>
