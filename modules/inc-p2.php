@@ -138,9 +138,9 @@ if ($tests['last_run']) {
 				);
   //   $disabled_functions_array = explode( ',', $disabled_functions );
        $disabled_functions_array = array_map('trim', explode(',', $disabled_functions)); //ignore space
-       $parent_class_test['status'] = 'FAIL';
+       $parent_class_test['status'] = 'WARNING';
        $parent_class_test['value'] = '<a href="'.$p2_url1.'" class="fdx-dialog" title="'.__('Fix', $this->hook ).'"><strong>'.__('Disabled', $this->hook ).'</strong></a>:&nbsp; <span class="fdx-info"><a class="pluginbuddy_tip" href="javascript:void(0)" title="'.$disabled_functions.'"></a></span>';
-       update_option('fdx_p2_red1', '1' );
+       update_option('fdx_p2_yel7', '1' );
         if (
 		( true === in_array( 'exec', $disabled_functions_array ) )
 		&&
@@ -155,7 +155,7 @@ if ($tests['last_run']) {
 		$parent_class_test['status'] = 'OK';
         $parent_class_test['value'] = __('Disabled', $this->hook ).':&nbsp; <span class="fdx-info"><a class="pluginbuddy_tip" title="'.$disabled_functions.'"></a></span>';
 
-        update_option('fdx_p2_red1', '0' );
+        update_option('fdx_p2_yel7', '0' );
 	}
 	array_push( $tests2, $parent_class_test );
 

@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login       
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 2.9.3
+Stable tag: 2.9.4
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -77,7 +77,7 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 = Languages Available =
 * English (default)
-
+* Spanish (**es_ES**) translation by **Juan Pablo Poblacion Paredes**
 
 
 = How To Contribute =
@@ -113,6 +113,11 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 
 == Changelog ==
+
+* 2.9.4
+      * Fixing: `wpdb::escape` Deprecated Function
+      * "Secure Hidden Login" and "Dangerous PHP Functions" change of risk status
+      * Add Spanish (es_ES) translation by  Juan Pablo Población Paredes
 
 * 2.9.3   
     * Compatibility with WordPress 3.6.1

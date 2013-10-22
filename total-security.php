@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 2.9.3
+ * Version: 2.9.4
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -14,10 +14,10 @@
 
 class Total_Security {
         public $min_wp_ver 	        = '3.6.1'; //
-  		public $pluginversion 	    = '2.9.3';
+  		public $pluginversion 	    = '2.9.4';
 
-        public $php_lastver 	    = '5.4.16'; // PHP - http://php.net/downloads.php
-        public $mySQL_lastver 	    = '5.5.32'; // MYSQL - http://dev.mysql.com/downloads/
+        public $php_lastver 	    = '5.5.5'; // PHP - http://php.net/downloads.php
+        public $mySQL_lastver 	    = '5.6.14'; // MYSQL - http://dev.mysql.com/downloads/
 
         public $pluginname			= 'Total Security';
         public $hook 				= 'total-security';
@@ -686,7 +686,6 @@ require_once ('modules/inc-p7.php');
     delete_option( 'p3_log_time' ); //p3 log
 
 // red
-delete_option('fdx_p2_red1');
 delete_option('fdx_p2_red2');
 delete_option('fdx_p2_red3');
 delete_option('fdx_p2_red4');
@@ -699,13 +698,14 @@ delete_option('fdx_p2_red10');
 delete_option('fdx_p2_red11');
 delete_option('fdx_p2_red12');
 delete_option('fdx_p2_red13');
-delete_option('fdx_p2_red14');
 //yel
 delete_option('fdx_p2_yel1');
 delete_option('fdx_p2_yel2');
 delete_option('fdx_p2_yel3');
 delete_option('fdx_p2_yel4');
 delete_option('fdx_p2_yel5');
+delete_option('fdx_p2_yel6');
+delete_option('fdx_p2_yel7');
 //total
 delete_option('fdx_p2_yel_total');
 delete_option('fdx_p2_red_total');

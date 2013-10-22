@@ -75,9 +75,10 @@ $this->fdx_logevent( 2 );
  //       define( 'DONOTCACHEPAGE', true );		// WP Super Cache and W3 Total Cache recognise this
 
  			//get default data
-			$host = $wpdb->escape( $this->fdxgetIp() );
- 			$url = $wpdb->escape( $_SERVER['REQUEST_URI'] );
-            $referrer = $wpdb->escape( $this->getRefe() );
+
+			$host = esc_sql( $this->fdxgetIp() );
+ 			$url = esc_sql( $_SERVER['REQUEST_URI'] );
+            $referrer = esc_sql( $this->getRefe() );
 
 			//log to database
 			$wpdb->insert(

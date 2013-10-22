@@ -20,7 +20,6 @@ static $security_tests = array(
 'secure_hidden_login'      => array() ); //end
 
 function __construct() {
-$fail1 = get_site_option( 'fdx_p2_red1' );// p2
 $fail2 = get_site_option( 'fdx_p2_red2' );// p2
 $fail3 = get_site_option( 'fdx_p2_red3' );// p2
 
@@ -34,8 +33,7 @@ $fail10 = get_site_option( 'fdx_p2_red10' );
 $fail11 = get_site_option( 'fdx_p2_red11' );
 $fail12 = get_site_option( 'fdx_p2_red12' );
 $fail13 = get_site_option( 'fdx_p2_red13' );
-$fail14 = get_site_option( 'fdx_p2_red14' );
-$fail_p2_t = $fail1+$fail2+$fail3+$fail4+$fail5+$fail6+$fail7+$fail8+$fail9+$fail10+$fail11+$fail12+$fail13+$fail14;  //14
+$fail_p2_t = $fail2+$fail3+$fail4+$fail5+$fail6+$fail7+$fail8+$fail9+$fail10+$fail11+$fail12+$fail13;  //12
 update_option('fdx_p2_red_total', $fail_p2_t );
 
 $fail15 = get_site_option( 'fdx_p2_yel1' );
@@ -43,8 +41,10 @@ $fail16 = get_site_option( 'fdx_p2_yel2' );
 $fail17 = get_site_option( 'fdx_p2_yel3' );
 $fail18 = get_site_option( 'fdx_p2_yel4' ); // p2
 $fail19 = get_site_option( 'fdx_p2_yel5' ); // p2
+$fail20 = get_site_option( 'fdx_p2_yel6' ); // new
+$fail21 = get_site_option( 'fdx_p2_yel7' ); // p2 new
 
-$fail_p2_t2 = $fail15+$fail16+$fail17+$fail18+$fail19; //2.5
+$fail_p2_t2 = $fail15+$fail16+$fail17+$fail18+$fail19+$fail20+$fail21; //2.5
 update_option('fdx_p2_yel_total', $fail_p2_t2 );
 
 }
@@ -435,13 +435,13 @@ function bruteforce_login() {
    $msgTIT = __('Check if', $this->hook).' <em>"'. __('Secure Hidden Login', $this->hook).'"</em> &nbsp;'.__('is enabled', $this->hook);
     // Define the function
     if ( !$settings['p6_check_1'] ) {
-      $return['status'] = '<span class="pb_label pb_label-important">X</span>';
+      $return['status'] = '<span class="pb_label pb_label-warning">!</span>';
       $return['msg'] = '<tr class="alternate"><td><span class="fdx-actions">'.$msgTIT .'</span></td><td><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p6). '" title="'.__('Fix', $this->hook ).'"><strong>'. __('Disabled', $this->hook) .'</strong></a></td>';
-      update_option('fdx_p2_red14', '1' );
+      update_option('fdx_p2_yel6', '1' );
     } else {
       $return['status'] = '<span class="pb_label pb_label-success">&#10003;</span>';
       $return['msg'] = '<tr><td><span class="fdx-actions">'.$msgTIT .'</span></td><td>'. __('Enabled', $this->hook) .'</td>';
-      update_option('fdx_p2_red14', '0' );
+      update_option('fdx_p2_yel6', '0' );
     }
     return $return;
   }
