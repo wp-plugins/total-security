@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 2.9.4
+ * Version: 2.9.5
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -13,8 +13,8 @@
  */
 
 class Total_Security {
-        public $min_wp_ver 	        = '3.6.1'; //
-  		public $pluginversion 	    = '2.9.4';
+        public $min_wp_ver 	        = '3.7'; //
+  		public $pluginversion 	    = '2.9.5';
 
         public $php_lastver 	    = '5.5.5'; // PHP - http://php.net/downloads.php
         public $mySQL_lastver 	    = '5.6.14'; // MYSQL - http://dev.mysql.com/downloads/

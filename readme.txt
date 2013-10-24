@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login       
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 2.9.4
+Stable tag: 2.9.5
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -113,6 +113,8 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 
 == Changelog ==
+* 2.9.5   
+    * Compatibility with WordPress 3.7
 
 * 2.9.4
       * Fixing: `wpdb::escape` Deprecated Function
