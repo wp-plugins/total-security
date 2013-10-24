@@ -4,7 +4,7 @@ Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login       
 Requires at least: 3.5.1
-Tested up to: 3.5.1
+Tested up to: 3.7
 Stable tag: 2.9.5
 License: GPLv2 or later
 
