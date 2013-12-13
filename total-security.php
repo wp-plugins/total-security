@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 2.9.6
+ * Version: 2.9.7
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -13,8 +13,8 @@
  */
 
 class Total_Security {
-        public $min_wp_ver 	        = '3.7'; //
-  		public $pluginversion 	    = '2.9.6';
+        public $min_wp_ver 	        = '3.8'; //
+  		public $pluginversion 	    = '2.9.7';
 
         public $php_lastver 	    = '5.5.5'; // PHP - http://php.net/downloads.php
         public $mySQL_lastver 	    = '5.6.14'; // MYSQL - http://dev.mysql.com/downloads/
@@ -26,7 +26,6 @@ class Total_Security {
         public $_p4 	            = 'error-404-log';
         public $_p5 	            = 'core_exploit_scanner'; // $this->hook . '-'.$this->_p5
         public $_p6 	            = 'settings';
-        public $_p7 	            = 'database-backup';
         public $accesslvl			= 'manage_options';
         public $p2_options_key   	= 'p2_log_time';
         public $p5_options_key   	= 'p5_log_time';
@@ -149,7 +148,7 @@ if ( $p2_red_total == '0' && $p5_red_total == '0' && $p3_red_total == '0'  ){
 $fdx_menu_title = __( $this->pluginname, $this->hook );
 $fdx_menu_ico = plugins_url( 'images/_16x16.png', __FILE__);
 } else {
-$fdx_menu_title = __( $this->pluginname, $this->hook )."<span class='update-plugins count-" . $fail_total . "'><span class='plugin-count'>" . number_format_i18n( $fail_total ) . "</span></span>";
+$fdx_menu_title = __( $this->pluginname, $this->hook )." <span class='update-plugins count-" . $fail_total . "'><span class='plugin-count'>" . number_format_i18n( $fail_total ) . "</span></span>";
 $fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
 }
 //--------------------------------------
@@ -196,15 +195,6 @@ $fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
 					$this->accesslvl,
                     $this->hook . '-'.$this->_p5,
 					array( $this, 'fdx_options_subpanel_p5' )
-				);
-
-               add_submenu_page(
-					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Database Backup', $this->hook ),
-					'BackUp*',
-					$this->accesslvl,
-                    $this->hook . '-'.$this->_p7,
-					array( $this, 'fdx_options_subpanel_p7' )
 				);
 
                add_submenu_page(
@@ -666,12 +656,6 @@ function fdx_logout_home($logouturl, $redir) {
         }
   }
 
-/********************************** P7 ******************************************
-************* database backup
-********************************************************************************/
-function fdx_options_subpanel_p7() {
-require_once ('modules/inc-p7.php');
-}
 
 
 /*
