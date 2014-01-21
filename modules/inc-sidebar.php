@@ -1,12 +1,4 @@
 <?php
-# Donation Message #
-if( get_site_option( 'fdx1_hidden_time' ) && get_site_option( 'fdx1_hidden_time' ) < time() ) {
-echo '<div class="updated"><form method="post" action=""><input type="hidden" name="fdx_page" value="hide_message" /><p>';
-echo '<strong>Is this plugin useful? Consider making a donation encouraging me to continue supporting it!</strong> &nbsp;&nbsp;<input type="button" class="button button-primary" onClick="location.href=\'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=' . $this->sbar_paypalcode . '\'" value=\'' . __( 'DONATE', $this->hook ) . '\'>&nbsp;&nbsp;&nbsp;';
-submit_button( __('Hide this message', $this->hook ), 'secondary', 'Submit', false, array( 'id' => '' ) ) ;
-echo '</p></form></div>';
-}
-
 /*---------------------------------------*/
 echo '<div id="postbox-container-1" class="postbox-container">';
 echo '<div id="side-sortables" class="meta-box-sortables">';
@@ -55,8 +47,7 @@ $rss = @fetch_feed( $this->sbar_rss );
      if ( is_object($rss) ) {
         if ( is_wp_error($rss) ) {
             echo 'Newsfeed could not be loaded.';
-    		return;
-        }
+           } else {
 echo '<ul>';
 		foreach ( $rss->get_items(0, 5) as $item ) {
     		$link = $item->get_link();
@@ -78,7 +69,8 @@ echo '<ul>';
 echo '<li style=" margin-top: -2px; margin-bottom: -2px"><a class="sm_button sm_bullet" title="'. $date .'" target="_blank" href="'. $link .'">'. $title.' <em class="none">'. $diff.'</em></a></li>';
     }
        echo'</ul>';
-      }
+   } // if feed error
+}
 echo '</div></div>';
 //----------------------------------------
 echo '</div></div>';
