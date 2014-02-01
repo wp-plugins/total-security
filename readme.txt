@@ -84,7 +84,7 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 We'd love for you to get involved. Whatever your level of skill or however much time you can give, your contribution is greatly appreciated.
 
 * **Users** - download the latest development version of the plugin, and submit bug/feature requests.
-* **Non-English Speaking Users** - Contribute a translation using the GlotPress web interface - no technical knowledge required ([how to](https://poeditor.com/join/project?hash=d9fb1f32a0dd2734ac1052c6a12b6be9)).
+* **Non-English Speaking Users** - Contribute a translation using the GlotPress web interface - no technical knowledge required ([how to](http://i.fabrix.net/gKqPN)).
 * **Developers** - Fork the development version and submit a pull request.
 
 

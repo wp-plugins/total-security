@@ -42,7 +42,7 @@ class Total_Security {
                   );
         //----------------------------------------------
         public $sbar_homepage       = 'http://fabrix.net/total-security/';
-        public $sbar_glotpress      = 'https://poeditor.com/join/project?hash=d9fb1f32a0dd2734ac1052c6a12b6be9';
+        public $sbar_glotpress      = 'http://i.fabrix.net/gKqPN';
         public $sbar_supportpage    = 'http://wordpress.org/extend/plugins/total-security/';
         public $sbar_paypalcode     = '8DHY4NXW35T4Y';
         public $sbar_rss            = 'http://feeds.feedburner.com/fdxplugins/';
