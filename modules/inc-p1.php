@@ -114,7 +114,7 @@ echo '<p>'.__(' You can see all identified security problems of your website at 
 echo '<p>'.__(' Each security problem comes with a detailed description and all the information needed so you can eliminate the problems and get secure.', $this->hook).'</p>';
 echo '<p>'.__('Any red or orange dots? Follow the instructions and turn them into green dots!', $this->hook).'</p>';
 echo '<hr class="sep">';
-echo '<div class="button_submit"><a class="button" href="javascript:void(0);" onclick="PopupCenter(\''.$p2_url2.'\', \'phpinfo\',800,690,\'yes\');" title="'.__('Display Extended PHP Settings via phpinfo()', $this->hook).'">Phpinfo()</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="'.$p2_url4.'" class="button fdx-dialog" title="'.__('Debug information is used to provide help. You should include this information in your posts on support forum.', $this->hook).'">'.__('Debug', $this->hook).'</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="'.$p2_url3.'" class="button fdx-dialog">'.__('Database Info', $this->hook).'</a></div>';
+echo '<div class="button_submit"><a class="button newWindow" href="'.$p2_url2.'" data-width="700" data-height="600" rel="1" id="pop_lats" title="'.__('Display Extended PHP Settings via phpinfo()', $this->hook).'">Phpinfo()</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="'.$p2_url4.'" class="button fdx-dialog" title="'.__('Debug information is used to provide help. You should include this information in your posts on support forum.', $this->hook).'">'.__('Debug', $this->hook).'</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="'.$p2_url3.'" class="button fdx-dialog">'.__('Database Info', $this->hook).'</a></div>';
 
 //------------------------------------------
 echo '</div><div class="fdx-right-content">';
