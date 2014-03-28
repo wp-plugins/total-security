@@ -27,7 +27,7 @@ tfoot tr { display: none; }
 .crop { overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis;
-  width:250px; }
+  width:200px; }
 
 #grenn a { color: #008000; }
 

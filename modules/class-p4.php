@@ -42,25 +42,13 @@ $this->fdx_logevent( 2 );
               		}
 		
           function getRefe() {
-    		//Just get the headers if we can or else use the SERVER global
-			if ( function_exists( 'apache_request_headers' ) ) {
-				$headers = apache_request_headers();
-			} else {
-				$headers = $_SERVER;
-			}
-			if ( array_key_exists( 'X-Forwarded-For', $headers ) ) {
-				$theRefe = $headers['X-Forwarded-For'];
-			} else {
-
-                if ( isset( $_SERVER['HTTP_REFERER']  ) ) {
+             if ( isset( $_SERVER['HTTP_REFERER']  ) ) {
 					$theRefe = $_SERVER['HTTP_REFERER'];
 				} else {
  					$theRefe = '';
 				}
-        	}
-			return $theRefe;
+ 			return $theRefe;
               		}
-
 
 		/**
 		 * Logs security related events to the database
@@ -145,19 +133,12 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
         }
 
 
-
-
-
-
-/*-----------------------FDX---------------------------*/
         function get_bulk_actions() {
         global $fdx_lg;
         return array(
             'delete'    => __( 'Delete', $fdx_lg->hook ),
         );
     }
-/*-----------------------FDX---------------------------*/
-
 
 
 		/**
@@ -168,7 +149,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 		 *
 		 **/
 		function column_time( $item ) {
-            $r = date( 'y/m/d(H:i:s)', $item['timestamp'] );
+            $r = date( 'Y/m/d H:i:s', $item['timestamp'] );
             return $r;
 		}
 
@@ -180,11 +161,10 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 		 *
 		 **/
 		function column_host( $item ) {
- 	         $r = '<a href="http://whois.domaintools.com/' . $item['host'] . '" target="_blank">' . $item['host'] . '</a>';
+		     global $fdx_lg;
+ 	         $r = '<a href="'.$fdx_lg->option_urllog . $item['host'] . '" target="_blank">' . $item['host'] . '</a>';
             return $r;
-
-
-		}
+    		}
 
 		/**
 		 * Define added column
@@ -208,7 +188,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 /*-----------------------FDX---------------------------*/
         function column_cb( $item ) {
         $id = $item['id'];
-//o cochete "[]" faz selecionar multiplos, sem ele somente seleciona 1
+      //o cochete "[]" faz selecionar multiplos, sem ele somente seleciona 1
         return "<input type='checkbox' name='404s[]' id='404s' value='$id' />";
   		}
 
@@ -222,7 +202,6 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
     }
 /*-----------------------FDX---------------------------*/
 
-
 		/**
 		 * Prepare data for table
 		 *
@@ -230,13 +209,11 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 		function fdx_prepare_items() {
             global $wpdb;
 
-/*-----------------------FDX---------------------------*/
        // process bulk deletes
 	        if( 'delete' === $this->current_action() ) {
 			$deleted = $this->bulk_delete();
 			echo '<div id="message" class="updated"><p>' . $deleted . ' rows deleted</p></div>';
 	    	}
-/*-----------------------FDX---------------------------*/
 
 			$columns = $this->get_columns();
 			$hidden = array();
