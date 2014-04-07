@@ -348,7 +348,8 @@ $('a.fdx-dialog').click(function(event) {
               });
               return false;
 });
-$('#fdx-dialog-wrap').dialog({ 'modal': true,
+$('#fdx-dialog-wrap').dialog({'dialogClass': 'wp-dialog',
+                               'modal': true,
                                'resizable': false,
                                'zIndex': 9999,
                                'width': 700,
