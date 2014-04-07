@@ -137,7 +137,8 @@ jQuery(document).ready(function($){
       return false;
   });
 
-  $('#source-dialog').dialog({'modal': true,
+  $('#source-dialog').dialog({'dialogClass': 'wp-dialog',
+                              'modal': true,
                               'resizable': false,
                               'zIndex': 9999,
                               'width': 800,
@@ -149,7 +150,8 @@ jQuery(document).ready(function($){
                               'autoOpen': false,
                               'closeOnEscape': true
                               });
-  $('#restore-dialog').dialog({'modal': true,
+  $('#restore-dialog').dialog({'dialogClass': 'wp-dialog',
+                               'modal': true,
                                'resizable': false,
                                'zIndex': 9999,
                                'width': 450,
