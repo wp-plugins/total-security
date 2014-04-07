@@ -101,6 +101,18 @@ function fdx_process_all(){
 				$settings['p4_check_1'] = false;
 			}
 
+            if ( isset( $_POST['p4_check_2'] ) ) {
+				$settings['p4_check_2'] = true;
+			} else {
+				$settings['p4_check_2'] = false;
+			}
+
+            if ( isset( $_POST['p4_check_3'] ) ) {
+				$settings['p4_check_3'] = true;
+			} else {
+				$settings['p4_check_3'] = false;
+			}
+
              if ( isset( $_POST['p6_check_1'] ) ) {
 				$settings['p6_check_1'] = true;
 			} else {

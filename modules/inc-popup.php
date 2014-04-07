@@ -4,8 +4,6 @@ if ($target == 'phpinfo'){
 phpinfo();
 die();
 }
-//echo '<div class="updated"><p><strong>'.__('<strong>Remember</strong> - always backup your database before upgrading!', $this->hook).'</strong></p></div>';
-//echo '<div class="error" id="errorimg"><p>'.__('AAAAAAAAAAA-BBBBBBBBBBB', $this->hook).'</p></div>';
 
 echo '<div class="fdx-popup"><table class="widefat"><thead><tr><th><strong>';
 //-----------------------------------------

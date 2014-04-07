@@ -128,7 +128,7 @@ echo '</div></div></div></div></div>';
 /*<![CDATA[*/
 jQuery(document).ready(function($){
   $('a.fdx-show-source').click(function() {
-     $($(this).attr('href')).dialog('option', { title: '<?php _e('Restore file source', $this->hook); ?>', file_path: $(this).attr('data-file'), file_hash: $(this).attr('data-hash') } ).dialog('open');  
+     $($(this).attr('href')).dialog('option', { title: '<?php _e('Restore file source', $this->hook); ?>', file_path: $(this).attr('data-file'), file_hash: $(this).attr('data-hash') } ).dialog('open');
       return false;
   });
 
@@ -137,8 +137,7 @@ jQuery(document).ready(function($){
       return false;
   });
 
-  $('#source-dialog').dialog({'dialogClass': 'wp-dialog',
-                              'modal': true,
+  $('#source-dialog').dialog({'modal': true,
                               'resizable': false,
                               'zIndex': 9999,
                               'width': 800,
@@ -150,8 +149,7 @@ jQuery(document).ready(function($){
                               'autoOpen': false,
                               'closeOnEscape': true
                               });
-  $('#restore-dialog').dialog({'dialogClass': 'wp-dialog',
-                               'modal': true,
+  $('#restore-dialog').dialog({'modal': true,
                                'resizable': false,
                                'zIndex': 9999,
                                'width': 450,

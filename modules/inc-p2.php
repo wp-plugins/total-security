@@ -348,12 +348,11 @@ $('a.fdx-dialog').click(function(event) {
               });
               return false;
 });
-$('#fdx-dialog-wrap').dialog({'dialogClass': 'wp-dialog',
-                               'modal': true,
+$('#fdx-dialog-wrap').dialog({ 'modal': true,
                                'resizable': false,
                                'zIndex': 9999,
                                'width': 700,
-                               'title': '<?php _e('Details, tips &amp; help', $this->hook)?>',
+                               'title': '<?php _e('Details, tips and help', $this->hook)?>',
                                'height': 550,
                                'hide': 'fade',
                                'show': 'fade',

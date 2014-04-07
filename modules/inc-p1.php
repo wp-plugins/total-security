@@ -125,27 +125,17 @@ echo '<p><span class="pb_label pb_label-important">X</span> '.__('The identified
 echo '<hr class="sep">';
 echo '<p><span class="pb_label pb_label-info">&#10003;</span> '.__('No security risk.', $this->hook). ' <em>('.__('If possible, replace', $this->hook).')</em></p>';
 echo '<p><span class="pb_label pb_label-desat">&Oslash;</span> '.__('Error / Unable / Deactivated', $this->hook). ' <em>('.__('No risk assessment', $this->hook).')</em></p>';
-
-
 //--------------------
-echo '</div><div class="clear"></div></div></div>';
-
+echo '</div><div class="clear"></div>';
+echo '</div></div>';
 
 //------------postbox
 echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Security Considerations for External Factors', $this->hook) . '</span></h3>';
+echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>Bookmarklets</span></h3>';
 echo '<div class="inside">';
-echo '<p><strong>i) '.__('SECURITY ON YOUR COMPUTER', $this->hook).'</strong><br/>';
-echo __('Make sure that your computer is free from malware, by regularly updating your operating system, browser and other installed software. Additionally, use antivirus software to identify some of the potential threats on your computer. Additionally, never store your FTP passwords in your FTP client.', $this->hook).'</p>';
-
-echo '<p><strong>ii) '.__('SECURITY ON YOUR WEB SERVER', $this->hook).'</strong><br/>';
-echo __('When relying on a webhosting provider for your WordPress setup, make sure that they take security seriously. Rely on well known hosting providers that have a good reputation for security and that always keep their installations updated.', $this->hook).'</p>';
-
-echo '<p><strong>iii) '.__('NETWORK SECURITY', $this->hook).'</strong><br/>';
-echo __('Be careful when using public or untrusted networks when working with your WordPress setup, especially free and unencrypted WiFi connections pose a high risk of attackers getting access to sensitive information such as passwords or session IDs. Communicate over secure networks, and rely on encrypted protocols such as FTPS and HTTPS that send all information over encrypted channels.', $this->hook).'</p>';
+echo '<p class="bookmarklet"><code><a class="pluginbuddy_tip" title="'.__('Drag this link to your bookmark bar, or right-click the link and add to Favorites', $this->hook). '" onclick="window.alert(\''.__('Drag this link to your bookmark bar, or right-click the link and add to Favorites', $this->hook). '\');return false;" href="javascript:(function(){w=410;h=650;window.open(\''.plugins_url( 'libs/bookmarklet/password_hash.php',dirname(__FILE__) ).'\',null,\'width=\'+w+\',height=\'+h+\',left=\'+parseInt((screen.availWidth/2)-(765/2))+\',top=\'+parseInt((screen.availHeight/3)-(102/2))+\'resizable=0toolbar=0,scrollbars=1,location=0,status=0,menubar=0\');})();">Password Hash&rsaquo;&rsaquo;&rsaquo;</code></a>';
+echo ' - '.__('Use to generate your passwords. It creates unique, secure passwords that are very easy for you to retrieve but no one else. Nothing is stored anywhere, anytime, so there\'s nothing to be hacked, lost, or stolen.', $this->hook). ' [<strong><a href="http://www.passwordmaker.org/" target="_blank">?</a></strong>]</p>';
 echo '<hr class="sep">';
-echo '<p>'.sprintf(__('Use <strong><a href="%1s" target="_blank">%2s</a></strong> to generate your passwords. It creates unique, secure passwords that are very easy for you to retrieve but no one else. Nothing is stored anywhere, anytime, so there\'s nothing to be hacked, lost, or stolen.', $this->hook), 'http://passwordmaker.org/', 'Password Maker' ) . '</p>';
-
 
 echo '</div></div>';
 
@@ -166,8 +156,7 @@ jQuery(document).ready(function($){
               });
               return false;
 });
-$('#fdx-dialog-wrap').dialog({'dialogClass': 'wp-dialog',
-                               'modal': true,
+$('#fdx-dialog-wrap').dialog({ 'modal': true,
                                'resizable': false,
                                'zIndex': 9999,
                                'width': 700,

@@ -243,8 +243,9 @@ xxx { background:url(../images/ext/_conf.png) no-repeat left 2px;}
  .fdx-popup { padding: 0 20px 0 20px  }
 
 #source-dialog p, #restore-dialog p {margin: 20px;}
-.wp-dialog .ui-dialog-title {padding: 3px 18px 5px 3px !important;}
 
+.bookmarklet code { font-size: 15px; font-weight: bold;   }
+.bookmarklet a { text-decoration: none; }
 
 
 /*******************************************************************************

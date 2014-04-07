@@ -58,11 +58,17 @@ $this->fdx_logevent( 2 );
 		 *
 		 **/
 		function fdx_logevent() {
+		    $settings = FDX_Process::fdx_get_settings();
  			global $wpdb;
 
  //       define( 'DONOTCACHEPAGE', true );		// WP Super Cache and W3 Total Cache recognise this
 
- 			//get default data
+ 			//ignor boots
+          	if ($settings['p4_check_2'] && !empty( $_SERVER['HTTP_USER_AGENT'] ) && preg_match( '/(bot|spider)/', $_SERVER['HTTP_USER_AGENT'] ) )
+			return;
+            //ignor whithow http refer
+            	if ($settings['p4_check_3'] && empty($_SERVER['HTTP_REFERER'] ) )
+		 	return;
 
 			$host = esc_sql( $this->fdxgetIp() );
  			$url = esc_sql( $_SERVER['REQUEST_URI'] );

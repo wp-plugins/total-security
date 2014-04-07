@@ -128,6 +128,10 @@ echo '</div><div class="fdx-right-content">';
 
 <p><input type="checkbox" class="check" id="p4_check_1" name="p4_check_1"<?php if ( $settings['p4_check_1'] ) echo ' checked'; ?> /> <strong><?php _e( 'Enable the Error 404 Log reporting', $this->hook ); ?></strong></p>
 
+<p style="margin-left: 15px"><input type="checkbox" class="check" id="p4_check_2" name="p4_check_2"<?php if ( $settings['p4_check_2'] ) echo ' checked'; ?> /> <?php _e( 'Ignore visits from robots', $this->hook ); ?>.</p>
+<p style="margin-left: 15px"><input type="checkbox" class="check" id="p4_check_3" name="p4_check_3"<?php if ( $settings['p4_check_3'] ) echo ' checked'; ?> /> <?php _e( 'Ignore visits which don\'t have an HTTP Referrer', $this->hook ); ?>.</p>
+
+
 <?php //--------------------------------------------- end
 echo '</div><div class="clear"></div></div></div>';
 
