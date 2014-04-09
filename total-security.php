@@ -30,7 +30,7 @@ class Total_Security {
         public $p2_options_key   	= 'p2_log_time';
         public $p5_options_key   	= 'p5_log_time';
         public $p5_salt         	= 'p5_hash';
-        public $p5_snippet         	= 'acid'; // ide-msvcpp | http://steamdev.com/snippet/
+        public $p5_snippet         	= 'neon'; // http://steamdev.com/snippet/
         public $p6_slug         	= 'login_key'; // /wp-login.php?login_key=1234
         public $fdx_defaults        = array(
                  'p2_op1'             => '200',
@@ -523,7 +523,7 @@ function get_file_source() {
     foreach ($files as $file) {
       $ext = pathinfo($file, PATHINFO_EXTENSION); //show only file extension
       $out .= '<li id="ext-'.$ext.'" >';
-      $out .=  ABSPATH . $file;
+      $out .=  ' ' . $file;
       if ($view) {
         $out .= ' <a data-hash="' . md5($this->p5_salt . ABSPATH . $file) . '" data-file="' . ABSPATH . $file . '" href="#source-dialog" class="fdx-show-source" title="'.__('View file source', $this->hook).'"><code id="c0">S</code></a>';
        }
@@ -545,7 +545,7 @@ function get_file_source() {
  */
 function fdx_diff_page() {
 	$file = $_GET['file'];
-    echo '<div class="fdx-popup"';
+    echo '<div class="fdx-popup">';
 	echo '<h2>'.__('Changes made to file', $this->hook). ': <code>' . esc_html($file) . '</code></h2>';
 	echo self::fdx_display_file_diff( $file );
     echo '</div>';
@@ -583,7 +583,7 @@ require_once( 'modules/class-p5.php' );
 	$text_diff = new Text_Diff( explode( "\n", $clean ), explode( "\n", $modified ) );
 	$renderer = new FDX_Text_Diff_Renderer();
 	$diff = $renderer->render( $text_diff );
-	$r  = "<table class='diff'>\n<col style='width:5px' /><col />\n";
+	$r  = "<table class=\"fdxdiff\">";
 	$r .= "<tbody>\n$diff\n</tbody>\n";
 	$r .= "</table>";
 	return $r;
