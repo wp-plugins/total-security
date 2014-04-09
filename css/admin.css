@@ -37,6 +37,9 @@ tfoot tr { display: none; }
 #red { color: #FF0000 !important;  }
 #errorimg {background-image:url('../images/h3_icons/warning.png'); background-position:10px center;background-repeat:no-repeat;padding:10px 5px  10px  65px; font-weight: bold; }
 
+/* diff ditor */
+.fdxdiff .diff-addedline { background: #E9FFE9  }
+.fdxdiff .diff-deletedline  { background:#FFE9E9  }
 
 /* show/hide */
 #hiddenoff,#hiddenoff2,#hiddenoff3 { }
@@ -246,7 +249,6 @@ xxx { background:url(../images/ext/_conf.png) no-repeat left 2px;}
 
 .bookmarklet code { font-size: 15px; font-weight: bold;   }
 .bookmarklet a { text-decoration: none; }
-
 
 /*******************************************************************************
       defaut

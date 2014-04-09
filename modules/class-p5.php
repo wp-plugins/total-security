@@ -7,13 +7,13 @@ class FDX_Text_Diff_Renderer extends Text_Diff_Renderer {
 		parent::Text_Diff_Renderer();
 	}
 	function _startBlock( $header ) {
-		return "<tr><td></td><td><code>$header</code></td></tr>\n";
+		return "<tr><td colspan='2'>&nbsp;</td></tr><tr><td colspan='2'><code>$header</code></td></tr>\n";
 	}
 	function _lines( $lines, $prefix, $class ) {
 		$r = '';
 		foreach ( $lines as $line ) {
 			$line = esc_html( $line );
-			$r .= "<tr><td>{$prefix}</td><td class='{$class}'>{$line}</td></tr>\n";
+			$r .= "<tr><td><code>{$prefix}</code></td><td class='{$class}'>{$line}</td></tr>\n";
 		}
 		return $r;
 	}
