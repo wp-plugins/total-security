@@ -4,8 +4,8 @@ Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet     
 Requires at least: 3.8.1
-Tested up to: 3.8.2
-Stable tag: 3.0.1
+Tested up to: 3.9
+Stable tag: 3.0.2
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -113,6 +113,10 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 
 == Changelog ==
+* 3.0.2
+    * Compatibility with WordPress 3.9
+    * Cosmetic fixes
+
 * 3.0.1
     * Compatibility with WordPress 3.8.2
 

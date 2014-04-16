@@ -68,34 +68,34 @@ $p5_red_total = get_site_option( 'fdx_p5_red_total' );
       echo '<thead><tr>';
       echo '<th>&nbsp;</th><th><small>'.__('Last run on', $this->hook).'</small></th><th style="text-align: center"><small>'.__('Medium Risk', $this->hook).'</small></th><th style="text-align: center"><small>'.__('High Risk', $this->hook).'</small></th><th style="text-align: center"><small>'. __('Overall Risk Rating', $this->hook) . '</small></th>';
       echo '</tr></thead><tbody><tr id="hiddenoff">';
-      echo '<td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p5). '">WP Core</a></h1></td><td class="ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), $results['last_run']) . '</td><td class="rating">';
+      echo '<td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p5). '">WP Core</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), $results['last_run']) . '</td><td class="fdx_rating">';
 
       if ($p5_red_total == '0' ) {
-      echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="rating"><span id="r-0"></span>';
+      echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span id="r-0"></span>';
       } else {
-      echo '<span class="pb_label pb_label-info">&#10003;</span></td><td class="rating"><span class="pb_label pb_label-important">1</span></td><td class="rating"><span id="r-9"></span>';
+      echo '<span class="pb_label pb_label-info">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-important">1</span></td><td class="fdx_rating"><span id="r-9"></span>';
       }
-      echo '</tr><tr class="alternate" id="hiddenoff2"><td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p3). '">File System</a></h1></td><td class="ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), get_site_option( 'p3_log_time') ) . '</td><td class="rating">';
+      echo '</tr><tr class="alternate" id="hiddenoff2"><td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p3). '">File System</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), get_site_option( 'p3_log_time') ) . '</td><td class="fdx_rating">';
 
      if ($p3_red_total == '0') {
-      echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="rating"><span id="r-1"></span>';
+      echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span id="r-1"></span>';
      } else {
-      echo '<span class="pb_label pb_label-info">&#10003;</span></td><td class="rating"><span class="pb_label pb_label-important">1</span></td><td class="rating"><span id="r-8"></span>';
+      echo '<span class="pb_label pb_label-info">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-important">1</span></td><td class="fdx_rating"><span id="r-8"></span>';
      }
 
-      echo '</td></tr><tr id="hiddenoff3"><td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p2). '">Vulnerability</a></h1></td><td class="ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), $tests['last_run']) . '</td><td class="rating">';
+      echo '</td></tr><tr id="hiddenoff3"><td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p2). '">Vulnerability</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), $tests['last_run']) . '</td><td class="fdx_rating">';
 
       if ($p2_yel_total == '0' && $p2_red_total == '0') {
-      echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="rating"><span id="r-2"></span>';
+      echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span id="r-2"></span>';
 
       } elseif ($p2_yel_total != '0' && $p2_red_total == '0') {
-      echo '<span class="pb_label pb_label-warning">'.$p2_yel_total.'</span></td><td class="rating"><span class="pb_label pb_label-important">'.$p2_red_total.'</span></td><td class="rating"><span id="r-'.$yel_total2.'"></span>';
+      echo '<span class="pb_label pb_label-warning">'.$p2_yel_total.'</span></td><td class="fdx_rating"><span class="pb_label pb_label-important">'.$p2_red_total.'</span></td><td class="fdx_rating"><span id="r-'.$yel_total2.'"></span>';
 
       } elseif ($p2_yel_total == '0' && $p2_red_total != '0') {
-      echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="rating"><span class="pb_label pb_label-important">'.$p2_red_total.'</span></td><td class="rating"><span id="r-9"></span>';
+      echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-important">'.$p2_red_total.'</span></td><td class="fdx_rating"><span id="r-9"></span>';
 
       } else {
-      echo '<span class="pb_label pb_label-warning">'.$p2_yel_total.'</span></td><td class="rating"><span class="pb_label pb_label-important">'.$p2_red_total.'</span></td><td class="rating"><span id="r-9"></span>';
+      echo '<span class="pb_label pb_label-warning">'.$p2_yel_total.'</span></td><td class="fdx_rating"><span class="pb_label pb_label-important">'.$p2_red_total.'</span></td><td class="fdx_rating"><span id="r-9"></span>';
        }
 
      echo '</tr></tbody></table><div class="tab_legen">*'.__('Rerun the checks after changes in your configuration.', $this->hook).'</div>';

@@ -290,15 +290,15 @@ echo '<br />'.__('It was designed to clearly show at a single glance what securi
   	echo '</tr></thead><tbody>';
     $siteurl = get_bloginfo('url');
     $wpurl = get_bloginfo('wpurl');
-    fdx_check_perms("<span id='mime0'>/</span>","../","750", "info");
-    fdx_check_perms("<span id='mime1'>wp-admin</span>","../wp-admin","750", "info");
-	fdx_check_perms("<span id='mime1'>wp-content</span>","../wp-content","750", "info");
-    fdx_check_perms("<span id='mime1'>wp-includes</span>","../wp-includes","750", "info");
+    fdx_check_perms("<span id='mime0'>/</span>","../","755", "info");
+    fdx_check_perms("<span id='mime1'>wp-admin</span>","../wp-admin","755", "info");
+	fdx_check_perms("<span id='mime1'>wp-content</span>","../wp-content","755", "info");
+    fdx_check_perms("<span id='mime1'>wp-includes</span>","../wp-includes","755", "info");
     if ($siteurl == $wpurl) {
     fdx_check_perms("<span id='mime2'>.htaccess</span>",ABSPATH."/.htaccess","444", "important");
     fdx_check_perms("<span id='mime3'>index.php</span>",ABSPATH."/index.php","640", "info");
     } else {
-    fdx_check_perms("<span id='mime2'>.htaccess</span>",dirname(ABSPATH)."/.htaccess","444", "info");
+     fdx_check_perms("<span id='mime2'>.htaccess</span>",dirname(ABSPATH)."/.htaccess","444", "important");
      fdx_check_perms("<span id='mime3'>index.php</span>",dirname(ABSPATH)."/index.php","640", "info");
     }
     fdx_check_perms("<span id='mime3'>wp-config.php</span>","../wp-config.php","400", "important");
