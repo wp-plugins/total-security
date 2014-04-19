@@ -17,7 +17,7 @@ echo '<h2>'. $this->pluginname . ' : ' . __('Settings', $this->hook) . '</h2>';
 
 //mesages alert
 if ( isset($_POST['fdx_page']) ) {
-echo '<div class="updated fade"><p><strong>' . __( 'Settings updated', $this->hook ) . '.</strong></p></div>';
+echo '<div class="box-shortcode box-green"><strong>' . __( 'Settings updated', $this->hook ) . '.</strong></div>';
 }
 
 

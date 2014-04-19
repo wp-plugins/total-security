@@ -17,30 +17,33 @@ echo '<h2>'. $this->pluginname . ' : ' . __('Dashboard', $this->hook) . '</h2>';
 <a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p4); ?>">404 Log</a>
 <a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p6); ?>"><?php _e('Settings', $this->hook); ?></a>
 </h2>
+
+
+
 <?php
 if (!$tests['last_run']) {
 echo <<<END
 <style type="text/css">
 #hiddenoff3 {opacity:0.1!important;}
-#showtime3  {display: inline-block}
 </style>
 END;
+echo '<div class="box-shortcode box-yellow">'.__( 'Vulnerability', $this->hook ).': '.__('Unexecuted!', $this->hook).'</div>';
 }
 if( !get_site_option( 'p3_log_time' ) ) {
 echo <<<END
 <style type="text/css">
 #hiddenoff2 {opacity:0.1!important;}
-#showtime2  {display: inline-block}
 </style>
 END;
+echo '<div class="box-shortcode box-yellow">'.__( 'File System', $this->hook ).': '.__('Unexecuted!', $this->hook).'</div>';
 }
 if (!$results['last_run']) {
 echo <<<END
 <style type="text/css">
 #hiddenoff {opacity:0.1!important;}
-#showtime  {display: inline-block}
 </style>
 END;
+echo '<div class="box-shortcode box-yellow">'.__( 'WP Core', $this->hook ).': '.__('Unexecuted!', $this->hook).'</div>';
 }
 
 /* poststuff and sidebar
@@ -51,7 +54,7 @@ echo '<div class="postbox-container"><div class="meta-box-sortables">';
 
 //------------postbox
 echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Security Status', $this->hook) . '</span> <div id="showtime"><code id="c1">'.__( 'WP Core', $this->hook ).': '.__('Unexecuted!', $this->hook).'</code></div> <div id="showtime2"><code id="c1">'.__( 'File System', $this->hook ).': '.__('Unexecuted!', $this->hook).'</code></div> <div id="showtime3"><code id="c1">'.__( 'Vulnerability', $this->hook ).': '.__('Unexecuted!', $this->hook).'</code></div></h3>';
+echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Security Status', $this->hook) . '</span></h3>';
 echo '<div class="inside">';
 //p2
 $p2_yel_total = get_site_option( 'fdx_p2_yel_total' );

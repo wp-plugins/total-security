@@ -1,4 +1,11 @@
 <?php
+# Donation Message #
+if( get_site_option( 'fdx1_hidden_time' ) && get_site_option( 'fdx1_hidden_time' ) < time() ) {
+echo '<div class="updated"><form method="post" action=""><input type="hidden" name="fdx_page" value="hide_message" /><p>';
+echo '<strong>Is this plugin useful? Consider making a donation encouraging me to continue supporting it!</strong> &nbsp;&nbsp;<input type="button" class="button button-primary" onClick="location.href=\'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y\'" value=\'' . __( 'DONATE', $this->hook ) . '\'>&nbsp;&nbsp;&nbsp;';
+submit_button( __('Hide this message', $this->hook ), 'secondary', 'Submit', false, array( 'id' => '' ) ) ;
+echo '</p></form></div>';
+}
 /*---------------------------------------*/
 echo '<div id="postbox-container-1" class="postbox-container">';
 echo '<div id="side-sortables" class="meta-box-sortables">';

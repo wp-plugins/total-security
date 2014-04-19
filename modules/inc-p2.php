@@ -222,11 +222,11 @@ echo '<h2>'. $this->pluginname . ' : ' . __('Vulnerability', $this->hook) . '</h
 <?php
 //display warning if test were never run
 if (!$tests['last_run']) {
-    echo '<div class="error" id="errorimg"><p>'.__('Not yet executed!', $this->hook).'</p></div>';
+    echo '<div class="box-shortcode box-yellow">'.__('Not yet executed!', $this->hook).'</div>';
     } elseif ((current_time('timestamp') - 15*24*60*60) > $tests['last_run']) {
-    echo '<div class="error" id="errorimg"><p>'. sprintf( __('<strong>Warning:</strong> The vulnerability information for this system is <code>%s</code> days old!' , $this->hook) , '15' ) . '</p></div>';
+    echo '<div class="box-shortcode box-yellow">'. sprintf( __('<strong>Warning:</strong> The vulnerability information for this system is <code>%s</code> days old!' , $this->hook) , '15' ) . '</div>';
     } else {
-    echo '<div class="updated"><p>'.__('Last run on', $this->hook).': <strong>' . date(get_option('date_format') . ', ' . get_option('time_format'), $tests['last_run']) . '</strong></p></div>';
+    echo '<div class="box-shortcode box-blue">'.__('Last run on', $this->hook).': <strong>' . date(get_option('date_format') . ', ' . get_option('time_format'), $tests['last_run']) . '</strong></div>';
 }
 
 
