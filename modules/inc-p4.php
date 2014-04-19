@@ -17,7 +17,7 @@ echo '<h2>'. $this->pluginname . ' :  404 Log</h2>';
 </h2>
 <?php
  if( ! get_option( 'permalink_structure' ) ) {
- echo '<div class="error" id="errorimg"><p>'. sprintf( __('You need to be using pretty <a href="%s">permalinks</a> for this function.', $this->hook), admin_url('options-permalink.php') ) . '</p></div>';
+ echo '<div class="box-shortcode box-red">'. sprintf( __('You need to be using pretty <a href="%s">permalinks</a> for this function.', $this->hook), admin_url('options-permalink.php') ) . '</div>';
 echo <<<END
 <style type="text/css">
 #hiddenoff {opacity:0.5 !important;}
@@ -33,7 +33,7 @@ END;
 
 //abc
 if ( isset($_POST['fdx_page']) ) {
-echo '<div class="updated fade"><p><strong>' . __( 'Settings updated', $this->hook ) . '.</strong></p></div>';
+echo '<div class="box-shortcode box-green"><strong>' . __( 'All logs were Deleted', $this->hook ) . '!</strong></div>';
 }
 
 /* poststuff and sidebar

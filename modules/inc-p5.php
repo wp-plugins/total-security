@@ -18,10 +18,10 @@ echo '<h2>'. $this->pluginname . ' : ' . __('WP Core', $this->hook) . '</h2>';
 // minimal version of WP core
  if (!version_compare(get_bloginfo('version'), $this->min_wp_ver,  '>=')) {
 
- echo '<div class="error" id="errorimg"><p>'. sprintf( __('This feature requires the WordPress version <code>%1s</code> or above, to function properly. You\'re using WordPress version <code>%2s</code>, please <a href="%3s">update</a>.' , $this->hook) , $this->min_wp_ver, get_bloginfo('version'), admin_url('update-core.php') ) . '</p></div>';
+ echo '<div class="box-shortcode box-red">'. sprintf( __('This feature requires the WordPress version <code>%1s</code> or above, to function properly. You\'re using WordPress version <code>%2s</code>, please <a href="%3s">update</a>.' , $this->hook) , $this->min_wp_ver, get_bloginfo('version'), admin_url('update-core.php') ) . '</div>';
  echo <<<END
 <style type="text/css">
-#hiddenoff {opacity:0.5 !important;}
+#hiddenoff {opacity:0.4 !important;}
 </style>
 <script>
 jQuery(document).ready(function($){
@@ -34,11 +34,11 @@ END;
 
 //display warning if test were never run
 if (!$results['last_run']) {
-      echo '<div class="error" id="errorimg"><p>'.__('Not yet executed!', $this->hook).'</p></div>';
+      echo '<div class="box-shortcode box-yellow">'.__('Not yet executed!', $this->hook).'</div>';
     } elseif ((current_time('timestamp') - 15*24*60*60) > $results['last_run']) {
-      echo '<div class="error" id="errorimg"><p>'. sprintf( __('Executed for more than <code>%s</code> days. Click in button "Execute" for a new analysis.' , $this->hook) , '15' ) . '</p></div>';
+      echo '<div class="box-shortcode box-yellow">'. sprintf( __('Executed for more than <code>%s</code> days. Click in button "Execute" for a new analysis.' , $this->hook) , '15' ) . '</div>';
     } else {
-      echo '<div class="updated"><p>'.__('Last run on', $this->hook).': <strong>' . date(get_option('date_format') . ', ' . get_option('time_format'), $results['last_run']) . '</strong></p></div>';
+      echo '<div class="box-shortcode box-blue">'.__('Last run on', $this->hook).': <strong>' . date(get_option('date_format') . ', ' . get_option('time_format'), $results['last_run']) . '</strong></div>';
 
     }
 

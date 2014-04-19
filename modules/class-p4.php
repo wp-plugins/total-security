@@ -218,7 +218,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
        // process bulk deletes
 	        if( 'delete' === $this->current_action() ) {
 			$deleted = $this->bulk_delete();
-			echo '<div id="message" class="updated"><p>' . $deleted . ' rows deleted</p></div>';
+			echo '<div class="box-shortcode box-green">' . $deleted . ' rows deleted</div>';
 	    	}
 
 			$columns = $this->get_columns();

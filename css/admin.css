@@ -32,7 +32,6 @@ tfoot tr { display: none; }
 /* hacks */
 .last_scan { font-size: 11px; float: right;  font-style: italic ; margin-right:  }
 #red { color: #FF0000 !important;  }
-#errorimg {background-image:url('../images/h3_icons/warning.png'); background-position:10px center;background-repeat:no-repeat;padding:10px 5px  10px  65px; font-weight: bold; }
 
 /* diff ditor */
 .fdxdiff .diff-addedline { background: #E9FFE9  }
@@ -375,10 +374,27 @@ border-bottom: 1px solid #e6e6e6; border-top: none; border-left: none; border-ri
  }
 
 
-/*.fdx-clear {
-	clear: both;
-}
-*/
-
 .button_submit { text-align: center }
 .button_reset  { float: left; margin-left: 0; margin-top: -25px }
+
+
+/*
+|--------------------------------------------------------------------------
+| Boxes   || <div class="updated"> || <div class="error">
+|--------------------------------------------------------------------------
+| <div class="box-shortcode box-blue">
+| <div class="box-shortcode box-yellow">
+| <div class="box-shortcode box-red">
+| <div class="box-shortcode box-green">
+*/
+.box-shortcode{color:#666;font-family:'Lucida Grande', Verdana, Arial, Sans-Serif;font-size:12px !important;margin:5px 0;padding:10px;}
+.box-shortcode a:hover{text-decoration:underline !important;}
+.box-red{background-color:#FFB8B8;border:1px solid #BF2F2F;color:#BF2F2F;background-image:url('../images/error2.png');}
+.box-red a{color:#BF2F2F !important;font-weight:700;}
+.box-yellow{background-color:#FFC;border:1px solid #996600;color:#960;background-image:url('../images/warning.png');}
+.box-yellow a{color:#960 !important;font-weight:700;}
+.box-green{background-color:#CF9;border:1px solid #336600;color:#360;background-image:url('../images/success.png');}
+.box-green a{color:#360 !important;font-weight:700;}
+.box-blue{background-color:#D1F2F5;border:1px solid #3887B1;color:#38878E;background-image:url('../images/info0.png');}
+.box-blue a{color:#38878E !important;font-weight:700;}
+.box-blue,.box-green,.box-yellow,.box-red{background-position:10px center;background-repeat:no-repeat;margin:15px 10px;padding:15px 5px 15px 50px; border-radius: 10px }
