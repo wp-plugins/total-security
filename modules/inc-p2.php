@@ -208,9 +208,18 @@ function fdx_check_perms($name,$path,$perm, $class) {
 
 /* wrap
 *********************************************************************************/
-echo '<div class="wrap">'. get_screen_icon('fdx-lock');
-echo '<h2>'. $this->pluginname . ' : ' . __('Vulnerability Scan', $this->hook) . '</h2>';
-
+echo '<div class="wrap">';
+echo '<h2>'. $this->pluginname . ' : ' . __('Vulnerability', $this->hook) . '</h2>';
+?>
+<h2 class="nav-tab-wrapper">
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook); ?>"><?php _e('Dashboard', $this->hook); ?></a>
+<a class="nav-tab nav-tab-active" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p2); ?>"><?php _e('Vulnerability', $this->hook ); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p3); ?>"><?php _e('File System', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p5); ?>"><?php _e('WP Core', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p4); ?>">404 Log</a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p6); ?>"><?php _e('Settings', $this->hook); ?></a>
+</h2>
+<?php
 //display warning if test were never run
 if (!$tests['last_run']) {
     echo '<div class="error" id="errorimg"><p>'.__('Not yet executed!', $this->hook).'</p></div>';
@@ -229,7 +238,7 @@ echo '<div class="postbox-container"><div class="meta-box-sortables">';
 
 //------------postbox 1
 echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Vulnerability Scan', $this->hook) . '</span>&nbsp;&nbsp;&nbsp;';
+echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Vulnerability', $this->hook) . '</span>&nbsp;&nbsp;&nbsp;';
 submit_button( __('Execute', $this->hook ), 'primary', 'Submit', false, array( 'id' => 'run-tests' ) );
 echo '</h3><div class="inside">';
 //left

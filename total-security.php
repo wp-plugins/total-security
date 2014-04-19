@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 3.0.2
+ * Version: 3.0.3
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -14,9 +14,9 @@
 
 class Total_Security {
         public $min_wp_ver 	        = '3.9'; //
-  		public $pluginversion 	    = '3.0.2';
+  		public $pluginversion 	    = '3.0.3';
 
-        public $php_lastver 	    = '5.5.10'; // PHP - http://php.net/downloads.php
+        public $php_lastver 	    = '5.5.11'; // PHP - http://php.net/downloads.php
         public $mySQL_lastver 	    = '5.6.17'; // MYSQL - http://dev.mysql.com/downloads/
 
         public $pluginname			= 'Total Security';
@@ -48,7 +48,6 @@ class Total_Security {
         public $sbar_homepage       = 'http://fabrix.net/total-security/';
         public $sbar_glotpress      = 'http://i.fabrix.net/gKqPN';
         public $sbar_supportpage    = 'http://wordpress.org/extend/plugins/total-security/';
-        public $sbar_paypalcode     = '8DHY4NXW35T4Y';
         public $sbar_rss            = 'http://feeds.feedburner.com/fdxplugins/';
 
 	function __construct() {
@@ -165,19 +164,10 @@ $fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
 		    	$fdx_menu_ico
 			);
 
-            add_submenu_page(
-					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Error 404 Log', $this->hook ),
-					__( 'Error 404 Log', $this->hook ),
-					$this->accesslvl,
-                      $this->hook . '-'.$this->_p4,
-					array( $this, 'fdx_options_subpanel_p4' )
-				);
-
 			add_submenu_page(
 					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Vulnerability Scan', $this->hook ),
-					'Check ~ Vulnerability',
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Vulnerability', $this->hook ),
+					__( 'Vulnerability', $this->hook ),
 					$this->accesslvl,
                       $this->hook . '-'.$this->_p2,
 					array( $this, 'fdx_options_subpanel_p2' )
@@ -185,8 +175,8 @@ $fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
 
                 add_submenu_page(
 					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Unsafe Files Search', $this->hook ),
-					'Check ~ File System',
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'File System', $this->hook ),
+					__( 'File System', $this->hook ),
 					$this->accesslvl,
                       $this->hook . '-'.$this->_p3,
 					array( $this, 'fdx_options_subpanel_p3' )
@@ -194,16 +184,25 @@ $fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
 
                 add_submenu_page(
 					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Core Exploit Scanner', $this->hook ),
-				    'Check ~ WP Core',
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'WP Core', $this->hook ),
+				    __( 'WP Core', $this->hook ),
 					$this->accesslvl,
                     $this->hook . '-'.$this->_p5,
 					array( $this, 'fdx_options_subpanel_p5' )
 				);
 
+            add_submenu_page(
+					$this->hook,
+					__( $this->pluginname, $this->hook ) . ' - 404 Log',
+					'404 Log',
+					$this->accesslvl,
+                      $this->hook . '-'.$this->_p4,
+					array( $this, 'fdx_options_subpanel_p4' )
+				);
+
                add_submenu_page(
 					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Settings and Setup', $this->hook ),
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Settings', $this->hook ),
 					__( 'Settings', $this->hook ),
 					$this->accesslvl,
                     $this->hook . '-'.$this->_p6,

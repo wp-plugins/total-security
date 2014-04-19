@@ -4,9 +4,18 @@ $tests = get_option($this->p2_options_key);
 
 /* wrap
 *********************************************************************************/
-echo '<div class="wrap">'. get_screen_icon('fdx-lock');
-echo '<h2>'. $this->pluginname . ' : ' . __('Error 404 Log', $this->hook) . '</h2>';
-
+echo '<div class="wrap">';
+echo '<h2>'. $this->pluginname . ' :  404 Log</h2>';
+?>
+<h2 class="nav-tab-wrapper">
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook); ?>"><?php _e('Dashboard', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p2); ?>"><?php _e('Vulnerability', $this->hook ); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p3); ?>"><?php _e('File System', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p5); ?>"><?php _e('WP Core', $this->hook); ?></a>
+<a class="nav-tab nav-tab-active" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p4); ?>">404 Log</a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p6); ?>"><?php _e('Settings', $this->hook); ?></a>
+</h2>
+<?php
  if( ! get_option( 'permalink_structure' ) ) {
  echo '<div class="error" id="errorimg"><p>'. sprintf( __('You need to be using pretty <a href="%s">permalinks</a> for this function.', $this->hook), admin_url('options-permalink.php') ) . '</p></div>';
 echo <<<END
@@ -35,7 +44,7 @@ echo '<div class="postbox-container"><div class="meta-box-sortables" id="hiddeno
 
 //------------postbox 1
 echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Error 404 Log', $this->hook) . '</span></h3>';
+echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>404 Log</span></h3>';
 echo '<div class="inside">';
 //-----------------------------------------
 

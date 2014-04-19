@@ -4,13 +4,20 @@ $tests = get_option($this->p2_options_key); //time
 $p2_url2 = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'phpinfo' ), menu_page_url( $this->hook , false ) );
 $p2_url3 = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'tableinfo' ), menu_page_url( $this->hook , false ) );
 $p2_url4 = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'debug' ), menu_page_url( $this->hook , false ) );
-
-
 /* wrap
 *********************************************************************************/
-echo '<div class="wrap">'. get_screen_icon('fdx-lock');
+echo '<div class="wrap">';
 echo '<h2>'. $this->pluginname . ' : ' . __('Dashboard', $this->hook) . '</h2>';
-
+?>
+<h2 class="nav-tab-wrapper">
+<a class="nav-tab nav-tab-active" href="<?php echo admin_url('admin.php?page='.$this->hook); ?>"><?php _e('Dashboard', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p2); ?>"><?php _e('Vulnerability', $this->hook ); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p3); ?>"><?php _e('File System', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p5); ?>"><?php _e('WP Core', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p4); ?>">404 Log</a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p6); ?>"><?php _e('Settings', $this->hook); ?></a>
+</h2>
+<?php
 if (!$tests['last_run']) {
 echo <<<END
 <style type="text/css">
@@ -44,7 +51,7 @@ echo '<div class="postbox-container"><div class="meta-box-sortables">';
 
 //------------postbox
 echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Security Status', $this->hook) . '</span> <div id="showtime"><code id="c1">WP Core: '.__('Unexecuted!', $this->hook).'</code></div> <div id="showtime2"><code id="c1">File System: '.__('Unexecuted!', $this->hook).'</code></div> <div id="showtime3"><code id="c1">Vulnerability: '.__('Unexecuted!', $this->hook).'</code></div></h3>';
+echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Security Status', $this->hook) . '</span> <div id="showtime"><code id="c1">'.__( 'WP Core', $this->hook ).': '.__('Unexecuted!', $this->hook).'</code></div> <div id="showtime2"><code id="c1">'.__( 'File System', $this->hook ).': '.__('Unexecuted!', $this->hook).'</code></div> <div id="showtime3"><code id="c1">'.__( 'Vulnerability', $this->hook ).': '.__('Unexecuted!', $this->hook).'</code></div></h3>';
 echo '<div class="inside">';
 //p2
 $p2_yel_total = get_site_option( 'fdx_p2_yel_total' );
@@ -68,14 +75,14 @@ $p5_red_total = get_site_option( 'fdx_p5_red_total' );
       echo '<thead><tr>';
       echo '<th>&nbsp;</th><th><small>'.__('Last run on', $this->hook).'</small></th><th style="text-align: center"><small>'.__('Medium Risk', $this->hook).'</small></th><th style="text-align: center"><small>'.__('High Risk', $this->hook).'</small></th><th style="text-align: center"><small>'. __('Overall Risk Rating', $this->hook) . '</small></th>';
       echo '</tr></thead><tbody><tr id="hiddenoff">';
-      echo '<td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p5). '">WP Core</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), $results['last_run']) . '</td><td class="fdx_rating">';
+      echo '<td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p5). '">'.__( 'WP Core', $this->hook ).'</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), $results['last_run']) . '</td><td class="fdx_rating">';
 
       if ($p5_red_total == '0' ) {
       echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span id="r-0"></span>';
       } else {
       echo '<span class="pb_label pb_label-info">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-important">1</span></td><td class="fdx_rating"><span id="r-9"></span>';
       }
-      echo '</tr><tr class="alternate" id="hiddenoff2"><td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p3). '">File System</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), get_site_option( 'p3_log_time') ) . '</td><td class="fdx_rating">';
+      echo '</tr><tr class="alternate" id="hiddenoff2"><td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p3). '">'.__( 'File System', $this->hook ).'</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), get_site_option( 'p3_log_time') ) . '</td><td class="fdx_rating">';
 
      if ($p3_red_total == '0') {
       echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span id="r-1"></span>';
@@ -83,7 +90,7 @@ $p5_red_total = get_site_option( 'fdx_p5_red_total' );
       echo '<span class="pb_label pb_label-info">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-important">1</span></td><td class="fdx_rating"><span id="r-8"></span>';
      }
 
-      echo '</td></tr><tr id="hiddenoff3"><td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p2). '">Vulnerability</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), $tests['last_run']) . '</td><td class="fdx_rating">';
+      echo '</td></tr><tr id="hiddenoff3"><td><h1><a href="'. admin_url('admin.php?page='.$this->hook . '-'.$this->_p2). '">'.__( 'Vulnerability', $this->hook ).'</a></h1></td><td class="fdx_ratingtime">' . date(get_option('date_format') . ', ' . get_option('time_format'), $tests['last_run']) . '</td><td class="fdx_rating">';
 
       if ($p2_yel_total == '0' && $p2_red_total == '0') {
       echo '<span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span class="pb_label pb_label-success">&#10003;</span></td><td class="fdx_rating"><span id="r-2"></span>';
@@ -161,7 +168,7 @@ $('#fdx-dialog-wrap').dialog({ 'dialogClass': 'wp-dialog',
                                'resizable': false,
                                'zIndex': 9999,
                                'width': 700,
-                               'title': '',
+                               'title': '<?php _e('Additional Info', $this->hook)?>',
                                'height': 550,
                                'hide': 'fade',
                                'show': 'fade',

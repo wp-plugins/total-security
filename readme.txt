@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet     
 Requires at least: 3.8.1
 Tested up to: 3.9
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -13,7 +13,7 @@ Checks your WordPress installation and provides detailed reporting on discovered
 == Description ==
 The **Total Security** plugin is the must-have tool when it comes security of your WordPress installation. The plugin monitors your website for security weaknesses that hackers might exploit and tells you how to easily fix them.
 
-= Vulnerability Scan =
+= Vulnerability =
 
 * Check your site for security vulnerabilities and holes.
 * numerous installation parameters tests
@@ -23,7 +23,7 @@ The **Total Security** plugin is the must-have tool when it comes security of yo
 * detailed help and description
 
 
-= Core Exploit Scanner =
+= WP Core =
 
 * scan WP core files with one click
 * quickly identify problematic files
@@ -33,7 +33,7 @@ The **Total Security** plugin is the must-have tool when it comes security of yo
 * restore modified files with one click
 
 
-= Unsafe Files Search =
+= File System =
 
 Scours your file system by suspicious or potentially malicious files, compressed, log, binary, data, and temporary files. And any unknown file in WP core.
  
@@ -59,9 +59,9 @@ Scours your file system by suspicious or potentially malicious files, compressed
 
 = Usage =
 
-For Vulnerability Scan: Once you click the `One Click Scan` button all tests will be run,
+For Vulnerability : Once you click the `One Click Scan` button all tests will be run,
 
-For Core Exploit Scanner: Once you click the `One Click Scanner` button all tests will be run,
+For WP Core: Once you click the `One Click Scanner` button all tests will be run,
 
 depending on various parameters of your site this can take from ten seconds to 2-3 minutes. Please don't reload the page until testing is done.
 
@@ -90,9 +90,9 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 == Screenshots ==
 1. Dashboard
-2. Vulnerability Scan
-3. Unsafe Files Search
-4. Core Exploit Scanner
+2. Vulnerability
+3. File System
+4. WP Core
 5. Secure Hidden Login - Setup
 6. Error 404 Log
 
@@ -113,6 +113,10 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 
 == Changelog ==
+* 3.0.3
+    * NEW - Navigation Tabs
+    * IMPROVED - Minor interface tweaks
+
 * 3.0.2
     * Compatibility with WordPress 3.9
     * Cosmetic fixes
@@ -202,7 +206,7 @@ We'd love for you to get involved. Whatever your level of skill or however much 
     * Compatibility with WordPress 3.5
 
 * 2.0.342
-    * Add new feature: Unsafe Files Search
+    * Add new feature: File System
     * Performance improvements.
 
 * 1.1

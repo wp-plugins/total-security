@@ -189,31 +189,50 @@ function fdx_format_size($rawSize) {
 
 //debug
 } elseif ($target == 'debug'){
-
-function fdx_url_method() {
-	if(function_exists('curl_init')) {
-		return 'curl';
-	} else if(ini_get('allow_url_fopen') && function_exists('stream_get_contents')) {
-		return 'fopen';
-	} else {
-		return 'fsockopen';
-	}
-}
-global $wp_version;
-echo __('Debug Information', $this->hook);
-echo '</strong></th></tr></thead><tbody><tr class="alternate"><td>';
+echo '<div align="center"><a class="button button-primary" href="javascript:selectcopy(\'test.select1\')">'. __('Select All', $this->hook).' </a></div></th></tr></thead><tbody><tr><td class="alternate">';
 echo '<form name="test">';
-echo '<div align="center"><p><a class="button" href="javascript:selectcopy(\'test.select1\')">'. __('Select All', $this->hook).' </a></p><textarea style="width:95%; height:350px; margin-bottom: 20px" name="select1">';
-echo 'User Agent =  ' . esc_html($_SERVER['HTTP_USER_AGENT']) . "\n";
-echo 'Server Software = ' . esc_html($_SERVER['SERVER_SOFTWARE']) . "\n";
-echo 'PHP = ' .  phpversion() . "\n";
-echo 'URLOpen Method = ' .  fdx_url_method() . "\n";
-echo '------------------------------------------------------------'. "\n";
-echo 'WP =  ' .$wp_version . "\n";
-echo 'Language = ' . get_bloginfo('language'). "\n";
-echo 'Charset = ' .  get_bloginfo('charset'). "\n";
-echo 'Active Theme = ' . $theme = wp_get_theme();  $theme['Name'] . $theme['Version'] . "\n";
-echo "\n". '------------------------------------------------------------'. "\n";
+echo '<div align="center"><textarea readonly="readonly" style="width:100%; height:350px; overflow: auto;white-space: pre; font-size:11px" name="select1">';
+?>
+SITE_URL: <?php echo site_url() . "\n"; ?>
+PLUGIN_URL: <?php echo plugins_url() . "\n"; ?>
+
+HTTP_HOST: <?php echo $_SERVER['HTTP_HOST'] . "\n"; ?>
+SERVER_PORT: <?php echo isset( $_SERVER['SERVER_PORT'] ) ? 'On (' . $_SERVER['SERVER_PORT'] . ')' : 'N/A'; echo "\n"; ?>
+HTTP_X_FORWARDED_PROTO: <?php echo isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ? 'On (' . $_SERVER['HTTP_X_FORWARDED_PROTO'] . ')' : 'N/A'; echo "\n"; ?>
+
+MULTI-SITE: <?php echo is_multisite() ? 'Yes' . "\n" : 'No' . "\n" ?>
+WORDPRESS VERSION: <?php echo get_bloginfo( 'version' ) . "\n"; ?>
+
+PHP VERSION: <?php echo PHP_VERSION . "\n"; ?>
+MYSQL VERSION: <?php echo mysql_get_server_info() . "\n"; ?>
+WEB SERVER INFO: <?php echo $_SERVER['SERVER_SOFTWARE'] . "\n"; ?>
+
+SESSION: <?php echo isset( $_SESSION ) ? 'Enabled' : 'Disabled'; echo "\n"; ?>
+SESSION:NAME: <?php echo esc_html( ini_get( 'session.name' ) ); echo "\n"; ?>
+
+COOKIE PATH: <?php echo esc_html( ini_get( 'session.cookie_path' ) ); echo "\n"; ?>
+SAVE PATH: <?php echo esc_html( ini_get( 'session.save_path' ) ); echo "\n"; ?>
+USE COOKIES: <?php echo ini_get( 'session.use_cookies' ) ? 'On' : 'Off'; echo "\n"; ?>
+USE ONLY COOKIES: <?php echo ini_get( 'session.use_only_cookies' ) ? 'On' : 'Off'; echo "\n"; ?>
+
+PHP/CURL: <?php echo function_exists( 'curl_init'   ) ? "Supported" : "Not supported"; echo "\n"; ?>
+<?php if( function_exists( 'curl_init' ) ): ?>
+PHP/CURL/VER: <?php $v = curl_version(); echo $v['version']; echo "\n"; ?>
+PHP/CURL/SSL: <?php $v = curl_version(); echo $v['ssl_version']; echo "\n"; ?><?php endif; ?>
+PHP/FSOCKOPEN: <?php echo function_exists( 'fsockopen'   ) ? "Supported" : "Not supported"; echo "\n"; ?>
+PHP/JSON: <?php echo function_exists( 'json_decode' ) ? "Supported" : "Not supported"; echo "\n"; ?>
+
+USER AGENT: <?php echo esc_html($_SERVER['HTTP_USER_AGENT']); echo "\n"; ?>
+LANGUAGE / CHARSET: <?php echo get_bloginfo('language'). ' / ' . get_bloginfo('charset'); echo "\n"; ?>
+CURRENT THEME: <?php
+if ( get_bloginfo( 'version' ) < '3.4' ) {
+	$theme_data = get_theme_data( get_stylesheet_directory() . '/style.css' );
+	echo $theme_data['Name'] . ': ' . $theme_data['Version'];
+} else {
+	$theme_data = wp_get_theme();
+	echo $theme_data->Name . ': ' . $theme_data->Version;
+}
+echo "\n". '------------------------PLUGINS---------------------------'. "\n";
 foreach (get_plugins() as $key => $plugin) {
     $isactive = "";
     if (is_plugin_active($key)) {
@@ -237,8 +256,6 @@ $FDX_orig_path = ABSPATH.'./.htaccess';
               }
        }
 echo '</textarea></div></form>';
-
-
 //-----------------------------------------
 }
 echo '</td></tr></tbody></table></div>';

@@ -2,9 +2,18 @@
 $settings = FDX_Process::fdx_get_settings();
 /* wrap
 *********************************************************************************/
-echo '<div class="wrap">'. get_screen_icon('fdx-lock');
-echo '<h2>'. $this->pluginname . ' : ' . __('Settings and Setup', $this->hook) . '</h2>';
-
+echo '<div class="wrap">';
+echo '<h2>'. $this->pluginname . ' : ' . __('Settings', $this->hook) . '</h2>';
+?>
+<h2 class="nav-tab-wrapper">
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook); ?>"><?php _e('Dashboard', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p2); ?>"><?php _e('Vulnerability', $this->hook ); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p3); ?>"><?php _e('File System', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p5); ?>"><?php _e('WP Core', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p4); ?>">404 Log</a>
+<a class="nav-tab nav-tab-active" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p6); ?>"><?php _e('Settings', $this->hook); ?></a>
+</h2>
+<?php
 
 //mesages alert
 if ( isset($_POST['fdx_page']) ) {
@@ -56,7 +65,7 @@ echo '</div><div class="clear"></div></div></div>';//postbox1
 
 // postbox 2
 echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Vulnerability Scan', $this->hook) . '</span></h3>';
+echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Vulnerability', $this->hook) . '</span></h3>';
 echo '<div class="inside">';
 echo '<div class="fdx-left-content">';
 //left
@@ -88,7 +97,7 @@ echo '</div><div class="clear"></div></div></div>';
 
 // postbox 3
 echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Unsafe Files Search', $this->hook) . '</span></h3>';
+echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('File System', $this->hook) . '</span></h3>';
 echo '<div class="inside">';
 echo '<div class="fdx-left-content">';
 //left
@@ -115,7 +124,7 @@ echo '</div><div class="clear"></div></div></div>';
 
 // postbox 4
 echo '<div class="postbox">';
-echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>'. __('Error 404 Log', $this->hook) . '</span></h3>';
+echo '<div class="handlediv" title="' . __('Click to toggle', $this->hook) . '"><br /></div><h3 class="hndle"><span>404 Log</span></h3>';
 echo '<div class="inside">';
 echo '<div class="fdx-left-content">';
 //left

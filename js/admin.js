@@ -19,14 +19,6 @@ event.preventDefault();
       });
 });
 
-/* alert
--------------------------------------------------------------- */
-jQuery(document).ready(function($) {
-$("#cl").click(function(){
-alert("fabrix@fabrix.net");
-});
-});
-
 jQuery(document).ready(function($) {
         // Tooltip only Text
         $('.pluginbuddy_tip').hover(function(){

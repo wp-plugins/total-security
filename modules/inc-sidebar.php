@@ -16,11 +16,7 @@ echo '</div></div>';
 
 //----------------------------------------
 echo '<div class="postbox"><div class="handlediv" title="'.__('Click to toggle', $this->hook) .'"><br /></div><h3 class="hndle"><span>'. __( 'Do you like this Plugin?', $this->hook ) . '</span></h3>';
-echo '<div class="inside">'.__( 'Please help to support continued development of this plugin!', $this->hook );
-echo '<div align="center"><strong style="font-size: 15px">' . __( 'DONATE', $this->hook ) . '</strong><br />';
-echo '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=' . $this->sbar_paypalcode . '" target="_blank"><img src="'.plugins_url( 'images/h3_icons/paypal.png', dirname(__FILE__)).'" width="101" height="64" border="0"  alt=""/></a>';
-echo '<a href="http://www.neteller.com/personal/send-money/" id="cl" target="_blank" title="fabrix@fabrix.net"><img src="'. plugins_url( 'images/h3_icons/neteller.png', dirname(__FILE__)).'" width="102" height="64" border="0" alt=""  style="margin-left: 25px" /></a></div>';
-echo '<ul><li><a class="sm_button sm_star" href="http://wordpress.org/extend/plugins/wp-twitter" target="_blank">'. __( 'Rate the plugin 5 star on WordPress.org', $this->hook ) .'.</a></li>';
+echo '<div class="inside"><ul><li><a class="sm_button sm_star" href="http://wordpress.org/extend/plugins/wp-twitter" target="_blank">'. __( 'Rate the plugin 5 star on WordPress.org', $this->hook ) .'.</a></li>';
 echo '<li><a class="sm_button sm_link" href="'. $this->sbar_homepage . '" target="_blank">'. __( 'Blog about it and link to the plugin page', $this->hook ) .'.</a></li></ul>';
 echo '<div align="center"><a href="http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url='. $this->sbar_homepage . '&amp;title='. $this->pluginname .'&amp;pubid=ra-52eb02b34be83059" data-width="850" data-height="500" rel="1" id="pop_1" class="newWindow" title="'. __( 'Share on', $this->hook ) .' Facebook"><img src="'. plugins_url( 'images/h3_icons/facebook.png', dirname(__FILE__)).'" width="32" height="32" border="0"  alt="*" style="margin-right: 15px" /></a>';
 echo'<a href="http://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url='. $this->sbar_homepage .'&amp;pubid=ra-52eb02b34be83059" data-width="500" data-height="600" rel="1" id="pop_2" class="newWindow" title="'. __( 'Share on', $this->hook ) .' Google Plus"><img src="'. plugins_url( 'images/h3_icons/googleplus.png', dirname(__FILE__)).'" width="32" height="32" border="0" alt="*" style="margin-right: 15px" /></a>';

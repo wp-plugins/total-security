@@ -9,7 +9,7 @@
 <div class="panel-body adbg">
 
 <div class="input-group">
-<span class="input-group-addon"><small>Profile</small></span>
+<span class="input-group-addon"><small><?php _e('Profile', 'total-security'); ?></small></span>
 <select id="profileLB" name="profile" class="editable form-control input-sm" onchange="loadProfile();">
 <option value="!!!edit!!!" class="activateEdit">New Profile</option>
 </select>
@@ -23,7 +23,7 @@ else{profileListArray=new Array("Default");var option=document.createElement("op
 <fieldset>
 <div class="two-3_4">
 <div class="input-group">
-<span class="input-group-addon"><small>Master Password</small></span>
+<span class="input-group-addon"><small><?php _e('Master Password', 'total-security'); ?></small></span>
 <input class="form-control input-sm" type="password" id="passwdMaster" onchange="preGeneratePassword();" onkeyup="preGeneratePassword();" onkeydown="preGeneratePassword();" onkeypress="preGeneratePassword();" oninput="preGeneratePassword();"/>
 </div>
 </div>
@@ -34,7 +34,7 @@ else{profileListArray=new Array("Default");var option=document.createElement("op
 </fieldset>
 
 <div class="input-group">
-<span class="input-group-addon"><small>Algorithm</small></span>
+<span class="input-group-addon"><small><?php _e('Algorithm', 'total-security'); ?></small></span>
 <select class="form-control input-sm" id="hashAlgorithmLB" onchange="preGeneratePassword();" onkeyup="preGeneratePassword();" onkeydown="preGeneratePassword();" onkeypress="preGeneratePassword();" oninput="preGeneratePassword();" style=" font-size: smaller">
 <option value="md4">MD4</option>
 <option value="hmac-md4">HMAC-MD4</option>
@@ -56,18 +56,18 @@ else{profileListArray=new Array("Default");var option=document.createElement("op
 
 <div class="two-2_3">
 <div class="input-group">
-<span class="input-group-addon"><small>Use l33t</small></span>
+<span class="input-group-addon"><small><?php _e('Use', 'total-security'); ?> l33t</small></span>
 <select class="form-control input-sm" id="whereLeetLB" onchange="onWhereLeetLBChanged();preGeneratePassword();">
-<option value="off">Not</option>
-<option value="before-hashing">before</option>
-<option value="after-hashing">after</option>
-<option value="both">before &amp; after</option>
+<option value="off"><?php _e('Not', 'total-security'); ?></option>
+<option value="before-hashing"><?php _e('before', 'total-security'); ?></option>
+<option value="after-hashing"><?php _e('after', 'total-security'); ?></option>
+<option value="both"><?php _e('before', 'total-security'); ?> &amp; <?php _e('after', 'total-security'); ?></option>
 </select>
 </div>
 </div>
 <div class="two-1_3 last">
 <div class="input-group">
-<span class="input-group-addon"><small>Level</small></span>
+<span class="input-group-addon"><small><?php _e('Level', 'total-security'); ?></small></span>
 <select class="form-control input-sm" id="leetLevelLB" onchange="preGeneratePassword();">
 <option value="0"> 1 </option>
 <option value="1"> 2 </option>
@@ -104,7 +104,7 @@ else{profileListArray=new Array("Default");var option=document.createElement("op
 
 <div class="two-2_3">
 <div class="input-group">
-<span class="input-group-addon"><small>User</small></span>
+<span class="input-group-addon"><small><?php _e('User', 'total-security'); ?></small></span>
 <input type="text" class="form-control input-sm" id="usernameTB" onchange="preGeneratePassword();" onkeyup="preGeneratePassword();" onkeydown="preGeneratePassword();" onkeypress="preGeneratePassword();" oninput="preGeneratePassword();"/>
 </div> </div>
 
@@ -116,14 +116,14 @@ else{profileListArray=new Array("Default");var option=document.createElement("op
 <input type="hidden" id="passwordSuffix" onchange="preGeneratePassword();" onkeyup="preGeneratePassword();" onkeydown="preGeneratePassword();" onkeypress="preGeneratePassword();" oninput="preGeneratePassword();"/>
 </div> </div>
 <div class="clear"></div>
-<span id="charMinWarning" style="display: none; color:red; font-size: smaller; margin-bottom: -18px">Two character minimum required!</span>
+<span id="charMinWarning" style="display: none; color:red; font-size: smaller; margin-bottom: -18px"><?php _e('Two character minimum required', 'total-security'); ?>!</span>
  <br>
 <div class="two-3_4">
 <div class="input-group">
-<span class="input-group-addon"><small>Characters</small></span>
+<span class="input-group-addon"><small><?php _e('Characters', 'total-security'); ?></small></span>
 
 <select id="charset" name="charset" class="form-control input-sm editable" onchange="preGeneratePassword();">
-<option value="!!!edit!!!" class="activateEdit">Edit Character Set:</option>
+<option value="!!!edit!!!" class="activateEdit"><?php _e('Edit Character Set', 'total-security'); ?>:</option>
 <option>0123456789</option>
 <option>abcdefghijklmnopqrstuvwxyz</option>
 <option selected="selected">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</option>
