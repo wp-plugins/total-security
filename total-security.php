@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 3.0.3
+ * Version: 3.0.4
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -14,7 +14,7 @@
 
 class Total_Security {
         public $min_wp_ver 	        = '3.9'; //
-  		public $pluginversion 	    = '3.0.3';
+  		public $pluginversion 	    = '3.0.4';
 
         public $php_lastver 	    = '5.5.11'; // PHP - http://php.net/downloads.php
         public $mySQL_lastver 	    = '5.6.17'; // MYSQL - http://dev.mysql.com/downloads/
@@ -24,14 +24,14 @@ class Total_Security {
         public $_p2 	            = 'vulnerability_scan';
         public $_p3 	            = 'unsafe_files_search';
         public $_p4 	            = 'error-404-log';
-        public $_p5 	            = 'core_exploit_scanner'; // $this->hook . '-'.$this->_p5
+        public $_p5 	            = 'core_exploit_scanner';    // $this->hook . '-'.$this->_p5
         public $_p6 	            = 'settings';
         public $accesslvl			= 'manage_options';
         public $p2_options_key   	= 'p2_log_time';
         public $p5_options_key   	= 'p5_log_time';
         public $p5_salt         	= 'p5_hash';
-        public $p5_snippet         	= 'neon'; // http://steamdev.com/snippet/
-        public $p6_slug         	= 'login_key'; // /wp-login.php?login_key=1234
+        public $p5_snippet         	= 'neon';                     // http://steamdev.com/snippet/
+        public $p6_slug         	= 'login_key';                // /wp-login.php?login_key=1234
         public $fdx_defaults        = array(
                  'p2_op1'             => '200',
                  'p3_op1'             => '1000',
@@ -45,9 +45,8 @@ class Total_Security {
         //----------------------------------------------
         public $option_urllog       = 'http://www.senderbase.org/lookup/?search_string=';  //http://whois.domaintools.com/
         //----------------------------------------------
-        public $sbar_homepage       = 'http://fabrix.net/total-security/';
-        public $sbar_glotpress      = 'http://i.fabrix.net/gKqPN';
-        public $sbar_supportpage    = 'http://wordpress.org/extend/plugins/total-security/';
+        public $sbar_homepage       = 'http://wordpress.org/extend/plugins/total-security/';
+        public $sbar_glotpress      = 'http://translate.fabrix.net/projects/total-security';
         public $sbar_rss            = 'http://feeds.feedburner.com/fdxplugins/';
 
 	function __construct() {
@@ -149,10 +148,8 @@ $fail_total = $p2_red_total+$p5_red+$p3_red;
 //--------------------------------------
 if ( $p2_red_total == '0' && $p5_red_total == '0' && $p3_red_total == '0'  ){
 $fdx_menu_title = __( $this->pluginname, $this->hook );
-$fdx_menu_ico = plugins_url( 'images/_16x16.png', __FILE__);
 } else {
 $fdx_menu_title = __( $this->pluginname, $this->hook )." <span class='update-plugins count-" . $fail_total . "'><span class='plugin-count'>" . number_format_i18n( $fail_total ) . "</span></span>";
-$fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
 }
 //--------------------------------------
  			add_menu_page(
@@ -161,7 +158,7 @@ $fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
 				$this->accesslvl,
 				$this->hook,
 				array( $this, 'fdx_options_subpanel_p1' ),
-		    	$fdx_menu_ico
+		    	'dashicons-shield-alt'
 			);
 
 			add_submenu_page(
@@ -184,8 +181,8 @@ $fdx_menu_ico = plugins_url( 'images/_16x16-3.png', __FILE__);
 
                 add_submenu_page(
 					$this->hook,
-					__( $this->pluginname, $this->hook ) . ' - ' . __( 'WP Core', $this->hook ),
-				    __( 'WP Core', $this->hook ),
+					__( $this->pluginname, $this->hook ) . ' - ' . __( 'Core Scanner', $this->hook ),
+				    __( 'Core Scanner', $this->hook ),
 					$this->accesslvl,
                     $this->hook . '-'.$this->_p5,
 					array( $this, 'fdx_options_subpanel_p5' )

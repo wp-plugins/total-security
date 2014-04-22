@@ -401,7 +401,7 @@ else {
   }
 //-2
 function bruteforce_login() {
-   $msgTIT = sprintf( __('Check admin password strength with a <em>%s</em> most commonly used' , $this->hook) , '600' );
+   $msgTIT = sprintf( __('Check admin password strength with a <em>%s</em> most commonly used' , $this->hook) , '1050' );
    $passwords = file(plugins_url( 'libs/brute-force-dictionary.txt', dirname(__FILE__)), FILE_IGNORE_NEW_LINES);
    $bad_usernames = array();
     $users = get_users(array('role' => 'administrator'));

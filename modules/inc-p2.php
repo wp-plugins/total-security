@@ -215,7 +215,7 @@ echo '<h2>'. $this->pluginname . ' : ' . __('Vulnerability', $this->hook) . '</h
 <a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook); ?>"><?php _e('Dashboard', $this->hook); ?></a>
 <a class="nav-tab nav-tab-active" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p2); ?>"><?php _e('Vulnerability', $this->hook ); ?></a>
 <a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p3); ?>"><?php _e('File System', $this->hook); ?></a>
-<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p5); ?>"><?php _e('WP Core', $this->hook); ?></a>
+<a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p5); ?>"><?php _e('Core Scanner', $this->hook); ?></a>
 <a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p4); ?>">404 Log</a>
 <a class="nav-tab" href="<?php echo admin_url('admin.php?page='.$this->hook . '-'.$this->_p6); ?>"><?php _e('Settings', $this->hook); ?></a>
 </h2>
@@ -256,7 +256,7 @@ echo '<br />'.__('It was designed to clearly show at a single glance what securi
         // test Results
         foreach($tests['test'] as $test_name => $details) {
           echo  $details['msg'];
-          echo '<td class="fdx-details2">'. strval($details['status']) . '</td></tr>';
+          echo '<td>'. strval($details['status']) . '</td></tr>';
        } // foreach
       echo '</tbody>';
       echo '</table>';

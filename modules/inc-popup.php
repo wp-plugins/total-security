@@ -156,20 +156,28 @@ function fdx_format_size($rawSize) {
 			return number_format_i18n($rawSize, 0) . ' bytes';
 	}
    global $wpdb;
+        $prefix = $wpdb->prefix;
      	echo 'N&deg;</strong></th><th>Tables</th><th>Records</th><th>Data Usage</th><th>Index Usage</th><th>Overhead</th>';
     	echo '</tr></thead>';
     	$tablesstatus = $wpdb->get_results("SHOW TABLE STATUS");
      	foreach($tablesstatus as  $tablestatus) {
     	if(@$no%2 == 0) {
-			$style = '';
-		} else {
-			$style = ' class="alternate"';
-		}
+        $style = '';
+         } else {
+   	 	$style = 'alternate';
+ 		}
 		@$no++;
-		echo "<tr$style>\n";
+        if(in_array($tablestatus->Name, [$prefix."commentmeta",$prefix."comments",$prefix."links",$prefix."options",$prefix."postmeta",$prefix."posts",$prefix."terms",$prefix."term_relationships",$prefix."term_taxonomy",$prefix."usermeta",$prefix."users"])){
+        $style2 = ' wptabledefault';
+        } elseif (in_array($tablestatus->Name, [$prefix."total_security_log"])){
+        $style2 = 'wptabledefault2';
+        } else {
+        $style2 = '';
+        }
+		echo "<tr class=\"$style\">\n";
 		echo '<td>'.number_format_i18n($no).'</td>'."\n";
-		echo "<td>$tablestatus->Name</td>\n";
-		echo '<td>'.number_format_i18n($tablestatus->Rows).'</td>'."\n";
+		echo "<td class=\"$style2\">$tablestatus->Name</td>\n";
+ 		echo '<td>'.number_format_i18n($tablestatus->Rows).'</td>'."\n";
 		echo '<td>'.fdx_format_size($tablestatus->Data_length).'</td>'."\n";
 		echo '<td>'.fdx_format_size($tablestatus->Index_length).'</td>'."\n";;
 		echo '<td>'.fdx_format_size($tablestatus->Data_free).'</td>'."\n";
@@ -241,7 +249,7 @@ foreach (get_plugins() as $key => $plugin) {
     echo $plugin['Name'].' '.$plugin['Version'].' '.$isactive."\n";
 }
 //.htaccess
-echo "\n". '---------------------.htaccess file------------------------'. "\n";
+echo "\n". '---------------------.htaccess file------------------------';
 $FDX_orig_path = ABSPATH.'./.htaccess';
       if(!file_exists($FDX_orig_path))
        {

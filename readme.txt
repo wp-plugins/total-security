@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet     
 Requires at least: 3.8.1
 Tested up to: 3.9
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -13,24 +13,24 @@ Checks your WordPress installation and provides detailed reporting on discovered
 == Description ==
 The **Total Security** plugin is the must-have tool when it comes security of your WordPress installation. The plugin monitors your website for security weaknesses that hackers might exploit and tells you how to easily fix them.
 
-= Vulnerability =
+= Vulnerability Scan =
 
 * Check your site for security vulnerabilities and holes.
-* numerous installation parameters tests
+* Numerous installation parameters tests
 * Apache and PHP related tests
-* file permissions
+* File permissions
 * WP options tests
-* detailed help and description
+* Detailed help and description
 
 
-= WP Core =
+= Core Scanner =
 
-* scan WP core files with one click
-* quickly identify problematic files
-* great for removing exploits and fixing accidental file edits/deletes
-* view files source to take a closer look
-* fix broken WP auto-updates
-* restore modified files with one click
+* Scan WP core files with one click
+* Quickly identify problematic files
+* Great for removing exploits and fixing accidental file edits/deletes
+* View files source to take a closer look
+* Fix broken WP auto-updates
+* Restore modified files with one click
 
 
 = File System =
@@ -59,16 +59,14 @@ Scours your file system by suspicious or potentially malicious files, compressed
 
 = Usage =
 
-For Vulnerability : Once you click the `One Click Scan` button all tests will be run,
+For Vulnerability Scan : Once you click the `Execute` button all tests will be run.
+For Core Scanner: Once you click the `Execute` button all tests will be run.
 
-For WP Core: Once you click the `One Click Scanner` button all tests will be run,
-
-depending on various parameters of your site this can take from ten seconds to 2-3 minutes. Please don't reload the page until testing is done.
+Depending on various parameters of your site this can take from ten seconds to 2-3 minutes. Please don't reload the page until testing is done.
 
 Each test comes with a detailed explanation which you should use to determine whether it affects your site or not. Most test have simple to follow instructions on how to strengthen your site's security. 
 
 Color-coded results separate files into categories:
-
 * Items in green are fully secured. Good job!
 * Items in orange are partially secured. Turn on more options to fully secure these areas
 * Items in red are not secured. You should secure these items immediately
@@ -77,22 +75,14 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 = Languages Available =
 * English (default)
-* Spanish (**es_ES**) translation by **Juan Pablo Poblacion Paredes**
-
-
-= How To Contribute =
-We'd love for you to get involved. Whatever your level of skill or however much time you can give, your contribution is greatly appreciated.
-
-* **Users** - download the latest development version of the plugin, and submit bug/feature requests.
-* **Non-English Speaking Users** - Contribute a translation using web interface - no technical knowledge required ([how to](http://i.fabrix.net/gKqPN)).
-* **Developers** - Fork the development version and submit a pull request.
+* **Non-English Speaking Users** - Contribute a translation using the GlotPress web interface – no technical knowledge required ([how to](http://translate.fabrix.net/projects/total-security)).
 
 
 == Screenshots ==
 1. Dashboard
-2. Vulnerability
+2. Vulnerability Scan
 3. File System
-4. WP Core
+4. Core Scanner
 5. Secure Hidden Login - Setup
 6. Error 404 Log
 
@@ -113,6 +103,10 @@ We'd love for you to get involved. Whatever your level of skill or however much 
 
 
 == Changelog ==
+* 3.0.4
+    * IMPROVED - Brute force dictionary: 1050 Most Common Passwords
+    * IMPROVED - Table Database Info: colored list
+
 * 3.0.3
     * NEW - Navigation Tabs
     * IMPROVED - Minor interface tweaks
