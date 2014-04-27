@@ -1,7 +1,6 @@
 <?php
 $tests = get_option($this->p2_options_key);
 $tests2 = array();
-$settings = FDX_Process::fdx_get_settings();
 
 $p2_url1 = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'php' ), menu_page_url( $this->hook . '-'.$this->_p2 , false ) );
 $p2_url2 = add_query_arg( array( 'popup' => 'pp_page', 'target' => 'php2' ), menu_page_url( $this->hook . '-'.$this->_p2 , false ) );

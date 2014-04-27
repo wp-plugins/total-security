@@ -40,12 +40,8 @@ class File_FDX_Scanner extends FDX_CLASS_P3 {
 	var $complete = false;
 
 
-	function File_FDX_Scanner( $path, $args ) {
-		$this->__construct( $path, $args );
-	}
-
 	function __construct( $path, $args ) {
-		$this->path = $path;
+	  	$this->path = $path;
 
 		if ( ! empty($args['max']) )
 			$this->max_batch_size = $args['max'];

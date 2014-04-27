@@ -1,5 +1,5 @@
 <?php
-   class FDX_CLASS_P2 {
+class FDX_CLASS_P2 extends Total_Security {
 static $security_tests = array(
 'ver_check'                => array(),
 'plugins_ver_check'        => array(),
@@ -20,6 +20,8 @@ static $security_tests = array(
 'secure_hidden_login'      => array() ); //end
 
 function __construct() {
+add_action('wp_ajax_sn_run_tests', array($this, 'run_tests'));
+
 $fail2 = get_site_option( 'fdx_p2_red2' );// p2
 $fail3 = get_site_option( 'fdx_p2_red3' );// p2
 
@@ -48,10 +50,36 @@ $fail_p2_t2 = $fail15+$fail16+$fail17+$fail18+$fail19+$fail20+$fail21; //2.5
 update_option('fdx_p2_yel_total', $fail_p2_t2 );
 
 }
+
+/*
+ * run all tests; via AJAX
+ */
+function run_tests() {
+    $settings = Total_Security::fdx_get_settings();
+    @set_time_limit($settings['p2_op1']);  //seconds
+    $test_count = 0;
+    $test_description = array('last_run' => current_time('timestamp'));
+    foreach(self::$security_tests as $test_name => $test){
+      if ($test_name[0] == '_') {
+        continue;
+      }
+      $response = self::$test_name();
+      if (!isset($response['msg'])) {
+        $response['msg'] = '';
+      }
+      $test_description['test'][$test_name]['status'] = $response['status'];
+      $test_description['test'][$test_name]['msg'] = sprintf($response['msg']);
+      $test_count++;
+    } // foreach
+    update_option($this->p2_options_key, $test_description);
+    die('1');
+  }
+
+
 /* -------1
  * check WP version
  */
-  function ver_check() {
+function ver_check() {
    global $wp_version;
    $msgTIT = __('Check if WordPress core is up to date.', $this->hook);
  if (!version_compare(get_bloginfo('version'), $this->min_wp_ver,  '>=')) {
@@ -391,7 +419,7 @@ else {
  * bruteforce user login
  */
 //-1
- function try_login($username, $password) {
+ Public static function try_login($username, $password) {
     $user = apply_filters('authenticate', null, $username, $password);
     if (isset($user->ID) && !empty($user->ID)) {
       return true;
@@ -430,7 +458,7 @@ function bruteforce_login() {
  *
  */
   function secure_hidden_login() {
-  $settings = FDX_Process::fdx_get_settings();
+  $settings = Total_Security::fdx_get_settings();
 
    $msgTIT = __('Check if', $this->hook).' <em>"'. __('Secure Hidden Login', $this->hook).'"</em> &nbsp;'.__('is enabled', $this->hook);
     // Define the function

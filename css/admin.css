@@ -4,6 +4,8 @@
 |--------------------------------------------------------------------------
 */
 a { text-decoration: none }
+.button_submit { text-align: center }
+.button_reset  { float: left; margin-left: 0; margin-top: -25px }
 
 /*
 |--------------------------------------------------------------------------
@@ -45,66 +47,30 @@ ul.sidebnews { margin: 0 0 0 10px}
 .box-blue a{color:#38878E !important;font-weight:700;}
 .box-blue,.box-green,.box-yellow,.box-red{background-position:10px center;background-repeat:no-repeat;margin:15px 10px;padding:15px 5px 15px 50px; border-radius: 10px }
 
- /*
-|--------------------------------------------------------------------------
-| LAYOUT
-|--------------------------------------------------------------------------
-*/
-.fdx-left-content {
-	width: 38%;
-	float: left;
-	padding-right: 0;
-	margin-top: 10px;
-	position: relative;
-}
-.fdx-right-content {
-	width: 53%;
-	float: left;
-	margin-left: 3%;
-	border-left: 1px solid #e6e6e6;
-	margin-bottom: -10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
-	padding-top: 15px;
-  }
-
- .fdx-right-content p, .fdx-left-content p {
-	margin-top: 0;
-}
-
-.button_submit { text-align: center }
-.button_reset  { float: left; margin-left: 0; margin-top: -25px }
-
 /*
 |--------------------------------------------------------------------------
 | TOOLTIP
 |--------------------------------------------------------------------------
 */
 .tooltip {
-   color: #535353;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-weight:  normal !important;
 	position: absolute;
-	z-index: 3000;
-    width: 350px;
-	border: 2px solid #DFDFDF;
-	padding: 0 10px 0 10px ;
-	max-width: auto !important;
-	border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-webkit-box-shadow: 6px 6px 25px 15px rgba(0, 0, 0, .08);
-	box-shadow: 6px 6px 25px 15px rgba(0, 0, 0, .08);
-	background: #ededed;
-	background: -moz-linear-gradient(top, #ededed 0%, #ffffff 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#ffffff));
-	background: -webkit-linear-gradient(top, #ededed 0%,#ffffff 100%);
-	background: -o-linear-gradient(top, #ededed 0%,#ffffff 100%);
-	background: -ms-linear-gradient(top, #ededed 0%,#ffffff 100%);
-	background: linear-gradient(top, #ededed 0%,#ffffff 100%);
+	z-index: 999999;
+	border: 1px solid #111;
+	background-color: #eee;
+	padding: 5px;
+	max-width: 300px;
+	opacity: 0.85;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
 }
 
-/* ####################################################################################
-#################################################################################### */
+
+/* ------------codes------------- */
+code#c0 {background-color:#DDDDDD;color:#000000;padding:0px 5px 0px 5px;height:20px;border:1px solid #808080;border-radius:3px;}
+code#c1 {background-color:#FFCC66;color:#000000;padding:0px 5px 0px 5px;height:20px;border:1px solid #FF6600;border-radius:3px;}
+code#c2 {background-color:#B8E2FF;color:#000000;padding:0px 5px 0px 5px;height:20px;border:1px solid #0066FF;border-radius:3px;}
+code#c3 {background-color:#C7FFC7;color:#000000;padding:0px 5px 0px 5px;height:20px;border:1px solid #009900;border-radius:3px;}
 
 /*******************************************************************************
 ESPECIFIC OF PLUGIN
@@ -141,6 +107,7 @@ tfoot tr { display: none; }
 /* diff ditor */
 .fdxdiff .diff-addedline { background: #E9FFE9  }
 .fdxdiff .diff-deletedline  { background:#FFE9E9  }
+
 
 
 .light { font-weight: bold; border: 1px solid #DDDDDD; background: #EEEEEE; padding: 4px; margin: 10px 0 10px 0 }
@@ -203,14 +170,6 @@ table.widefat { margin-top: 25px; margin-bottom: 25px  }
 .fdx-list {line-height:20px;margin:0 0 4px; list-style: none; font-family: "Courier New", Courier, monospace;}
 .fdx-list li { padding-left: 18px;list-style: none; margin-left: -10px  }
 
-/* ------------codes------------- */
-code#c0 {background-color:#DDDDDD;color:#000000;padding:0px 5px 0px 5px;height:20px;border:1px solid #808080;border-radius:3px;}
-code#c1 {background-color:#FFCC66;color:#000000;padding:0px 5px 0px 5px;height:20px;border:1px solid #FF6600;border-radius:3px;}
-code#c2 {background-color:#B8E2FF;color:#000000;padding:0px 5px 0px 5px;height:20px;border:1px solid #0066FF;border-radius:3px;}
-code#c3 {background-color:#C7FFC7;color:#000000;padding:0px 5px 0px 5px;height:20px;border:1px solid #009900;border-radius:3px;}
-
-
-
 span#mime0 { background-image:url('../images/ext/f2.png'); background-position:0 center;background-repeat:no-repeat;padding:1px 0  0  18px;   }
 span#mime1 { background-image:url('../images/ext/f1.png'); background-position:0 center;background-repeat:no-repeat;padding:1px 0  0  18px;   }
 span#mime2 { background-image:url('../images/ext/txt.png'); background-position:0 center;background-repeat:no-repeat;padding:1px 0  0  18px;   }
@@ -272,12 +231,12 @@ span#mime3 { background-image:url('../images/ext/php.png'); background-position:
 }
 
 .fdx-file {	font-style:italic;	margin-right:20px; color:#888}
-.fdx-show-source, .fdx-restore-source {margin:0 0 0 1px;font-size: 11px;text-decoration: none;font-weight: bold}
+.fdx-show-source {margin:0 0 0 1px;font-size: 11px;text-decoration: none;font-weight: bold}
 .fdx-file-list li {	margin-bottom:10px}
 
 .fdx-popup { padding: 0 20px 0 20px  }
 
-#source-dialog p, #restore-dialog p {margin: 20px;}
+#source-dialog p {margin: 20px;}
 
 .bookmarklet code { font-size: 15px; font-weight: bold;   }
 .bookmarklet a { text-decoration: none; }
@@ -306,3 +265,16 @@ span#mime3 { background-image:url('../images/ext/php.png'); background-position:
 .fdx_rating span#r-9{ background-position: 0 -170px !important; }
 
 
+/*
+|--------------------------------------------------------------------------
+| P7 - Debug     <div class="wpvl-html theme-classic">
+|--------------------------------------------------------------------------
+*/
+
+.table_log { background: #FFFFFF }
+
+.fdx-colo0 { color:#ffffff !important; background: #FF0000!important;}/* Fatal error */
+.fdx-colo1 { color:#0000FF !important; background: #E8E8E8!important;}/* Notice  */
+.fdx-colo2 { color:#000000 !important; background: #FFFF14!important;}/* Deprecated  */
+.fdx-colo3 { color:#FFFF14 !important; background: #000000!important;}/* Warning: */
+.fdx-colo4 { color:#FFFFFF !important; background: #0000FF!important;}/* Strict Standards */

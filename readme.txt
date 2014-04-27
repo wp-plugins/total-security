@@ -2,10 +2,10 @@
 Plugin Name: Total Security
 Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
-Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet     
+Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet,Log Viewer, debug.log
 Requires at least: 3.8.1
 Tested up to: 3.9
-Stable tag: 3.0.4
+Stable tag: 3.1
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -30,7 +30,6 @@ The **Total Security** plugin is the must-have tool when it comes security of yo
 * Great for removing exploits and fixing accidental file edits/deletes
 * View files source to take a closer look
 * Fix broken WP auto-updates
-* Restore modified files with one click
 
 
 = File System =
@@ -50,9 +49,14 @@ Scours your file system by suspicious or potentially malicious files, compressed
 
 = Secure Hidden Login =
 
-* Allows you to create custom URLs for user's login, logout and admin's login page, without editing any `.htaccess` files. 
+* Allows you to create custom URLs for user's login, logout and admin's login page, without editing any `.htaccess` files.
 * Those attempting to gain access to your login form will be automatcally redirected to a customizable URL.
 * Hide "wp-admin" folder.
+
+
+= Log Viewer (debug.log) =
+
+* Adds a debug menu to the admin bar that shows real-time debugging information.
 
 
 > Best practices on security combined into one plugin! 
@@ -85,6 +89,7 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 4. Core Scanner
 5. Secure Hidden Login - Setup
 6. Error 404 Log
+7. Log Viewer
 
 == Installation ==
 
@@ -103,6 +108,10 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 
 == Changelog ==
+* 3.1
+    * NEW - Log Viewer (debug.log) - Adds a debug menu to the admin bar that shows real-time debugging information
+    * FIX - strict standards error
+
 * 3.0.4
     * IMPROVED - Brute force dictionary: 1050 Most Common Passwords
     * IMPROVED - Table Database Info: colored list

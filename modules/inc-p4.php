@@ -1,5 +1,5 @@
 <?php
-$settings = FDX_Process::fdx_get_settings();
+$settings = Total_Security::fdx_get_settings(); 
 $tests = get_option($this->p2_options_key);
 
 /* wrap
@@ -30,6 +30,19 @@ $("#hiddenoff  :input").attr("disabled", true);
 END;
  }
 
+if (! $settings['p4_check_1'] ) {
+ echo '<div class="box-shortcode box-blue">'.sprintf(__('Disabled, <a href="%s"><strong>click here</strong></a> to activate!', $this->hook), 'admin.php?page='.$this->hook . '-'.$this->_p6).'</div>';
+ echo <<<END
+<style type="text/css">
+#hiddenoff {opacity:0.5 !important;}
+</style>
+<script>
+jQuery(document).ready(function($){
+$("#hiddenoff  :input").attr("disabled", true);
+});
+</script>
+END;
+}
 
 //abc
 if ( isset($_POST['fdx_page']) ) {

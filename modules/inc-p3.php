@@ -1,5 +1,5 @@
 <?php
-$settings = FDX_Process::fdx_get_settings();
+$settings = Total_Security::fdx_get_settings(); 
 
 /* wrap
 *********************************************************************************/

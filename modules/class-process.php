@@ -38,21 +38,6 @@ update_option( 'fdx_db1_version', $fdx_db_version ); //remove only uninstall
      }
 }
 
-
-/*
- * Get settings defaults
- */
-function fdx_get_settings() {
-	$settings = $this->fdx_defaults;
-	$wordpress_settings = get_option( 'fdx_settings' );
-	if ( $wordpress_settings ) {
-		foreach( $wordpress_settings as $key => $value ) {
-			$settings[ $key ] = $value;
-		}
-	}
-	return $settings;
-}
-
 /*
  * Executes appropriate process function based on post variable
  */
@@ -66,7 +51,6 @@ function fdx_update_post_settings() {
                     update_option('fdx1_hidden_time', $time ); //grava o tempo em
                     }
 					break;
-
                     case 'fdx_reset':
 				    update_option( 'fdx_settings', false );
 					break;
@@ -119,21 +103,19 @@ function fdx_process_all(){
 				$settings['p6_check_1'] = false;
 			}
 
+            if ( isset( $_POST['p7_check_1'] ) ) {
+				$settings['p7_check_1'] = true;
+			} else {
+				$settings['p7_check_1'] = false;
+			}
+//----------text
             if ( isset($_POST['p6_key']) ) {
-				$p6_key = $_POST['p6_key'];
-			} else {
-				$p6_key = '';
+	        $settings['p6_key'] = stripslashes($_POST['p6_key']);
 			}
-
             if ( isset($_POST['p6_url']) ) {
-				$p6_url = $_POST['p6_url'];
-			} else {
-				$p6_url = '';
-			}
-
-            $settings['p6_key'] = stripslashes( $p6_key );
-            $settings['p6_url'] = stripslashes( $p6_url );
-    		update_option( 'fdx_settings', $settings );
+	          $settings['p6_url'] = stripslashes($_POST['p6_url']);
+	   		}
+update_option( 'fdx_settings', $settings );
 }
 
 

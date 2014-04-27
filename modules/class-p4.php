@@ -5,7 +5,7 @@ class FDX_CLASS_P4 extends Total_Security {
  * Constructor for each and every page load
  */
 function __construct() {
-               $settings = FDX_Process::fdx_get_settings();
+               $settings = Total_Security::fdx_get_settings();
                if ( $settings['p4_check_1'] ) {
                   add_action( 'wp_head', array( $this,'fdxcheck404' ) );
                   	}
@@ -58,7 +58,7 @@ $this->fdx_logevent( 2 );
 		 *
 		 **/
 		function fdx_logevent() {
-		    $settings = FDX_Process::fdx_get_settings();
+		   $settings = Total_Security::fdx_get_settings();
  			global $wpdb;
 
  //       define( 'DONOTCACHEPAGE', true );		// WP Super Cache and W3 Total Cache recognise this

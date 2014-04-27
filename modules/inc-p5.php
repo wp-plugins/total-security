@@ -88,7 +88,7 @@ if (isset($results['last_run']) && $results['last_run']) {
       echo '<th><strong style="color:red;">'. __('Missing', $this->hook). '</strong><div style="float: right"><span class="pb_label pb_label-important">X</span></div></th>';
       echo '</tr></thead>';
       echo '<tbody><tr class="alternate"><td>';
-      echo '<div style="font-size: 11px">'.__('Missing core files my indicate a bad auto-update or they simply were not copied on the server when the site was setup. Use the restore action to create them.', $this->hook).'</div></td></tr><td>';
+      echo '<div style="font-size: 11px">'.__('Missing core files my indicate a bad auto-update or they simply were not copied on the server when the site was setup.', $this->hook).'</div></td></tr><td>';
       echo self::list_files($results['missing_bad'], false, true);
       echo '</td></tr></tbody>';
       echo '</table>';
@@ -122,7 +122,6 @@ if (isset($results['last_run']) && $results['last_run']) {
 
     // dialogs
     echo '<div id="source-dialog" style="display: none;" title="File source"><p>'.__('Please wait', $this->hook).'.</p></div>';
-    echo '<div id="restore-dialog" style="display: none;" title="'.__('Restore file', $this->hook).'"><p>'.__('Please wait', $this->hook).'.</p></div>';
     echo '<div id="fdx-dialog-wrap"><div id="fdx-dialog"></div></div>';
 
     //--------------------
@@ -137,12 +136,7 @@ echo '</div></div></div></div></div>';
 /*<![CDATA[*/
 jQuery(document).ready(function($){
   $('a.fdx-show-source').click(function() {
-     $($(this).attr('href')).dialog('option', { title: '<?php _e('Restore file source', $this->hook); ?>', file_path: $(this).attr('data-file'), file_hash: $(this).attr('data-hash') } ).dialog('open');
-      return false;
-  });
-
-  $('a.fdx-restore-source').click(function() {
-      $($(this).attr('href')).dialog('option', { title: '<?php _e('Restore file source', $this->hook); ?>', file_path: $(this).attr('data-file'), file_hash: $(this).attr('data-hash') } ).dialog('open');
+     $($(this).attr('href')).dialog('option', { title: '<?php _e('File Source', $this->hook); ?>', file_path: $(this).attr('data-file'), file_hash: $(this).attr('data-hash') } ).dialog('open');
       return false;
   });
 
@@ -159,20 +153,6 @@ jQuery(document).ready(function($){
                               'autoOpen': false,
                               'closeOnEscape': true
                               });
-  $('#restore-dialog').dialog({'dialogClass': 'wp-dialog',
-                               'modal': true,
-                               'resizable': false,
-                               'zIndex': 9999,
-                               'width': 450,
-                               'height': 350,
-                               'hide': 'fade',
-                               'open': function(event, ui) { renderRestore(event, ui); fixDialogClose(event, ui); },
-                               'close': function(event, ui) { jQuery('#restore-dialog').html('<p><?php _e('Please wait', $this->hook) ?>.</p>') },
-                               'show': 'fade',
-                               'autoOpen': false,
-                               'closeOnEscape': true
-                              });
-
 //-----------------------------------------------------
 $('a.fdx-dialog').click(function(event) {
               event.preventDefault();
@@ -237,33 +217,6 @@ function renderSource(event, ui) {
 } // renderSource
 
 
-function renderRestore(event, ui) {
-  dialog_id = '#' + event.target.id;
-   jQuery.post(ajaxurl, {action: 'sn_core_restore_file', filename: jQuery(dialog_id).dialog('option', 'file_path'), hash: jQuery(dialog_id).dialog('option', 'file_hash')}, function(response) {
-      if (response) {
-        if (response.err) {
-          jQuery(dialog_id).html('<p><b><?php _e('An error occured', $this->hook) ?>.</b> ' + response.err + '</p>');
-        } else {
-          jQuery(dialog_id).html(response.out);
-               jQuery('#fdx-restore-file').on('click', function(event){
-              jQuery(this).attr('disabled', 'disabled').attr('value', '<?php _e('Please wait', $this->hook) ?> ...');
-              jQuery.post(ajaxurl, {action: 'sn_core_restore_file_do', filename: jQuery(this).attr('data-filename')}, function(response) {
-                if (response == '1') {
-                  alert('<?php _e('File successfully restored!\nThe page will reload and files will be rescanned', $this->hook) ?>.');
-                  window.location.reload();
-                } else {
-                  alert('<?php _e('An error occured', $this->hook) ?> - ' + response);
-                  jQuery(this).attr('disabled', '').attr('value', '<?php _e('Restore file', $this->hook) ?>');
-                }
-              });
-            });
-        }
-      } else {
-        alert('<?php _e('An undocumented error occured. The page will reload', $this->hook) ?>.');
-        window.location.reload();
-      }
-    }, 'json');
-} // renderSource
 
 
 function fixDialogClose(event, ui) {

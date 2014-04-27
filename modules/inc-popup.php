@@ -2,7 +2,7 @@
 // phpinfo
 if ($target == 'phpinfo'){
 phpinfo();
-die();
+return;
 }
 
 echo '<div class="fdx-popup"><table class="widefat"><thead><tr><th><strong>';
@@ -197,6 +197,7 @@ function fdx_format_size($rawSize) {
 
 //debug
 } elseif ($target == 'debug'){
+global $wpdb;
 echo '<div align="center"><a class="button button-primary" href="javascript:selectcopy(\'test.select1\')">'. __('Select All', $this->hook).' </a></div></th></tr></thead><tbody><tr><td class="alternate">';
 echo '<form name="test">';
 echo '<div align="center"><textarea readonly="readonly" style="width:100%; height:350px; overflow: auto;white-space: pre; font-size:11px" name="select1">';
@@ -212,7 +213,7 @@ MULTI-SITE: <?php echo is_multisite() ? 'Yes' . "\n" : 'No' . "\n" ?>
 WORDPRESS VERSION: <?php echo get_bloginfo( 'version' ) . "\n"; ?>
 
 PHP VERSION: <?php echo PHP_VERSION . "\n"; ?>
-MYSQL VERSION: <?php echo mysql_get_server_info() . "\n"; ?>
+MYSQL VERSION: <?php echo $wpdb->db_version(). "\n"; ?>
 WEB SERVER INFO: <?php echo $_SERVER['SERVER_SOFTWARE'] . "\n"; ?>
 
 SESSION: <?php echo isset( $_SESSION ) ? 'Enabled' : 'Disabled'; echo "\n"; ?>
@@ -265,6 +266,32 @@ $FDX_orig_path = ABSPATH.'./.htaccess';
        }
 echo '</textarea></div></form>';
 //-----------------------------------------
-}
+} elseif ($target == 'debug_log'){
+echo __('Debug Mode', $this->hook);
+echo '</strong></th></tr></thead><tbody><tr><td>';?>
+
+<pre class="fdx_snippet">
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', false);
+@ini_set('display_errors', 0);
+</pre>
+<p><strong>WP_DEBUG </strong><br>
+<?php _e('This is the most important constant as it determines if WordPress will use any of the other debugging constants. Thankfully it is quite simple. If set to true, debug mode is turned on. If undefined or set to false, debug mode is kept off.', $this->hook); ?>
+</p>
+
+<p><strong>WP_DEBUG_LOG</strong><br>
+<?php _e('Set this constant to true and WordPress will set up PHP to write to an error log in', $this->hook); ?> <em>/wp-content/debug.log</em>.
+</p>
+<p><strong>WP_DEBUG_DISPLAY</strong><br>
+<?php _e('Turn off the display of error messages on your site. ', $this->hook); ?>
+</p>
+
+<p><strong>display_errors</strong><br>
+<?php _e('The last line in our code block turns off the display of errors, regardless of <em>php.ini</em> or <em>.htaccess</em> settings to the contrary. This is important because though WordPress can force the display of errors to be on, it won\'t force them to be off if <em>display_errors</em> is already turned on.', $this->hook); ?>
+</p>
+
+<?php
+}//end
 echo '</td></tr></tbody></table></div>';
 echo '<script type="text/javascript">jQuery(document).ready(function($) {$("pre.fdx_snippet").snippet("php",{style:"acid",transparent:false,showNum:false,menu:false});});</script>';

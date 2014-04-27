@@ -19,6 +19,11 @@ event.preventDefault();
       });
 });
 
+/*
+|--------------------------------------------------------------------------
+| Tooltip
+|--------------------------------------------------------------------------
+*/
 jQuery(document).ready(function($) {
         // Tooltip only Text
         $('.pluginbuddy_tip').hover(function(){
@@ -41,10 +46,11 @@ jQuery(document).ready(function($) {
         });
 });
 
-/*******************************************************************************
-ESPECIFIC OF PLUGIN
-*******************************************************************************/
-// select  all
+/*
+|--------------------------------------------------------------------------
+| select  all button
+|--------------------------------------------------------------------------
+*/
 function selectcopy(fieldid){
 	var field=document.getElementById(fieldid) || eval('document.'+fieldid)
 	field.select()
