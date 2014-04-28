@@ -3,7 +3,7 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 3.1
+ * Version: 3.2
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
@@ -14,7 +14,7 @@
 
 class Total_Security {
         public $min_wp_ver 	        = '3.9'; //
-  		public $pluginversion 	    = '3.1';
+  		public $pluginversion 	    = '3.2';
 
         public $php_lastver 	    = '5.5.11'; // PHP - http://php.net/downloads.php
         public $mySQL_lastver 	    = '5.6.17'; // MYSQL - http://dev.mysql.com/downloads/
@@ -66,7 +66,9 @@ class Total_Security {
         add_action('wp_ajax_sn_core_run_scan', array($this, 'scan_files'));
 
       //--------------ALL
-        register_deactivation_hook( __FILE__, array( $this, 'fdx_deactivate' ) );
+       register_activation_hook( __FILE__, array( $this, 'fdx_activate' ) );
+       register_deactivation_hook( __FILE__, array( $this, 'fdx_deactivate' ) );
+
         require_once( 'modules/class-process.php' );
         new FDX_Process();
 
@@ -620,6 +622,10 @@ function init(){
         }
   }
 
+function fdx_activate() {
+update_option( 'fdx_settings', $this->fdx_defaults );
+}
+
 /*
 |--------------------------------------------------------------------------
 | [ALL] - Clean-Up When Deactivated
@@ -659,9 +665,6 @@ delete_option('fdx_p5_red_total');
 delete_option('fdx_p3_red_op1');
 delete_option('fdx_p3_red_op2');
 
-#PHP Debug Log--------P7
-if( file_exists( FDX_CLASS_P7::$file_log ) )
-unlink( FDX_CLASS_P7::$file_log );
 }
 
 

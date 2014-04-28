@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet,Log Viewer, debug.log
 Requires at least: 3.8.1
 Tested up to: 3.9
-Stable tag: 3.1
+Stable tag: 3.2
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -93,11 +93,28 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 == Installation ==
 
-1. Upload the `total-security` folder to your `/wp-content/plugins/` directory
-1. Activate the `Total Security` plugin in your WordPress admin `Plugins`
-1. That's it. You're ready to go!
+= Using The WordPress Dashboard =
 
-> You can install **Total Security** directly from the WordPress admin! Visit the Plugins - > Add New page and search for **Total Security**. Click to install.
+1. Navigate to the 'Add New' in the plugins dashboard
+2. Search for 'Total Security'
+3. Click 'Install Now'
+4. Activate the plugin on the Plugin dashboard
+
+= Uploading in WordPress Dashboard =
+
+1. Navigate to the 'Add New' in the plugins dashboard
+2. Navigate to the 'Upload' area
+3. Select `total-security.zip` from your computer
+4. Click 'Install Now'
+5. Activate the plugin in the Plugin dashboard
+
+= Using FTP =
+
+1. Download `total-security.zip`
+2. Extract the `total-security` directory to your computer
+3. Upload the `total-security` directory to the `/wp-content/plugins/` directory
+4. Activate the plugin in the Plugin dashboard
+
 
 == Frequently Asked Questions ==
 
@@ -108,6 +125,9 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 
 == Changelog ==
+* 3.2
+    * FIX - Minor bug fixes
+
 * 3.1
     * NEW - Log Viewer (debug.log) - Adds a debug menu to the admin bar that shows real-time debugging information
     * FIX - strict standards error
