@@ -278,3 +278,9 @@ span#mime3 { background-image:url('../images/ext/php.png'); background-position:
 .fdx-colo2 { color:#000000 !important; background: #FFFF14!important;}/* Deprecated  */
 .fdx-colo3 { color:#FFFF14 !important; background: #000000!important;}/* Warning: */
 .fdx-colo4 { color:#FFFFFF !important; background: #0000FF!important;}/* Strict Standards */
+
+#scrollable {
+  width: 99%;
+  max-height: 500px;
+  overflow: auto;
+}

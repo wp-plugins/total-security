@@ -11,10 +11,7 @@ class FDX_CLASS_P7 extends Total_Security {
 		if ( file_exists( self::$file_log ) && is_readable( self::$file_log ) ) {
 			self::$current_log = file( self::$file_log, FILE_IGNORE_NEW_LINES );
 			self::$current_log = array_reverse( self::$current_log, true );
-		} else {
-				set_transient( 'wpvl_log_error', 'log_error', 60 );
 			}
-
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
