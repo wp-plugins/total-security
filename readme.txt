@@ -4,8 +4,8 @@ Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet,Log Viewer, debug.log
 Requires at least: 3.8.1
-Tested up to: 3.9.1
-Stable tag: 3.2.1
+Tested up to: 4.0
+Stable tag: 3.2.2
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -79,6 +79,8 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 = Languages Available =
 * English (default)
+* Russian **(ru)** by [zerg959](http://100wines.net/)
+
 * **Non-English Speaking Users** - Contribute a translation using the GlotPress web interface – no technical knowledge required ([how to](http://translate.fabrix.net/projects/total-security)).
 
 
@@ -125,6 +127,10 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 
 == Changelog ==
+* 3.2.2
+    * IMPROVED - Compatibility with WordPress 4.0
+    * IMPROVED - Russian **(ru)** Language pack added (thanks to zerg959)
+
 * 3.2.1
     * Compatibility with WordPress 3.9.1
 
