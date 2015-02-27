@@ -3,21 +3,21 @@
  * Plugin Name: Total Security
  * Plugin URI: http://fabrix.net/total-security/
  * Description: Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
- * Version: 3.2.2
+ * Version: 3.2.3
  * Author: Fabrix DoRoMo
  * Author URI: http://fabrix.net
  * License: GPL2+
  * Text Domain: total-security
  * Domain Path: /lang
- * Copyright 2014 - fabrix.net
+ * Copyright 2015 - fabrix.net
  */
 
 class Total_Security {
-        public $min_wp_ver 	        = '4.0'; //
-  		public $pluginversion 	    = '3.2.2';
+        public $min_wp_ver 	        = '4.1.1'; //
+  		public $pluginversion 	    = '3.2.3';
 
-        public $php_lastver 	    = '5.5.11'; // PHP - http://php.net/downloads.php
-        public $mySQL_lastver 	    = '5.6.17'; // MYSQL - http://dev.mysql.com/downloads/
+        public $php_lastver 	    = '5.6.6'; // PHP - http://php.net/downloads.php
+        public $mySQL_lastver 	    = '5.6.23'; // MYSQL - http://dev.mysql.com/downloads/
 
         public $pluginname			= 'Total Security';
         public $hook 				= 'total-security';
@@ -48,7 +48,8 @@ class Total_Security {
         public $option_urllog       = 'http://www.senderbase.org/lookup/?search_string=';  //http://whois.domaintools.com/
         //----------------------------------------------
         public $sbar_homepage       = 'http://wordpress.org/extend/plugins/total-security/';
-        public $sbar_glotpress      = 'http://translate.fabrix.net/projects/total-security';
+        public $sbar_glotpress      = 'http://dev.fabrix.net/translate/projects/total-security';
+        public $sbar_wpratelink     = 'http://wordpress.org/support/view/plugin-reviews/total-security?rate=5#postform';
         public $sbar_rss            = 'http://feeds.feedburner.com/fdxplugins/';
 
 	function __construct() {
