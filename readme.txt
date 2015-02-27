@@ -81,7 +81,7 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 * English (default)
 * Russian **(ru)** by [zerg959](http://100wines.net/)
 
-* **Non-English Speaking Users** - Contribute a translation using the GlotPress web interface – no technical knowledge required ([how to](http://translate.fabrix.net/projects/total-security)).
+* **Non-English Speaking Users** - Contribute a translation using the GlotPress web interface - no technical knowledge required ([how to](http://dev.fabrix.net/translate/projects/total-security)).
 
 
 == Screenshots ==
