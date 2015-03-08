@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet,Log Viewer, debug.log
 Requires at least: 4.1.1
 Tested up to: 4.1.1
-Stable tag: 3.2.3
+Stable tag: 3.2.4
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -127,6 +127,9 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 
 == Changelog ==
+* 3.2.4
+    * FIX - File System: error in jQuery
+
 * 3.2.3
     * IMPROVED - Compatibility with WordPress 4.1.1
 

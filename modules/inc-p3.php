@@ -110,7 +110,7 @@ echo '</div></div></div></div></div>';
            .val('<?php _e('Executing, please wait!', $this->hook) ?>');
     		$.blockUI({ message: '<img src="<?php echo plugins_url( 'images/loading.gif',dirname(__FILE__));?>" width="24" height="24" border="0" alt="" /><br /><div id="scan-loader" style="display:none;"><span><?php _e('Executing, please wait!', $this->hook) ?></span></div>' });
            //-----------------------------------
-          max = <?php echo $settings['p3_op1']; ?> ;
+//          max = <?php echo $settings['p3_op1']; ?> ;
   			$.ajaxSetup({
 				type: 'POST',
 				url: ajaxurl,
@@ -138,19 +138,19 @@ echo '</div></div></div></div></div>';
 				start: s,
    			   	_ajax_nonce: fdx_nonce
 			}, success: function(r) {
-				var res = jQuery.parseJSON(r);
-				if ( 'running' == res.status ) {
-					jQuery('#scan-loader span').html(res.data);
-					fdx_file_scan(s+max, max);
-				} else if ( 'error' == res.status ) {
+  //				var res = jQuery.parseJSON(r);
+ //				if ( 'running' == res.status ) {
+ //					jQuery('#scan-loader span').html(res.data);
+ //					fdx_file_scan(s+max, max);
+//				} else if ( 'error' == res.status ) {
 					// console.log( r );
-					jQuery('#scan-loader img').hide();
-					jQuery('#scan-loader span').html(
-						'An error occurred: <pre style="overflow:auto">' + r.toString() + '</pre>'
-					);
-				} else {
+//					jQuery('#scan-loader img').hide();
+//					jQuery('#scan-loader span').html(
+ //						'An error occurred: <pre style="overflow:auto">' + r.toString() + '</pre>'
+//					);
+ //				} else {
                     fdx_db_scan();
-				}
+ //				}
 			}
 		});
 	}, fdx_db_scan = function() {
