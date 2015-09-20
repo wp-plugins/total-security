@@ -3,9 +3,9 @@ Plugin Name: Total Security
 Contributors: fdoromo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8DHY4NXW35T4Y
 Tags: security, scan ,scanner, hack, exploit, secure, malware, phishing, vulnerability, scours, unsafe, total, 404 log, error 404, stealth login, hidden login, Bookmarklet,Log Viewer, debug.log
-Requires at least: 4.2.3
-Tested up to: 4.2.3
-Stable tag: 3.2.7
+Requires at least: 4.3.1
+Tested up to: 4.3.1
+Stable tag: 3.3.1
 License: GPLv2 or later
 
 Checks your WordPress installation and provides detailed reporting on discovered vulnerabilities, anything suspicious and how to fix them.
@@ -127,6 +127,12 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 
 == Changelog ==
+* 3.3.1
+    * IMPROVED - Compatibility with WordPress 4.3.1
+
+* 3.3
+    * IMPROVED - Compatibility with WordPress 4.3
+
 * 3.2.7
     * IMPROVED - Compatibility with WordPress 4.2.3
 
@@ -261,3 +267,8 @@ A warning to redo the scan will be informed every 15 days of last inspection.
 
 * 1.0
     * Initial release
+
+== Upgrade Notice ==
+
+= 3.4 =
+IMPORTANT: After upgrade, Deactivate and Activate the plugin to update the files of mobile theme.

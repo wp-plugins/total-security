@@ -26,37 +26,6 @@ echo '<a href="http://api.addthis.com/oexchange/0.8/offer?title='. $this->plugin
 echo '</div></div>';
 
 //----------------------------------------
-echo '<div class="postbox"><div class="handlediv" title="'.__('Click to toggle', $this->hook) .'"><br /></div><h3 class="hndle"><span>'. __( 'Notices', $this->hook ) . '</span></h3>';
-echo '<div class="inside">';
 
-$rss = @fetch_feed( $this->sbar_rss );
-     if ( is_object($rss) ) {
-        if ( is_wp_error($rss) ) {
-            echo 'Newsfeed could not be loaded.';
-           } else {
-echo '<ul class="sidebnews">';
-		foreach ( $rss->get_items(0, 5) as $item ) {
-    		$link = $item->get_link();
-    		while ( stristr($link, 'http') != $link )
-    			$link = substr($link, 1);
-    		$link = esc_url(strip_tags($link));
-    		$title = esc_attr(strip_tags($item->get_title()));
-    		if ( empty($title) )
-    			$title = __('Untitled');
-			$date = $item->get_date();
-            $diff = '';
-			if ( $date ) {
-                $diff = human_time_diff( strtotime($date, time()) );
-				if ( $date_stamp = strtotime( $date ) )
-					$date =  date_i18n( get_option( 'date_format' ), $date_stamp );
-				else
-					$date = '';
-			}
-echo '<li><a title="'. $date .'" target="_blank" href="'. $link .'">'. $title.' <em class="none">'. $diff.'</em></a></li>';
-    }
-       echo'</ul>';
-   } // if feed error
-}
-echo '</div></div>';
 //----------------------------------------
 echo '</div></div>';
